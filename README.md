@@ -145,12 +145,6 @@ pnpm build
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
-
-ScaleX Team - [@ScaleXFinance](https://twitter.com/ScaleXFinance)
-
-Project Link: [https://scalex.finance](https://scalex.finance)
-
 ---
 
 **Experience the future of DeFi with ScaleX** 🚀
