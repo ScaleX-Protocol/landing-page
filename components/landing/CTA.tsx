@@ -74,7 +74,7 @@ export function CTA() {
                     <div ref={buttonRef} className="flex justify-center">
                         <LaunchAppButton
                             text="Get Started Now"
-                            href="/app"
+                            href={process.env.NEXT_PUBLIC_APP_URL}
                         />
                     </div>
                 </div>
