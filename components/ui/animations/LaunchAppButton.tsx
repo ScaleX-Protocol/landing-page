@@ -12,7 +12,7 @@ interface LaunchAppButtonProps {
 }
 
 const LaunchAppButton = forwardRef<HTMLDivElement, LaunchAppButtonProps>(
-  ({ href = '#', onClick, className = '', text = 'Launch App' }, ref) => {
+  ({ href, onClick, className = '', text = 'Launch App' }, ref) => {
     const handleMouseEnter = (e: React.MouseEvent) => {
       const leftPath = e.currentTarget.querySelector('.left-path') as SVGPathElement;
       const rightPath = e.currentTarget.querySelector('.right-path') as SVGPathElement;
@@ -83,35 +83,67 @@ const LaunchAppButton = forwardRef<HTMLDivElement, LaunchAppButtonProps>(
         </div>
 
         {/* Orange trapezoid section with SVG background */}
-        <Link href={href} className="relative -ml-2">
-          <svg
-            className="right-svg"
-            width="70"
-            height="52"
-            viewBox="0 0 70 52"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              className="right-path"
-              d="M19.8393 7.14592C21.7607 2.80185 26.0637 0 30.8137 0H58C64.6274 0 70 5.37258 70 12V40C70 46.6274 64.6274 52 58 52H18.4291C9.75445 52 3.94574 43.0792 7.45469 35.1459L19.8393 7.14592Z"
-              fill="#CD6529"
-              style={{
-                fill: '#CD6529',
-                transition: 'fill 0.5s ease, d 0.5s ease'
-              }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <ArrowRight
-              className="w-5 h-5 text-white arrow"
-              style={{
-                transform: 'translateX(4px)',
-                transition: 'transform 0.3s ease'
-              }}
-            />
+        {href ? (
+          <Link href={href} className="relative -ml-2">
+            <svg
+              className="right-svg"
+              width="70"
+              height="52"
+              viewBox="0 0 70 52"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                className="right-path"
+                d="M19.8393 7.14592C21.7607 2.80185 26.0637 0 30.8137 0H58C64.6274 0 70 5.37258 70 12V40C70 46.6274 64.6274 52 58 52H18.4291C9.75445 52 3.94574 43.0792 7.45469 35.1459L19.8393 7.14592Z"
+                fill="#CD6529"
+                style={{
+                  fill: '#CD6529',
+                  transition: 'fill 0.5s ease, d 0.5s ease'
+                }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ArrowRight
+                className="w-5 h-5 text-white arrow"
+                style={{
+                  transform: 'translateX(4px)',
+                  transition: 'transform 0.3s ease'
+                }}
+              />
+            </div>
+          </Link>
+        ) : (
+          <div className="relative -ml-2 cursor-not-allowed opacity-50">
+            <svg
+              className="right-svg"
+              width="70"
+              height="52"
+              viewBox="0 0 70 52"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                className="right-path"
+                d="M19.8393 7.14592C21.7607 2.80185 26.0637 0 30.8137 0H58C64.6274 0 70 5.37258 70 12V40C70 46.6274 64.6274 52 58 52H18.4291C9.75445 52 3.94574 43.0792 7.45469 35.1459L19.8393 7.14592Z"
+                fill="#CD6529"
+                style={{
+                  fill: '#CD6529',
+                  transition: 'fill 0.5s ease, d 0.5s ease'
+                }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ArrowRight
+                className="w-5 h-5 text-white arrow"
+                style={{
+                  transform: 'translateX(4px)',
+                  transition: 'transform 0.3s ease'
+                }}
+              />
+            </div>
           </div>
-        </Link>
+        )}
       </div>
     );
   }

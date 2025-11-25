@@ -138,7 +138,7 @@ export function DefiFlywheelSection() {
               Matching Order Book Dex with Lending Protocol creates a self-reinforcing flywheel effect where idle trading capital generates yield, higher yields attract more liquidity, better liquidity improves trading conditions, and increased trading volume drives more borrowing demand - creating an unstoppable cycle of growth.
             </p>
             <div ref={buttonRef} className="w-fit transform scale-75 sm:scale-100 origin-left">
-              <LaunchAppButton />
+              <LaunchAppButton href={process.env.NEXT_PUBLIC_APP_URL} />
             </div>
           </div>
         </div>

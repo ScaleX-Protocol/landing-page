@@ -193,7 +193,7 @@ export default function Landing() {
             <div className="transform scale-75">
               <LaunchAppButton
                 text="Launch App"
-                href="/app"
+                href={process.env.NEXT_PUBLIC_APP_URL}
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ export default function Landing() {
           <div className="hidden sm:block absolute bottom-6 md:bottom-10 right-10 z-20">
             <LaunchAppButton
               text="Launch App"
-              href="/app"
+              href={process.env.NEXT_PUBLIC_APP_URL}
             />
           </div>
         </div>
