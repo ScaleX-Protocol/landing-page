@@ -72,10 +72,12 @@ export function CTA() {
                         Start earning yield while you trade. Join the revolution of capital efficiency with Order Book DEX integrated with Lending Protocol.
                     </p>
                     <div ref={buttonRef} className="flex justify-center">
-                        <LaunchAppButton
-                            text="Get Started Now"
-                            href={process.env.NEXT_PUBLIC_APP_URL}
-                        />
+                        <div className="transform scale-75 sm:scale-90 md:scale-100">
+                            <LaunchAppButton
+                                text="Get Started Now"
+                                href={process.env.NEXT_PUBLIC_APP_URL}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

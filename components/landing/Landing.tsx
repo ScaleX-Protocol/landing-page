@@ -218,10 +218,12 @@ export default function Landing() {
 
           {/* Desktop: Button positioned separately */}
           <div className="hidden sm:block absolute bottom-6 md:bottom-10 right-10 z-20">
-            <LaunchAppButton
-              text="Launch App"
-              href={process.env.NEXT_PUBLIC_APP_URL}
-            />
+            <div className="transform scale-90 md:scale-100">
+              <LaunchAppButton
+                text="Launch App"
+                href={process.env.NEXT_PUBLIC_APP_URL}
+              />
+            </div>
           </div>
         </div>
 
