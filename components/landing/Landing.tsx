@@ -174,15 +174,15 @@ export default function Landing() {
           className="fixed inset-0 z-0 m-[-40] rounded-2xl overflow-hidden"
         >
           <NeuroNoise
-          className="w-full h-full"
-          colorBack="#000000"
-          colorMid="#FF6B35"
-          colorFront="#FF6B35"
-          speed={0.5}
-          brightness={0.1}
-          contrast={0.6}
-          scale={1.5}
-        />
+            className="w-full h-full"
+            colorBack="#000000"
+            colorMid="#FF6B35"
+            colorFront="#FF6B35"
+            speed={0.8}
+            brightness={0.1}
+            contrast={0.6}
+            scale={1.5}
+          />
           <div className="absolute inset-0 bg-black/70" />
         </div>
 
@@ -195,7 +195,7 @@ export default function Landing() {
             <p className="text-white/90 text-base leading-relaxed mb-8">
               Trade Your Assets While They Earn Yield. Revolutionary DeFi platform that maximizes capital efficiency through intelligent automation.
             </p>
-            <div className="transform scale-75">
+            <div className="transform scale-75 flex justify-center">
               <LaunchAppButton
                 text="Launch App"
                 href={process.env.NEXT_PUBLIC_APP_URL}
