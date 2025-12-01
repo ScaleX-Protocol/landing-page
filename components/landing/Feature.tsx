@@ -61,27 +61,27 @@ export default function Feature({
     gsap.set(progressBar, { scaleX: 0, transformOrigin: 'left center' });
     gsap.set(content, { opacity: 1, y: 0 }); // Make first content visible
 
-    // Split text into words and wrap each word in a span
-    const splitTextIntoWords = (element: HTMLElement) => {
+    // Split text into letters and wrap each letter in a span
+    const splitTextIntoLetters = (element: HTMLElement) => {
       const text = element.textContent || '';
-      const words = text.split(' ');
-      element.innerHTML = words.map(word =>
-        `<span style="opacity: 0.6; color: white; display: inline-block; margin-right: 0.25em;">${word}</span>`
+      const letters = text.split('');
+      element.innerHTML = letters.map(letter =>
+        letter === ' ' ? ' ' : `<span style="opacity: 0.6; color: white; display: inline-block;">${letter}</span>`
       ).join('');
       return element.querySelectorAll('span');
     };
 
-    // Split title and description into word spans
-    const titleWords = splitTextIntoWords(title);
-    const descriptionWords = splitTextIntoWords(description);
-    const allWords = [...titleWords, ...descriptionWords];
+    // Split title and description into letter spans
+    const titleLetters = splitTextIntoLetters(title);
+    const descriptionLetters = splitTextIntoLetters(description);
+    const allLetters = [...titleLetters, ...descriptionLetters];
 
-    // Word-by-word reveal animation
-    const wordRevealAnimation = gsap.to(allWords, {
+    // Letter-by-letter reveal animation
+    const letterRevealAnimation = gsap.to(allLetters, {
       opacity: 1,
       duration: 1,
       stagger: {
-        each: 0.1,
+        each: 0.02,
         from: 'start'
       },
       ease: 'power2.out',
@@ -116,17 +116,17 @@ export default function Feature({
             newContentIndex = 0;
           }
 
-          // Continuous word reveal animation based on progress
-          const currentWords = content.querySelectorAll('span');
-          if (currentWords.length > 0) {
+          // Continuous letter reveal animation based on progress
+          const currentLetters = content.querySelectorAll('span');
+          if (currentLetters.length > 0) {
             const stepProgress = ((progress * 3) % 1); // Progress within current step
-            const wordsToReveal = Math.floor(stepProgress * currentWords.length);
+            const lettersToReveal = Math.floor(stepProgress * currentLetters.length);
 
-            currentWords.forEach((word, index) => {
-              if (index <= wordsToReveal) {
-                gsap.set(word, { opacity: 1 });
+            currentLetters.forEach((letter, index) => {
+              if (index <= lettersToReveal) {
+                gsap.set(letter, { opacity: 1 });
               } else {
-                gsap.set(word, { opacity: 0.6 });
+                gsap.set(letter, { opacity: 0.6 });
               }
             });
           }
@@ -148,19 +148,19 @@ export default function Feature({
                   // Update content
                   setActiveContent(newContentIndex);
 
-                  // Re-split and setup new words for animation
+                  // Re-split and setup new letters for animation
                   setTimeout(() => {
-                    const newTitleWords = splitTextIntoWords(title);
-                    const newDescriptionWords = splitTextIntoWords(description);
-                    const newAllWords = [...newTitleWords, ...newDescriptionWords];
+                    const newTitleLetters = splitTextIntoLetters(title);
+                    const newDescriptionLetters = splitTextIntoLetters(description);
+                    const newAllLetters = [...newTitleLetters, ...newDescriptionLetters];
 
-                    // Calculate progress within current step for word reveal
+                    // Calculate progress within current step for letter reveal
                     const stepProgress = ((progress * 3) % 1);
-                    const wordsToReveal = Math.floor(stepProgress * newAllWords.length);
+                    const lettersToReveal = Math.floor(stepProgress * newAllLetters.length);
 
-                    // Set initial state for new words and reveal based on current progress
-                    gsap.set(newAllWords, { opacity: 0.6 });
-                    gsap.set(newAllWords.slice(0, wordsToReveal), { opacity: 1 });
+                    // Set initial state for new letters and reveal based on current progress
+                    gsap.set(newAllLetters, { opacity: 0.6 });
+                    gsap.set(newAllLetters.slice(0, lettersToReveal), { opacity: 1 });
                   }, 50);
 
                   // Fade in new content (fade down)
@@ -179,8 +179,8 @@ export default function Feature({
     return () => {
       scrollTrigger.scrollTrigger?.kill();
       scrollTrigger.kill();
-      wordRevealAnimation.scrollTrigger?.kill();
-      wordRevealAnimation.kill();
+      letterRevealAnimation.scrollTrigger?.kill();
+      letterRevealAnimation.kill();
     };
   }, []);
 
