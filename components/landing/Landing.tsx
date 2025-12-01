@@ -12,6 +12,7 @@ import { DefiFlywheelSection } from './DefiFlywheelSection';
 import { IntegrationsMarquee } from './IntegrationsMarquee';
 import { CTA } from './CTA';
 import { Footer } from './Footer';
+import { NeuroNoise } from '@paper-design/shaders-react';
 
 export default function Landing() {
   const bgRef = useRef<HTMLDivElement>(null);
@@ -172,12 +173,16 @@ export default function Landing() {
           ref={bgRef}
           className="fixed inset-0 z-0 m-[-40] rounded-2xl overflow-hidden"
         >
-          <Iridescence
-            color={[0.93, 0.41, 0.09]}
-            speed={1}
-            amplitude={0.05}
-            mouseReact={true}
-          />
+          <NeuroNoise
+          className="w-full h-full"
+          colorBack="#000000"
+          colorMid="#FF6B35"
+          colorFront="#FF6B35"
+          speed={0.5}
+          brightness={0.1}
+          contrast={0.6}
+          scale={1.5}
+        />
           <div className="absolute inset-0 bg-black/70" />
         </div>
 
