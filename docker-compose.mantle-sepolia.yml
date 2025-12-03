@@ -1,0 +1,28 @@
+services:
+  # Mantle Sepolia Landing Page Application
+  landing-mantle-sepolia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CHAIN: mantle-sepolia
+    container_name: scalex-landing-mantle-sepolia
+    env_file:
+      - .env.mantle-sepolia
+    restart: unless-stopped
+    networks:
+      - landing-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.landing-mantle-sepolia.rule=Host(`mantle-sepolia.scalex.money`)"
+      - "traefik.http.routers.landing-mantle-sepolia.entrypoints=websecure"
+      - "traefik.http.routers.landing-mantle-sepolia.tls=true"
+      - "traefik.http.routers.landing-mantle-sepolia.tls.certresolver=letsencrypt"
+      - "traefik.http.services.landing-mantle-sepolia.loadbalancer.server.port=3000"
+    
+networks:
+  landing-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
