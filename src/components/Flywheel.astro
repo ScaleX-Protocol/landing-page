@@ -1,0 +1,208 @@
+---
+// Flywheel section - The ScaleX Flywheel with professional animation
+const steps = [
+  {
+    number: "01",
+    icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    title: "Deposit Assets",
+    description: "Bridge USDC or ETH. Your collateral is automatically deployed into Aave/Compound lending pools to earn base APY immediately.",
+    position: "top-left"
+  },
+  {
+    number: "02",
+    icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+    title: "Trade & Leverage",
+    description: "Open positions with up to 10x leverage. Your interest-bearing tokens serve as margin, keeping your capital efficient.",
+    position: "top-right"
+  },
+  {
+    number: "03",
+    icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>`,
+    title: "Optimize Yield",
+    description: "Rewards from lending and trading fees are auto-harvested. The protocol reinvests them to boost your collateral size automatically.",
+    position: "bottom-right"
+  },
+  {
+    number: "04",
+    icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
+    title: "The Loop",
+    description: "Increased collateral value creates more borrowing power. The cycle repeats, compounding your yield while you maintain trading exposure.",
+    position: "bottom-left"
+  }
+];
+---
+
+<section class="py-24 relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-surface-primary via-surface-secondary/30 to-surface-primary pointer-events-none"></div>
+
+  <div class="section-container relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-20 space-y-4">
+      <!-- Badge -->
+      <div class="inline-flex badge">
+        <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        MECHANICS
+      </div>
+
+      <h2>The ScaleX <span class="gradient-text">Flywheel</span></h2>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+        Supercharge your portfolio. A self-reinforcing cycle that maximizes capital efficiency by earning yield on collateral while you trade.
+      </p>
+    </div>
+
+    <!-- Flywheel Diagram -->
+    <div class="relative max-w-5xl mx-auto h-[700px] md:h-[600px]">
+      <!-- Center Engine -->
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        <!-- Rotating Rings -->
+        <div class="absolute inset-0 -m-8 animate-spin-slow">
+          <div class="w-[200px] h-[200px] rounded-full border border-dashed border-primary/30"></div>
+        </div>
+        <div class="absolute inset-0 -m-16 animate-spin-slow" style="animation-direction: reverse; animation-duration: 30s;">
+          <div class="w-[260px] h-[260px] rounded-full border border-dashed border-gray-700"></div>
+        </div>
+
+        <!-- Engine Core -->
+        <div class="relative w-[130px] h-[130px] rounded-full bg-surface-tertiary border-2 border-primary/50 flex flex-col items-center justify-center animate-pulse-glow shadow-glow-lg">
+          <svg class="w-10 h-10 text-primary mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span class="text-xs font-heading font-semibold text-white">ENGINE</span>
+          <span class="text-xs text-success">ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Step Cards -->
+      <!-- Top Left - Step 1 -->
+      <div class="absolute top-0 left-0 md:left-10 max-w-[280px] flywheel-step" data-step="1">
+        <div class="card-glow group">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 bg-primary/20 rounded-lg text-primary group-hover:scale-110 transition-transform" set:html={steps[0].icon}></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h4 class="font-heading font-semibold text-white">{steps[0].title}</h4>
+                <span class="text-primary font-heading font-bold text-sm">{steps[0].number}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">{steps[0].description}</p>
+        </div>
+        <!-- Connector Line -->
+        <div class="hidden md:block absolute -right-16 top-1/2 w-16 h-px bg-gradient-to-r from-border to-transparent"></div>
+      </div>
+
+      <!-- Top Right - Step 2 -->
+      <div class="absolute top-0 right-0 md:right-10 max-w-[280px] flywheel-step" data-step="2">
+        <div class="card-glow group">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 bg-primary/20 rounded-lg text-primary group-hover:scale-110 transition-transform" set:html={steps[1].icon}></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h4 class="font-heading font-semibold text-white">{steps[1].title}</h4>
+                <span class="text-primary font-heading font-bold text-sm">{steps[1].number}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">{steps[1].description}</p>
+        </div>
+        <!-- Connector Line -->
+        <div class="hidden md:block absolute -left-16 top-1/2 w-16 h-px bg-gradient-to-l from-border to-transparent"></div>
+      </div>
+
+      <!-- Bottom Right - Step 3 -->
+      <div class="absolute bottom-24 md:bottom-0 right-0 md:right-10 max-w-[280px] flywheel-step" data-step="3">
+        <div class="card-glow group">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 bg-primary/20 rounded-lg text-primary group-hover:scale-110 transition-transform" set:html={steps[2].icon}></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h4 class="font-heading font-semibold text-white">{steps[2].title}</h4>
+                <span class="text-primary font-heading font-bold text-sm">{steps[2].number}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">{steps[2].description}</p>
+        </div>
+        <!-- Connector Line -->
+        <div class="hidden md:block absolute -left-16 top-1/2 w-16 h-px bg-gradient-to-l from-border to-transparent"></div>
+      </div>
+
+      <!-- Bottom Left - Step 4 -->
+      <div class="absolute bottom-24 md:bottom-0 left-0 md:left-10 max-w-[280px] flywheel-step" data-step="4">
+        <div class="card-glow group">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 bg-primary/20 rounded-lg text-primary group-hover:scale-110 transition-transform" set:html={steps[3].icon}></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h4 class="font-heading font-semibold text-white">{steps[3].title}</h4>
+                <span class="text-primary font-heading font-bold text-sm">{steps[3].number}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">{steps[3].description}</p>
+        </div>
+        <!-- Connector Line -->
+        <div class="hidden md:block absolute -right-16 top-1/2 w-16 h-px bg-gradient-to-r from-border to-transparent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .flywheel-step {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+  }
+
+  .flywheel-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .flywheel-step.active .card-glow {
+    border-color: rgba(249, 115, 22, 0.5);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const steps = document.querySelectorAll('.flywheel-step');
+        steps.forEach((step, index) => {
+          setTimeout(() => {
+            step.classList.add('visible');
+          }, index * 200);
+        });
+
+        // Start sequential highlight animation
+        startFlywheelAnimation();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const flywheelSection = document.querySelector('.flywheel-step')?.closest('section');
+  if (flywheelSection) {
+    observer.observe(flywheelSection);
+  }
+
+  // Sequential highlight animation
+  function startFlywheelAnimation() {
+    const steps = document.querySelectorAll('.flywheel-step');
+    let currentStep = 0;
+
+    setInterval(() => {
+      steps.forEach(step => step.classList.remove('active'));
+      steps[currentStep]?.classList.add('active');
+      currentStep = (currentStep + 1) % steps.length;
+    }, 2500);
+  }
+</script>
+
+

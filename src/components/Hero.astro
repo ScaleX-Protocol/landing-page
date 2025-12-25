@@ -1,0 +1,467 @@
+---
+// Hero section with 3D coin animation and floating info cards
+---
+
+<section class="relative pt-32 pb-16 overflow-hidden">
+  <!-- Background Glow Effects -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/4 opacity-60"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-success/10 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4 opacity-50"
+    >
+    </div>
+  </div>
+
+  <div class="section-container relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Left Content -->
+      <div class="space-y-8 animate-fade-in">
+
+        <!-- Main Headline -->
+        <div class="space-y-4">
+          <h2
+            class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-tight tracking-[-0.02em]"
+          >
+            Trade Smarter.<br />
+            <span class="gradient-text">Earn More.</span>
+          </h2>
+
+          <p
+            class="text-base sm:text-lg text-gray-400 max-w-lg leading-relaxed"
+          >
+            The first CLOB DEX where your open limit orders earn lending yield.
+            Stop letting your capital sit idle—maximize your portfolio's
+            potential.
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-4">
+          <a href="https://app.scalex.finance" class="btn-primary group">
+            <div
+              class="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+            </div>
+            <svg
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Launch App
+          </a>
+          <a href="https://docs.scalex.finance" class="btn-secondary">
+            <svg
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+            Read Docs
+          </a>
+        </div>
+
+        <!-- Audited By -->
+        <div class="flex items-center gap-4 pt-4">
+          <span
+            class="text-xs text-gray-500 font-medium uppercase tracking-wider"
+            >Audited By</span
+          >
+          <div class="h-px w-8 bg-gray-700"></div>
+          <div
+            class="flex items-center gap-6 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div
+              class="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                class="w-4 h-4 text-primary"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span class="font-bold text-sm text-gray-300">CERTIK</span>
+            </div>
+            <div
+              class="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                class="w-4 h-4 text-primary"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span class="font-bold text-sm text-gray-300">TRAIL OF BITS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Content - 3D Coin Animation with Portal -->
+      <div
+        class="relative h-[450px] lg:h-[500px] flex items-center justify-center perspective-1000"
+      >
+        <!-- Main Image Container with floating coins effect -->
+        <div
+          class="relative w-full max-w-[500px] aspect-square transform transition-transform duration-700 hover:scale-[1.02]"
+        >
+          <!-- Background Glow -->
+          <div
+            class="absolute inset-0 bg-gradient-to-tr from-primary/30 via-success/10 to-transparent rounded-full blur-3xl transform scale-75 animate-pulse"
+          >
+          </div>
+
+          <!-- Glowing Portal Base -->
+          <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 w-[280px] h-[60px] md:w-[350px] md:h-[70px]"
+          >
+            <div
+              class="absolute inset-0 bg-success/30 rounded-full blur-xl animate-pulse"
+            >
+            </div>
+            <div class="absolute inset-4 bg-success/50 rounded-full blur-lg">
+            </div>
+            <div
+              class="absolute inset-0 border-2 border-success/40 rounded-full"
+            >
+            </div>
+            <div
+              class="absolute inset-0 border border-success/20 rounded-full animate-ping"
+              style="animation-duration: 3s;"
+            >
+            </div>
+          </div>
+
+          <!-- Floating Coins -->
+          <div class="relative w-full h-full">
+            <!-- Main Large Coin -->
+            <div
+              class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float"
+              style="animation-delay: 0s;"
+            >
+              <div
+                class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-500"
+              >
+                <div
+                  class="absolute inset-2 rounded-full bg-gradient-to-tl from-yellow-300 to-yellow-500 opacity-60"
+                >
+                </div>
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-yellow-900 font-bold text-2xl md:text-3xl"
+                >
+                  $
+                </div>
+              </div>
+            </div>
+
+            <!-- Medium Coin 1 -->
+            <div
+              class="absolute top-1/4 right-1/4 animate-float-slow"
+              style="animation-delay: -2s;"
+            >
+              <div
+                class="w-14 h-14 md:w-18 md:h-18 rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 shadow-xl transform -rotate-12"
+              >
+                <div
+                  class="absolute inset-1 rounded-full bg-gradient-to-tl from-yellow-300 to-yellow-500 opacity-60"
+                >
+                </div>
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-yellow-900 font-bold text-lg"
+                >
+                  $
+                </div>
+              </div>
+            </div>
+
+            <!-- Medium Coin 2 -->
+            <div
+              class="absolute top-1/5 left-1/3 animate-float"
+              style="animation-delay: -1s;"
+            >
+              <div
+                class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 shadow-lg transform rotate-45"
+              >
+                <div
+                  class="absolute inset-1 rounded-full bg-gradient-to-tl from-yellow-300 to-yellow-500 opacity-60"
+                >
+                </div>
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-yellow-900 font-bold text-base"
+                >
+                  $
+                </div>
+              </div>
+            </div>
+
+            <!-- Silver/Green Coin -->
+            <div
+              class="absolute top-2/5 right-1/3 animate-float-fast"
+              style="animation-delay: -0.5s;"
+            >
+              <div
+                class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 shadow-lg transform -rotate-12"
+              >
+                <div
+                  class="absolute inset-1 rounded-full bg-gradient-to-tl from-gray-200 to-gray-400 opacity-60"
+                >
+                </div>
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-gray-700 font-bold text-lg"
+                >
+                  Ξ
+                </div>
+              </div>
+            </div>
+
+            <!-- Small Coins -->
+            <div
+              class="absolute top-1/6 right-1/4 animate-float-slow"
+              style="animation-delay: -3s;"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-sm transform -rotate-45"
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-yellow-900 font-bold text-xs"
+                >
+                  $
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute bottom-1/3 left-1/4 animate-float"
+              style="animation-delay: -4s;"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-md"
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-yellow-900 font-bold text-sm"
+                >
+                  $
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Info Card - Yield Generated -->
+          <div
+            class="absolute top-8 left-0 md:left-4 z-20 glass rounded-xl p-4 animate-float shadow-2xl"
+            style="animation-delay: -1.5s;"
+          >
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-primary/20 rounded-lg">
+                <svg
+                  class="w-5 h-5 text-primary"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
+                  <polyline points="17,6 23,6 23,12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400">Yield Generated</p>
+                <p class="text-lg font-heading font-bold text-primary">
+                  +12.5% <span class="text-sm text-primary/80">APY</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Info Card - Order Filled -->
+          <div
+            class="absolute bottom-24 right-0 md:right-4 z-20 glass rounded-xl p-4 animate-float-slow shadow-2xl"
+            style="animation-delay: -3s;"
+          >
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-success/20 rounded-lg">
+                <svg
+                  class="w-5 h-5 text-success"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400">Limit Order</p>
+                <p class="text-lg font-heading font-bold">
+                  Filled @ <span class="text-success">1,240.00</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="section-container mt-16">
+    <div
+      class="w-full border-y border-border bg-surface-secondary/50 backdrop-blur-sm relative z-10 rounded-2xl"
+    >
+      <div class="py-8 px-4 md:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Total Volume -->
+          <div
+            class="flex flex-col gap-1 p-4 rounded-lg border border-transparent hover:border-border hover:bg-white/5 transition-all group cursor-default"
+          >
+            <div class="flex items-center gap-2 mb-2">
+              <svg
+                class="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 20V10"></path>
+                <path d="M12 20V4"></path>
+                <path d="M6 20v-6"></path>
+              </svg>
+              <p
+                class="text-gray-400 text-sm font-medium uppercase tracking-wider"
+              >
+                Total Volume
+              </p>
+            </div>
+            <div class="flex items-end gap-3">
+              <p
+                class="text-white text-3xl font-heading font-black leading-tight tracking-tight"
+              >
+                $1.2B
+              </p>
+              <span
+                class="text-primary text-sm font-bold mb-1 flex items-center"
+              >
+                <svg
+                  class="w-4 h-4 mr-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7,7 17,7 17,17"></polyline>
+                </svg>
+                5.2%
+              </span>
+            </div>
+          </div>
+
+          <!-- Current APY -->
+          <div
+            class="flex flex-col gap-1 p-4 rounded-lg border border-transparent hover:border-border hover:bg-white/5 transition-all group cursor-default"
+          >
+            <div class="flex items-center gap-2 mb-2">
+              <svg
+                class="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="19" y1="5" x2="5" y2="19"></line>
+                <circle cx="6.5" cy="6.5" r="2.5"></circle>
+                <circle cx="17.5" cy="17.5" r="2.5"></circle>
+              </svg>
+              <p
+                class="text-gray-400 text-sm font-medium uppercase tracking-wider"
+              >
+                Current APY
+              </p>
+            </div>
+            <div class="flex items-end gap-3">
+              <p
+                class="text-white text-3xl font-heading font-black leading-tight tracking-tight"
+              >
+                12.5%
+              </p>
+              <span
+                class="text-primary text-sm font-bold mb-1 flex items-center"
+              >
+                <svg
+                  class="w-4 h-4 mr-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7,7 17,7 17,17"></polyline>
+                </svg>
+                0.5%
+              </span>
+            </div>
+          </div>
+
+          <!-- TVL -->
+          <div
+            class="flex flex-col gap-1 p-4 rounded-lg border border-transparent hover:border-border hover:bg-white/5 transition-all group cursor-default"
+          >
+            <div class="flex items-center gap-2 mb-2">
+              <svg
+                class="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <p
+                class="text-gray-400 text-sm font-medium uppercase tracking-wider"
+              >
+                TVL
+              </p>
+            </div>
+            <div class="flex items-end gap-3">
+              <p
+                class="text-white text-3xl font-heading font-black leading-tight tracking-tight"
+              >
+                $450M
+              </p>
+              <span
+                class="text-primary text-sm font-bold mb-1 flex items-center"
+              >
+                <svg
+                  class="w-4 h-4 mr-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7,7 17,7 17,17"></polyline>
+                </svg>
+                2.1%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
