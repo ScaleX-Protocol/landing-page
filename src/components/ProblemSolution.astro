@@ -1,146 +1,190 @@
 ---
-// Problem vs Solution comparison section
+// Problem vs Solution - Highlighting ScaleX advantage
 ---
 
 <section class="py-24 relative overflow-hidden">
   <!-- Background -->
-  <div class="absolute inset-0 bg-gradient-to-b from-surface-primary via-surface-secondary/50 to-surface-primary pointer-events-none"></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-surface-primary via-surface-secondary/30 to-surface-primary pointer-events-none"
+  >
+  </div>
 
   <div class="section-container relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16 space-y-4">
-      <h2>Problem vs. <span class="gradient-text">Solution</span></h2>
-      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-        See why traders are switching to ScaleX. Unlock the true potential of your capital with our efficiency engine.
+    <div class="text-center mb-16 max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+        Stop Leaving Money on the Table
+      </h2>
+      <p class="text-lg text-gray-400">
+        Every second your limit order waits, you're losing potential yield.
+        ScaleX changes that.
       </p>
     </div>
 
     <!-- Comparison Cards -->
-    <div class="relative grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <!-- Traditional DEX Card -->
-      <div class="card bg-surface-tertiary/50 space-y-6">
+    <div class="relative grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+      <!-- Traditional DEX Card with hover effects -->
+      <div
+        class="group rounded-2xl bg-surface-tertiary/30 border border-border/50 p-6 lg:p-8 space-y-6 opacity-70 hover:opacity-90 hover:border-gray-600 transition-all duration-500"
+      >
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="p-2 bg-gray-800 rounded-lg">
-              <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <div
+              class="p-2 bg-gray-800 rounded-lg group-hover:bg-gray-700 transition-colors"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 group-hover:text-gray-400 transition-colors"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
             </div>
-            <span class="font-heading font-semibold text-lg text-white">Traditional DEX</span>
+            <span class="font-heading font-semibold text-lg text-gray-400"
+              >Other DEXs</span
+            >
           </div>
-          <span class="badge text-xs">THE OLD WAY</span>
         </div>
 
-        <!-- Chart Placeholder - Flat Line -->
-        <div class="h-32 bg-surface-primary rounded-xl flex items-center justify-center relative overflow-hidden">
+        <!-- Visual -->
+        <div
+          class="h-24 bg-surface-primary/50 rounded-xl flex items-center justify-center relative overflow-hidden group-hover:bg-surface-primary/70 transition-colors"
+        >
           <div class="absolute inset-0 flex items-end justify-center p-4">
-            <div class="w-full h-1 bg-gray-700 rounded"></div>
+            <div class="w-full h-0.5 bg-gray-700/50 rounded"></div>
           </div>
-          <div class="flex flex-col items-center gap-2 z-10">
-            <svg class="w-10 h-10 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <div class="flex flex-col items-center gap-1 z-10">
+            <svg
+              class="w-8 h-8 text-gray-600 group-hover:text-gray-500 group-hover:animate-[shake_0.5s_ease-in-out] transition-colors"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
-            <span class="text-sm text-gray-500">Idle Capital</span>
+            <span
+              class="text-xs text-gray-600 group-hover:text-gray-500 transition-colors"
+              >Funds locked, earning nothing</span
+            >
           </div>
         </div>
 
         <!-- Stats -->
-        <div class="space-y-4 pt-4 border-t border-border">
+        <div class="space-y-3 pt-4 border-t border-border/30">
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Limit Orders</span>
-            <span class="font-heading font-semibold text-white">$50,000</span>
+            <span class="text-gray-500 text-sm">Your deposit</span>
+            <span class="font-heading font-semibold text-gray-400">$50,000</span
+            >
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Yield Generated</span>
-            <span class="font-heading font-semibold text-gray-500">$0 Yield</span>
+            <span class="text-gray-500 text-sm">While waiting</span>
+            <span class="font-heading font-semibold text-red-500/80"
+              >$0 earned</span
+            >
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Status</span>
-            <span class="flex items-center gap-2 text-red-500 font-medium">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="15" y1="9" x2="9" y2="15"/>
-                <line x1="9" y1="9" x2="15" y2="15"/>
-              </svg>
-              Capital is frozen
-            </span>
+            <span class="text-gray-500 text-sm">Opportunity cost</span>
+            <span class="text-red-500/80 font-medium text-sm"
+              >-$6,250/year lost</span
+            >
           </div>
         </div>
       </div>
 
       <!-- VS Badge -->
-      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex">
-        <div class="w-14 h-14 rounded-full bg-surface-primary border-2 border-border flex items-center justify-center font-heading font-bold text-lg shadow-xl">
+      <div
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-surface-primary border-2 border-primary/50 flex items-center justify-center font-heading font-bold text-sm shadow-lg shadow-primary/20"
+        >
           VS
         </div>
       </div>
 
-      <!-- ScaleX Card -->
-      <div class="card-glow space-y-6 ring-1 ring-primary/20">
+      <!-- ScaleX Card - Highlighted with hover effects -->
+      <div
+        class="group rounded-2xl bg-gradient-to-br from-surface-secondary via-surface-secondary to-primary/5 border border-primary/30 p-6 lg:p-8 space-y-6 ring-1 ring-primary/20 shadow-xl shadow-primary/10 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/50 transition-all duration-500"
+      >
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="p-2 bg-primary/20 rounded-lg">
-              <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            <div
+              class="p-2 bg-primary/20 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
+            >
+              <svg
+                class="w-5 h-5 text-primary group-hover:text-white transition-colors"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <span class="font-heading font-semibold text-lg text-white">ScaleX</span>
+            <span class="font-heading font-semibold text-lg text-white"
+              >ScaleX</span
+            >
           </div>
-          <span class="badge badge-live text-xs">THE SCALEX WAY</span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span class="text-xs text-primary font-medium">Earning</span>
+          </div>
         </div>
 
-        <!-- Chart Placeholder - Growing Bars -->
-        <div class="h-32 bg-surface-primary rounded-xl flex items-end justify-center gap-3 p-4 relative overflow-hidden">
-          <div class="absolute top-2 right-3">
-            <span class="flex items-center gap-1 text-xs font-medium">
-              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              <span class="text-primary">EARNING</span>
-            </span>
+        <!-- Visual - Growing Bars with hover effect -->
+        <div
+          class="h-24 bg-surface-primary/50 rounded-xl flex items-end justify-center gap-2 p-4 relative overflow-hidden group-hover:bg-surface-primary/70 transition-colors"
+        >
+          <div
+            class="w-6 h-4 bg-primary/50 rounded-t transition-all duration-500 ease-out group-hover:h-6 group-hover:bg-primary/60"
+          >
           </div>
-          <div class="w-8 h-8 bg-primary/60 rounded-t"></div>
-          <div class="w-8 h-12 bg-primary/70 rounded-t"></div>
-          <div class="w-8 h-16 bg-primary/80 rounded-t"></div>
-          <div class="w-8 h-24 bg-primary rounded-t"></div>
+          <div
+            class="w-6 h-8 bg-primary/60 rounded-t transition-all duration-500 ease-out delay-75 group-hover:h-10 group-hover:bg-primary/70"
+          >
+          </div>
+          <div
+            class="w-6 h-12 bg-primary/70 rounded-t transition-all duration-500 ease-out delay-100 group-hover:h-14 group-hover:bg-primary/80"
+          >
+          </div>
+          <div
+            class="w-6 h-16 bg-primary/80 rounded-t transition-all duration-500 ease-out delay-150 group-hover:h-18 group-hover:bg-primary/90"
+          >
+          </div>
+          <div
+            class="w-6 h-20 bg-primary rounded-t transition-all duration-500 ease-out delay-200 group-hover:h-[5.5rem] group-hover:shadow-lg group-hover:shadow-primary/50"
+          >
+          </div>
         </div>
 
         <!-- Stats -->
-        <div class="space-y-4 pt-4 border-t border-primary/20">
+        <div class="space-y-3 pt-4 border-t border-primary/20">
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Limit Orders</span>
-            <span class="font-heading font-semibold text-white">Same $50,000</span>
+            <span class="text-gray-400 text-sm">Same deposit</span>
+            <span class="font-heading font-semibold text-white">$50,000</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Yield Generated</span>
-            <span class="font-heading font-semibold">
-              <span class="text-white">Trading Upside</span>
-              <span class="text-primary"> + Lending APY</span>
-            </span>
+            <span class="text-gray-400 text-sm">While waiting</span>
+            <span class="font-heading font-bold text-primary">+12.5% APY</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-400">Status</span>
-            <span class="flex items-center gap-2 text-primary font-medium">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="3"/>
-                <circle cx="12" cy="12" r="8" stroke-dasharray="4"/>
-              </svg>
-              Capital works 24/7
-            </span>
+            <span class="text-gray-400 text-sm">Extra earnings</span>
+            <span class="text-primary font-bold text-sm">+$6,250/year</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- CTA -->
-    <div class="text-center mt-12 space-y-4">
-      <a href="https://app.scalex.finance" class="btn-primary">
-        Start Earning Now
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <p class="text-sm text-gray-500">No lock-up periods. Withdraw anytime.</p>
+    <!-- Bottom Note -->
+    <div class="text-center mt-12">
+      <p class="text-sm text-gray-500">
+        Same trades. Same strategy. More profit.
+      </p>
     </div>
   </div>
 </section>

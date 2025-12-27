@@ -1,41 +1,46 @@
 ---
-// Comparison Table - Why ScaleX Wins
+// Comparison Table - Why ScaleX Wins with tooltips
 const features = [
   {
     name: "Yield on Open Orders",
-    scalex: { value: "Yes", detail: "Earn while waiting", positive: true },
+    tooltip: "Earn lending interest on the capital locked in your limit orders while waiting for execution.",
+    scalex: { value: "Yes", detail: "12.5% avg APY", positive: true },
     dex: { value: "No", positive: false },
-    lending: { value: "No", positive: false }
+    lending: { value: "No", positive: false },
   },
   {
     name: "Capital Efficiency",
-    scalex: { value: "High", detail: "10x Leverage", positive: true },
-    dex: { value: "Medium", positive: null },
-    lending: { value: "Low", detail: "Over-collateralized", positive: false }
+    tooltip: "How much trading power you get per dollar deposited. Higher is better.",
+    scalex: { value: "10x", detail: "Leverage", positive: true },
+    dex: { value: "5x", positive: null },
+    lending: { value: "1.5x", detail: "Over-collateralized", positive: false },
   },
   {
-    name: "Liquidation Type",
-    scalex: { value: "Soft Liquidations", positive: true, highlight: true },
-    dex: { value: "Hard Liquidations", positive: false },
-    lending: { value: "Hard Liquidations", positive: false }
+    name: "Liquidation Protection",
+    tooltip: "How the protocol handles positions that approach liquidation threshold.",
+    scalex: { value: "Gradual", detail: "Soft liquidation", positive: true },
+    dex: { value: "Instant", positive: false },
+    lending: { value: "Instant", positive: false },
   },
   {
-    name: "Repayment",
-    scalex: { value: "Auto-repay via Yield", positive: true, icon: "magic" },
+    name: "Loan Repayment",
+    tooltip: "How outstanding loans are paid back over time.",
+    scalex: { value: "Automatic", detail: "Yield pays debt", positive: true },
     dex: { value: "Manual", positive: null },
-    lending: { value: "Manual", positive: null }
-  }
+    lending: { value: "Manual", positive: null },
+  },
 ];
 ---
 
-<section class="py-24 relative overflow-hidden" id="markets">
+<section class="py-24 relative overflow-hidden" id="compare">
   <div class="section-container relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16 space-y-4">
-      <h2>Why <span class="gradient-text">ScaleX</span> Wins</h2>
-      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-        Compare us with standard <span class="text-primary">DEXs</span> and <span class="text-primary">lending protocols</span>. 
-        See how we unlock capital efficiency and maximize your yield in the DeFi ecosystem.
+    <div class="text-center mb-16 max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+        The ScaleX Advantage
+      </h2>
+      <p class="text-lg text-gray-400">
+        See how we stack up against traditional DEXs and lending protocols.
       </p>
     </div>
 
@@ -45,93 +50,86 @@ const features = [
         <!-- Header -->
         <thead>
           <tr class="border-b border-border">
-            <th class="text-left py-4 px-4 text-sm text-gray-500 uppercase tracking-wider font-medium">Feature</th>
-            <th class="text-center py-4 px-4 relative">
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Recommended</span>
-              </div>
-              <div class="flex items-center justify-center gap-2 pt-4">
+            <th class="text-left py-5 px-4 text-sm text-gray-500 uppercase tracking-wider font-medium">
+              Feature
+            </th>
+            <th class="text-center py-5 px-4">
+              <div class="flex items-center justify-center gap-2">
                 <svg class="w-5 h-5 text-primary" viewBox="0 0 48 48" fill="currentColor">
-                  <path d="M8 12L24 4L40 12V20L32 24L40 28V36L24 44L8 36V28L16 24L8 20V12Z"/>
+                  <path d="M8 12L24 4L40 12V20L32 24L40 28V36L24 44L8 36V28L16 24L8 20V12Z"></path>
                 </svg>
-                <span class="font-heading font-bold text-white">ScaleX</span>
+                <span class="font-heading font-bold text-primary">ScaleX</span>
               </div>
             </th>
-            <th class="text-center py-4 px-4">
-              <div class="text-gray-400 font-heading font-semibold">Standard DEX</div>
-              <div class="text-xs text-gray-500">(dYdX)</div>
+            <th class="text-center py-5 px-4">
+              <div class="text-gray-500 font-heading font-medium">DEX</div>
             </th>
-            <th class="text-center py-4 px-4">
-              <div class="text-gray-400 font-heading font-semibold">Lending</div>
-              <div class="text-xs text-gray-500">(Aave)</div>
+            <th class="text-center py-5 px-4">
+              <div class="text-gray-500 font-heading font-medium">Lending</div>
             </th>
           </tr>
         </thead>
-        
+
         <!-- Body -->
         <tbody>
           {features.map((feature, index) => (
-            <tr class={`border-b border-border/50 hover:bg-surface-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-surface-secondary/20' : ''}`}>
+            <tr class={`border-b border-border/30 hover:bg-surface-secondary/30 transition-colors ${index % 2 === 0 ? "bg-surface-secondary/10" : ""}`}>
               <td class="py-5 px-4">
                 <div class="flex items-center gap-2">
                   <span class="font-medium text-white">{feature.name}</span>
-                  <button class="text-gray-600 hover:text-gray-400 transition-colors">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M12 16v-4M12 8h.01"/>
-                    </svg>
-                  </button>
+                  <div class="relative group">
+                    <button class="text-gray-600 hover:text-primary transition-colors">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                      </svg>
+                    </button>
+                    <!-- Tooltip -->
+                    <div class="absolute left-0 bottom-full mb-2 w-64 p-3 bg-surface-tertiary border border-border rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      <p class="text-sm text-gray-300 leading-relaxed">{feature.tooltip}</p>
+                      <div class="absolute left-4 bottom-0 translate-y-full w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-surface-tertiary"></div>
+                    </div>
+                  </div>
                 </div>
               </td>
               <td class="py-5 px-4 text-center bg-primary/5">
-                <div class="flex flex-col items-center gap-1">
-                  <div class="flex items-center gap-2">
+                <div class="flex flex-col items-center gap-0.5">
+                  <div class="flex items-center gap-1.5">
                     {feature.scalex.positive && (
-                      <svg class="w-5 h-5 text-success" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      <svg class="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     )}
-                    {feature.scalex.icon === "magic" && (
-                      <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8L19 13M17.8 6.2L19 5M3 21l9-9"/>
-                      </svg>
-                    )}
-                    <span class={`font-semibold ${feature.scalex.positive ? 'text-success' : 'text-white'}`}>
+                    <span class={`font-semibold ${feature.scalex.positive ? "text-primary" : "text-white"}`}>
                       {feature.scalex.value}
                     </span>
                   </div>
                   {feature.scalex.detail && (
-                    <span class={`text-xs ${feature.scalex.highlight ? 'bg-primary/20 text-primary px-2 py-0.5 rounded-full' : 'text-primary'}`}>
-                      {feature.scalex.detail}
-                    </span>
+                    <span class="text-xs text-primary/80">{feature.scalex.detail}</span>
                   )}
                 </div>
               </td>
               <td class="py-5 px-4 text-center">
-                <div class="flex items-center justify-center gap-2">
+                <div class="flex items-center justify-center gap-1.5">
                   {feature.dex.positive === false && (
-                    <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M15 9l-6 6M9 9l6 6"/>
+                    <svg class="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M15 9l-6 6M9 9l6 6" />
                     </svg>
                   )}
-                  <span class={`${feature.dex.positive === false ? 'text-gray-500' : 'text-gray-400'}`}>
-                    {feature.dex.value}
-                  </span>
+                  <span class="text-gray-500">{feature.dex.value}</span>
                 </div>
               </td>
               <td class="py-5 px-4 text-center">
-                <div class="flex flex-col items-center gap-1">
-                  <div class="flex items-center justify-center gap-2">
+                <div class="flex flex-col items-center gap-0.5">
+                  <div class="flex items-center justify-center gap-1.5">
                     {feature.lending.positive === false && (
-                      <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M15 9l-6 6M9 9l6 6"/>
+                      <svg class="w-4 h-4 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M15 9l-6 6M9 9l6 6" />
                       </svg>
                     )}
-                    <span class={`${feature.lending.positive === false ? 'text-gray-500' : 'text-gray-400'}`}>
-                      {feature.lending.value}
-                    </span>
+                    <span class="text-gray-500">{feature.lending.value}</span>
                   </div>
                   {feature.lending.detail && (
                     <span class="text-xs text-gray-600">{feature.lending.detail}</span>
@@ -142,13 +140,6 @@ const features = [
           ))}
         </tbody>
       </table>
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center mt-12">
-      <a href="https://app.scalex.finance" class="btn-primary uppercase tracking-wider">
-        Start Trading
-      </a>
     </div>
   </div>
 </section>
