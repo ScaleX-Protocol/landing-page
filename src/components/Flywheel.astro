@@ -1,0 +1,454 @@
+---
+// Flywheel section - Dramatic animation showing the value cycle
+const steps = [
+  {
+    number: "01",
+    title: "Deposit",
+    description:
+      "Your assets immediately start earning yield in lending pools.",
+  },
+  {
+    number: "02",
+    title: "Trade",
+    description: "Use yield-bearing tokens as margin for leveraged positions.",
+  },
+  {
+    number: "03",
+    title: "Earn",
+    description: "Yield auto-compounds. Loans auto-repay. Collateral grows.",
+  },
+  {
+    number: "04",
+    title: "Repeat",
+    description: "More collateral = more borrowing power. The cycle compounds.",
+  },
+];
+---
+
+<section class="py-32 relative overflow-hidden" id="flywheel">
+  <!-- Background -->
+  <div class="absolute inset-0">
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-surface-primary via-surface-secondary/20 to-surface-primary"
+    >
+    </div>
+    <!-- Radial glow behind center -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"
+    >
+    </div>
+  </div>
+
+  <div class="section-container relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-20 max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+        The Compounding Engine
+      </h2>
+      <p class="text-lg text-gray-400">
+        A self-reinforcing cycle that grows your portfolio while you trade.
+      </p>
+    </div>
+
+    <!-- Flywheel Animation Container -->
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Center Engine -->
+      <div class="flex justify-center mb-12">
+        <div class="relative">
+          <!-- Outer rotating ring -->
+          <div class="absolute inset-0 -m-12 flywheel-ring">
+            <svg class="w-full h-full" viewBox="0 0 200 200">
+              <circle
+                cx="100"
+                cy="100"
+                r="90"
+                fill="none"
+                stroke="url(#gradient)"
+                stroke-width="2"
+                stroke-dasharray="8 4"
+                class="animate-spin-slow origin-center"></circle>
+              <defs>
+                <linearGradient
+                  id="gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#F97316" stop-opacity="0.5"
+                  ></stop>
+                  <stop offset="50%" stop-color="#F97316" stop-opacity="0.1"
+                  ></stop>
+                  <stop offset="100%" stop-color="#F97316" stop-opacity="0.5"
+                  ></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Second rotating ring (counter) -->
+          <div class="absolute inset-0 -m-20 flywheel-ring-reverse">
+            <svg class="w-full h-full" viewBox="0 0 200 200">
+              <circle
+                cx="100"
+                cy="100"
+                r="95"
+                fill="none"
+                stroke="rgba(249,115,22,0.15)"
+                stroke-width="1"
+                stroke-dasharray="4 8"
+                class="animate-spin-slow-reverse origin-center"></circle>
+            </svg>
+          </div>
+
+          <!-- Engine Core -->
+          <div
+            class="relative w-40 h-40 rounded-full bg-gradient-to-br from-surface-tertiary to-surface-secondary border-2 border-primary/50 flex flex-col items-center justify-center shadow-2xl shadow-primary/20 engine-pulse"
+          >
+            <svg
+              class="w-12 h-12 text-primary mb-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <span
+              class="text-xs font-heading font-bold text-white tracking-wider"
+              >FLYWHEEL</span
+            >
+            <span class="text-xs text-primary font-medium">Active</span>
+
+            <!-- Pulse rings -->
+            <div
+              class="absolute inset-0 rounded-full border border-primary/30 animate-ping"
+              style="animation-duration: 2s;"
+            >
+            </div>
+            <div
+              class="absolute inset-0 -m-4 rounded-full border border-primary/20 animate-ping"
+              style="animation-duration: 3s;"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps Grid -->
+      <div
+        id="steps-grid"
+        class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+      >
+        {
+          steps.map((step, index) => (
+            <div
+              class="flywheel-step group p-5 rounded-2xl bg-surface-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-surface-secondary hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500 cursor-pointer"
+              data-step-index={index}
+              style={`animation-delay: ${index * 0.15}s;`}
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <span class="step-number text-2xl font-heading font-black text-primary/30 group-hover:text-primary transition-colors duration-500">
+                  {step.number}
+                </span>
+              </div>
+              <h4 class="step-title text-lg font-heading font-bold text-white mb-2 group-hover:text-primary transition-colors duration-500">
+                {step.title}
+              </h4>
+              <p class="step-desc text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors duration-500">
+                {step.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Connecting lines between steps (visible on md+) -->
+      <div
+        class="hidden md:block absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none"
+        style="top: calc(50% + 80px);"
+      >
+        <div class="flex justify-between items-center px-12">
+          <div
+            class="step-line flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-primary/30 transition-all duration-500"
+            data-line-index="0"
+          >
+          </div>
+          <svg
+            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
+            data-arrow-index="0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+          <div
+            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 via-primary/30 to-primary/30 transition-all duration-500"
+            data-line-index="1"
+          >
+          </div>
+          <svg
+            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
+            data-arrow-index="1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+          <div
+            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 via-primary/30 to-primary/30 transition-all duration-500"
+            data-line-index="2"
+          >
+          </div>
+          <svg
+            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
+            data-arrow-index="2"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+          <div
+            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent transition-all duration-500"
+            data-line-index="3"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16">
+      <a
+        href="https://base-sepolia-app.scalex.money"
+        class="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4 group"
+      >
+        <svg
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        Start the Flywheel
+        <svg
+          class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Engine pulse glow */
+  .engine-pulse {
+    animation: engineGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes engineGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 30px rgba(249, 115, 22, 0.2),
+        0 0 60px rgba(249, 115, 22, 0.1);
+    }
+    50% {
+      box-shadow:
+        0 0 50px rgba(249, 115, 22, 0.4),
+        0 0 100px rgba(249, 115, 22, 0.2);
+    }
+  }
+
+  /* Flywheel step entrance animation */
+  .flywheel-step {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: stepFadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes stepFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Active step state - simulates hover */
+  .flywheel-step.step-active {
+    border-color: rgba(249, 115, 22, 0.5) !important;
+    background-color: rgba(30, 30, 36, 1) !important;
+    box-shadow: 0 10px 40px -10px rgba(249, 115, 22, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .flywheel-step.step-active .step-number {
+    color: #f97316 !important;
+  }
+
+  .flywheel-step.step-active .step-title {
+    color: #f97316 !important;
+  }
+
+  .flywheel-step.step-active .step-desc {
+    color: rgb(156, 163, 175) !important;
+  }
+
+  /* Active line glow */
+  .step-line.line-active {
+    background: linear-gradient(to right, #f97316, #f97316) !important;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+    height: 2px !important;
+  }
+
+  /* Active arrow */
+  .step-arrow.arrow-active {
+    color: #f97316 !important;
+    transform: scale(1.2);
+  }
+
+  /* Slow spin for rings */
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  .animate-spin-slow-reverse {
+    animation: spin 30s linear infinite reverse;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  // Add intersection observer for entrance animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const steps = entry.target.querySelectorAll(".flywheel-step");
+          steps.forEach((step, index) => {
+            (step as HTMLElement).style.animationDelay = `${index * 0.15}s`;
+          });
+          // Start auto-cycling when section is visible
+          startAutoCycle();
+        } else {
+          // Pause when out of view
+          stopAutoCycle();
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+
+  const flywheelSection = document.getElementById("flywheel");
+  if (flywheelSection) {
+    observer.observe(flywheelSection);
+  }
+
+  // Auto-cycling animation for steps
+  let currentStep = 0;
+  let cycleInterval: ReturnType<typeof setInterval> | null = null;
+  const totalSteps = 4;
+  const stepDuration = 2500; // 2.5 seconds per step
+
+  function activateStep(index: number) {
+    // Get all step elements
+    const steps = document.querySelectorAll(".flywheel-step");
+    const lines = document.querySelectorAll(".step-line");
+    const arrows = document.querySelectorAll(".step-arrow");
+
+    // Remove active class from all steps
+    steps.forEach((step) => {
+      step.classList.remove("step-active");
+    });
+
+    // Remove active class from all lines and arrows
+    lines.forEach((line) => {
+      line.classList.remove("line-active");
+    });
+    arrows.forEach((arrow) => {
+      arrow.classList.remove("arrow-active");
+    });
+
+    // Add active class to current step
+    const currentStepEl = document.querySelector(
+      `[data-step-index="${index}"]`,
+    );
+    if (currentStepEl) {
+      currentStepEl.classList.add("step-active");
+    }
+
+    // Activate connecting line and arrow leading TO this step (index - 1)
+    if (index > 0) {
+      const prevLine = document.querySelector(
+        `[data-line-index="${index - 1}"]`,
+      );
+      const prevArrow = document.querySelector(
+        `[data-arrow-index="${index - 1}"]`,
+      );
+      if (prevLine) prevLine.classList.add("line-active");
+      if (prevArrow) prevArrow.classList.add("arrow-active");
+    }
+  }
+
+  function startAutoCycle() {
+    if (cycleInterval) return; // Already running
+
+    // Initial activation
+    activateStep(currentStep);
+
+    cycleInterval = setInterval(() => {
+      currentStep = (currentStep + 1) % totalSteps;
+      activateStep(currentStep);
+    }, stepDuration);
+  }
+
+  function stopAutoCycle() {
+    if (cycleInterval) {
+      clearInterval(cycleInterval);
+      cycleInterval = null;
+    }
+  }
+
+  // Pause auto-cycle on hover, resume on mouse leave
+  const stepsGrid = document.getElementById("steps-grid");
+  if (stepsGrid) {
+    stepsGrid.addEventListener("mouseenter", () => {
+      stopAutoCycle();
+      // Clear all active states when hovering
+      document.querySelectorAll(".flywheel-step").forEach((step) => {
+        step.classList.remove("step-active");
+      });
+      document.querySelectorAll(".step-line").forEach((line) => {
+        line.classList.remove("line-active");
+      });
+      document.querySelectorAll(".step-arrow").forEach((arrow) => {
+        arrow.classList.remove("arrow-active");
+      });
+    });
+
+    stepsGrid.addEventListener("mouseleave", () => {
+      startAutoCycle();
+    });
+  }
+</script>
