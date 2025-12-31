@@ -59,7 +59,7 @@ jobs:
         uses: ./.github/actions/setup-node
         
       - name: Build Astro static site
-        run: pnpm run build:base-sepolia
+        run: pnpm run build
         
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
