@@ -150,8 +150,11 @@ jobs:
           }
           
           echo "=== Checking initial service status ==="
-          sleep 15
+          sleep 30
           docker-compose -f docker-compose.base-sepolia.yml ps
+          
+          echo "=== Checking if server is responding ==="
+          docker-compose -f docker-compose.base-sepolia.yml logs --tail=50 landing-base-sepolia
             
       - name: Show Container Logs
         run: |
