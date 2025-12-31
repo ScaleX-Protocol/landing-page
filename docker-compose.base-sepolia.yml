@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  # Mantle Sepolia Landing Page Application
+  # Base Sepolia Landing Page Application
   landing-base-sepolia:
     build:
       context: .
@@ -9,6 +7,8 @@ services:
       args:
         CHAIN: base-sepolia
     container_name: scalex-landing-base-sepolia
+    env_file:
+      - .env.base-sepolia
     restart: unless-stopped
     networks:
       - landing-network

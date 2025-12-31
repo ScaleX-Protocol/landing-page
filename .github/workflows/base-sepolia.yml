@@ -4,27 +4,27 @@ on:
   push:
     branches: [base-sepolia]
     paths:
-      - 'src/**'
+      - 'src/**' 
       - 'public/**'
-      - '.github/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'Dockerfile'
-      - '.env.example'
+      - '.env.base-sepolia'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
+      - 'nginx.conf'
   pull_request:
     branches: [base-sepolia]
     paths:
       - 'src/**'
       - 'public/**'
-      - '.github/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'Dockerfile'
-      - '.env.example'
+      - '.env.base-sepolia'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
+      - 'nginx.conf'
   workflow_dispatch:
 
 env:
@@ -45,13 +45,20 @@ jobs:
       - name: Setup Node.js with caching
         uses: ./.github/actions/setup-node
         
+      - name: Setup Base Sepolia environment
+        run: |
+          cp .env.base-sepolia .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+        
       - name: Run Astro check
-        run: pnpm exec astro check || true
+        run: pnpm run astro check
 
   # Build Application for Base Sepolia
   build:
     name: Build Landing Page (Base Sepolia)
     runs-on: [self-hosted, scalex]
+    # Removed dependency on lint - can run in parallel
     
     steps:
       - name: Checkout code
@@ -60,14 +67,22 @@ jobs:
       - name: Setup Node.js with caching
         uses: ./.github/actions/setup-node
         
-      - name: Build Astro static site
+      - name: Setup Base Sepolia environment
+        run: |
+          cp .env.base-sepolia .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+        
+      - name: Build application for Base Sepolia
         run: pnpm run build
         
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-files-base-sepolia-landing
-          path: dist/
+          path: |
+            dist
+            package.json
           retention-days: 1
           compression-level: 9
 
@@ -75,6 +90,7 @@ jobs:
   security:
     name: Security Audit (Base Sepolia Landing)
     runs-on: [self-hosted, scalex]
+    # Runs in parallel with lint and build
     
     steps:
       - name: Checkout code
@@ -84,7 +100,7 @@ jobs:
         uses: ./.github/actions/setup-node
         
       - name: Run security audit
-        run: pnpm audit --audit-level moderate || echo "⚠️ Some vulnerabilities found, review recommended"
+        run: pnpm audit --audit-level moderate
 
   # Deploy to Base Sepolia
   deploy-base-sepolia:
@@ -112,6 +128,9 @@ jobs:
           echo "=== Cleaning Docker resources ==="
           docker system prune -f --volumes
           docker image prune -a -f --filter "until=24h"
+          
+          # Set up environment variables
+          cp .env.base-sepolia .env
           
           echo "=== Building Base Sepolia landing services ==="
           docker-compose -f docker-compose.base-sepolia.yml build --no-cache || {

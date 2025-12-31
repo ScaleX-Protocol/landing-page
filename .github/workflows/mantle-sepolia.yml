@@ -4,29 +4,27 @@ on:
   push:
     branches: [mantle-sepolia]
     paths:
-      - 'app/**' 
-      - 'components/**'
-      - 'lib/**'
+      - 'src/**' 
       - 'public/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'Dockerfile'
       - '.env.mantle-sepolia'
-      - 'next.config.ts'
-      - 'tailwind.config.js'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+      - 'nginx.conf'
   pull_request:
     branches: [mantle-sepolia]
     paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
+      - 'src/**'
       - 'public/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'Dockerfile'
       - '.env.mantle-sepolia'
-      - 'next.config.ts'
-      - 'tailwind.config.js'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+      - 'nginx.conf'
   workflow_dispatch:
 
 env:
@@ -50,14 +48,11 @@ jobs:
       - name: Setup Mantle Sepolia environment
         run: |
           cp .env.mantle-sepolia .env
-          echo "NEXT_PUBLIC_DOMAIN=$DOMAIN" >> .env
-          echo "NEXT_PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
         
-      - name: Run linter
-        run: pnpm run lint
-        
-      - name: Run type check
-        run: pnpm run typecheck
+      - name: Run Astro check
+        run: pnpm run astro check
 
   # Build Application for Mantle Sepolia
   build:
@@ -75,19 +70,18 @@ jobs:
       - name: Setup Mantle Sepolia environment
         run: |
           cp .env.mantle-sepolia .env
-          echo "NEXT_PUBLIC_DOMAIN=$DOMAIN" >> .env
-          echo "NEXT_PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
         
       - name: Build application for Mantle Sepolia
-        run: pnpm run build:mantle-sepolia
+        run: pnpm run build
         
       - name: Upload build artifacts (optimized)
         uses: actions/upload-artifact@v4
         with:
           name: build-files-mantle-sepolia-landing
           path: |
-            .next/static
-            .next/server
+            dist
             package.json
           retention-days: 1
           compression-level: 9

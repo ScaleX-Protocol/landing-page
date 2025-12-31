@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Mantle Sepolia Landing Page Application
   landing-mantle-sepolia:
@@ -9,6 +7,8 @@ services:
       args:
         CHAIN: mantle-sepolia
     container_name: scalex-landing-mantle-sepolia
+    env_file:
+      - .env.mantle-sepolia
     restart: unless-stopped
     networks:
       - landing-network
@@ -19,10 +19,10 @@ services:
       - "traefik.http.routers.landing-mantle-sepolia.tls=true"
       - "traefik.http.routers.landing-mantle-sepolia.tls.certresolver=letsencrypt"
       - "traefik.http.services.landing-mantle-sepolia.loadbalancer.server.port=3000"
-  
+    
 networks:
   landing-network:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.24.0.0/16
+        - subnet: 172.25.0.0/16
