@@ -12,7 +12,6 @@ on:
       - '.env.example'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
-      - 'nginx.conf'
   pull_request:
     branches: [base-sepolia]
     paths:
@@ -24,13 +23,12 @@ on:
       - '.env.example'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
-      - 'nginx.conf'
   workflow_dispatch:
 
 env:
   CHAIN: base-sepolia
   DOMAIN: base-sepolia.scalex.money
-  IMAGE_NAME: scalex-landing-base-sepolia
+  PORT: 3000
 
 jobs:
   # Lint and Type Check for Base Sepolia
@@ -47,7 +45,6 @@ jobs:
         
       - name: Run Astro check
         run: pnpm exec astro check || true
-        continue-on-error: true
 
   # Build Application for Base Sepolia
   build:
@@ -62,7 +59,7 @@ jobs:
         uses: ./.github/actions/setup-node
         
       - name: Build Astro static site
-        run: pnpm run build
+        run: pnpm run build:base-sepolia
         
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -76,7 +73,6 @@ jobs:
   security:
     name: Security Audit (Base Sepolia Landing)
     runs-on: [self-hosted, scalex]
-    continue-on-error: true
     
     steps:
       - name: Checkout code
@@ -92,7 +88,7 @@ jobs:
   deploy-base-sepolia:
     name: Deploy Landing to Base Sepolia
     runs-on: [self-hosted, scalex]
-    needs: [build]
+    needs: [build, security]
     if: |
       github.event_name == 'push' && 
       github.ref == 'refs/heads/base-sepolia' &&
@@ -108,44 +104,33 @@ jobs:
         
       - name: Deploy to production
         run: |
-          echo "🚀 Deploying Base Sepolia landing page..."
+          echo "Deploying Base Sepolia landing page..."
           
           # Clean up Docker resources to prevent disk space issues
           echo "=== Cleaning Docker resources ==="
-          docker system prune -f --volumes || true
-          docker image prune -a -f --filter "until=24h" || true
+          docker system prune -f --volumes
+          docker image prune -a -f --filter "until=24h"
           
-          echo "=== Building Base Sepolia landing Docker image ==="
-          docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:${{ github.sha }} . || {
+          echo "=== Building Base Sepolia landing services ==="
+          docker-compose -f docker-compose.base-sepolia.yml build --no-cache || {
             echo "❌ Build failed, checking build logs..."
+            docker-compose -f docker-compose.base-sepolia.yml build --no-cache --progress=plain
             exit 1
           }
           
-          echo "=== Stopping existing container ==="
-          docker stop scalex-landing-base-sepolia 2>/dev/null || true
-          docker rm scalex-landing-base-sepolia 2>/dev/null || true
+          echo "=== Stopping existing services ==="
+          docker-compose -f docker-compose.base-sepolia.yml down --remove-orphans || true
           
-          echo "=== Starting Base Sepolia landing container ==="
-          docker run -d \
-            --name scalex-landing-base-sepolia \
-            --restart unless-stopped \
-            -p 80:80 \
-            --health-cmd="wget --quiet --tries=1 --spider http://localhost/health || exit 1" \
-            --health-interval=30s \
-            --health-timeout=10s \
-            --health-retries=3 \
-            --health-start-period=10s \
-            --label "com.scalex.service=landing-base-sepolia" \
-            --label "com.scalex.chain=base-sepolia" \
-            $IMAGE_NAME:latest || {
-              echo "❌ Container start failed"
-              docker logs scalex-landing-base-sepolia 2>/dev/null || true
-              exit 1
-            }
+          echo "=== Starting Base Sepolia landing services ==="
+          docker-compose -f docker-compose.base-sepolia.yml up -d || {
+            echo "❌ Service start failed, checking logs..."
+            docker-compose -f docker-compose.base-sepolia.yml logs
+            exit 1
+          }
           
-          echo "=== Waiting for container to be ready ==="
-          sleep 10
-          docker ps --filter "name=scalex-landing-base-sepolia"
+          echo "=== Checking initial service status ==="
+          sleep 15  # Reduced from 30s
+          docker-compose -f docker-compose.base-sepolia.yml ps
             
       - name: Show Container Logs
         run: |
@@ -155,39 +140,46 @@ jobs:
           
           echo ""
           echo "=== 1. CONTAINER STATUS ==="
-          docker ps --filter "name=scalex-landing-base-sepolia" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+          docker-compose -f docker-compose.base-sepolia.yml ps
           
           echo ""
-          echo "=== 2. CONTAINER LOGS (last 50 lines) ==="
-          docker logs --tail=50 scalex-landing-base-sepolia 2>&1 || echo "No logs available"
+          echo "=== 2. LANDING CONTAINER LOGS (last 100 lines) ==="
+          docker-compose -f docker-compose.base-sepolia.yml logs --tail=100 landing-base-sepolia
           
           echo ""
           echo "=== 3. STARTUP VERIFICATION ==="
-          CONTAINER_ID=$(docker ps -q --filter "name=scalex-landing-base-sepolia")
-          if [ -n "$CONTAINER_ID" ]; then
-            echo "✅ Landing container is running: $CONTAINER_ID"
+          # Check if container is running
+          CONTAINER_STATUS=$(docker-compose -f docker-compose.base-sepolia.yml ps -q landing-base-sepolia)
+          if [ -n "$CONTAINER_STATUS" ]; then
+            echo "✅ Landing container is running: $CONTAINER_STATUS"
             
             # Check container startup time
-            STARTED_AT=$(docker inspect --format='{{.State.StartedAt}}' $CONTAINER_ID)
+            STARTED_AT=$(docker inspect --format='{{.State.StartedAt}}' $CONTAINER_STATUS)
             echo "Container started at: $STARTED_AT"
             
-            # Check if nginx is responding internally
+            # Check if application is ready internally
             echo "Testing internal health endpoint..."
-            if docker exec scalex-landing-base-sepolia wget --quiet --tries=1 --spider http://localhost/health 2>/dev/null; then
+            if timeout 30s docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
               echo "✅ Internal health check passed"
             else
-              echo "⚠️ Internal health check failed - container may still be starting"
+              echo "⚠️ Internal health check failed - application may still be starting"
             fi
           else
             echo "❌ Landing container is NOT running"
-            docker ps -a --filter "name=scalex-landing-base-sepolia"
+            echo "All containers status:"
+            docker-compose -f docker-compose.base-sepolia.yml ps -a
+            echo "Docker events (last 10):"
+            docker events --since 10m --format "{{.Time}} {{.Status}} {{.Actor.Attributes.name}}" | tail -10
             exit 1
           fi
           
           echo ""
           echo "=== 4. SYSTEM RESOURCES ==="
           echo "Available disk space:"
-          df -h | grep -E "(Filesystem|/dev/)" || true
+          df -h | grep -E "(Filesystem|/dev/)"
+          echo ""
+          echo "Memory usage:"
+          free -h
           echo ""
           echo "Docker system info:"
           docker system df
@@ -198,47 +190,47 @@ jobs:
           echo "=========================================="
           echo "🌐 EXTERNAL HEALTH CHECKS"
           echo "=========================================="
-          sleep 15
+          sleep 30
           
           # Check health endpoint
           echo "--- Testing Health Endpoint ---"
           for attempt in {1..5}; do
-            response=$(curl -s -o /dev/null -w "%{http_code}" https://$DOMAIN/health || echo "000")
+            response=$(curl -s -o /dev/null -w "%{http_code}" https://$DOMAIN/api/health)
             echo "Attempt $attempt: HTTP $response"
             
             if [ "$response" = "200" ]; then
-              echo "✅ Base Sepolia Landing health check passed (HTTP $response)"
+              echo "✅ Base Sepolia Landing API health check passed (HTTP $response)"
               break
             else
-              echo "⏳ Health check failed (HTTP $response) - retrying in 10s..."
-              sleep 10
+              echo "⏳ Health check failed (HTTP $response) - retrying in 15s..."
+              sleep 15
               
               if [ $attempt -eq 5 ]; then
                 echo "❌ Health check failed after 5 attempts (HTTP $response)"
                 echo "Debugging - checking container logs:"
-                docker logs --tail=20 scalex-landing-base-sepolia 2>&1 || true
+                docker-compose -f docker-compose.base-sepolia.yml logs --tail=20 landing-base-sepolia
                 echo "Debugging - checking container status:"
-                docker ps -a --filter "name=scalex-landing-base-sepolia"
+                docker-compose -f docker-compose.base-sepolia.yml ps
+                echo "Debugging - testing local connectivity:"
+                docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health || echo "Local health check failed"
                 exit 1
               fi
             fi
           done
           
           # Check main application with redirect following
-          echo ""
-          echo "--- Testing Main Page ---"
-          main_response=$(curl -s -L -o /dev/null -w "%{http_code}" https://$DOMAIN || echo "000")
+          main_response=$(curl -s -L -o /dev/null -w "%{http_code}" https://base-sepolia.scalex.money)
           if [ "$main_response" = "200" ]; then
-            echo "✅ Base Sepolia Landing main page check passed (HTTP $main_response)"
+            echo "✅ Base Sepolia Landing main page health check passed (HTTP $main_response)"
           else
-            echo "⚠️ Base Sepolia Landing main page check: HTTP $main_response"
+            echo "⚠️ Base Sepolia Landing main page health check: HTTP $main_response"
+            # Don't fail deployment for non-critical main page check
+            # The API health check already passed, which is more important
           fi
           
           # Performance check
-          echo ""
-          echo "--- Performance Check ---"
           start_time=$(date +%s%N)
-          curl -s https://$DOMAIN > /dev/null || true
+          curl -s https://base-sepolia.scalex.money > /dev/null
           end_time=$(date +%s%N)
           response_time=$(( ($end_time - $start_time) / 1000000 ))
           echo "📊 Base Sepolia Landing response time: ${response_time}ms"
@@ -246,27 +238,42 @@ jobs:
       - name: Verify Container Status
         run: |
           echo "=========================================="
-          echo "🔍 FINAL CONTAINER VERIFICATION"
+          echo "🔍 CONTAINER VERIFICATION"
           echo "=========================================="
           
           echo ""
-          echo "=== CONTAINER STATUS CHECK ==="
-          docker ps --filter "name=scalex-landing-base-sepolia" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Image}}"
+          echo "=== 1. CONTAINER STATUS CHECK ==="
+          docker-compose -f docker-compose.base-sepolia.yml ps
           
-          CONTAINER_ID=$(docker ps -q --filter "name=scalex-landing-base-sepolia")
-          if [ -n "$CONTAINER_ID" ]; then
-            echo ""
-            echo "✅ Landing container is healthy and running"
+          echo ""
+          echo "=== 2. DETAILED CONTAINER INSPECTION ==="
+          LANDING_STATUS=$(docker-compose -f docker-compose.base-sepolia.yml ps -q landing-base-sepolia)
+          if [ -n "$LANDING_STATUS" ]; then
+            echo "✅ Landing container is running: $LANDING_STATUS"
             
             echo ""
-            echo "=== CONTAINER STATS ==="
-            docker stats --no-stream scalex-landing-base-sepolia || true
+            echo "=== 3. CONTAINER HEALTH CHECK ==="
+            # Test container internal health
+            if docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
+              echo "✅ Internal container health: PASS"
+            else
+              echo "❌ Internal container health: FAIL"
+              echo "Container logs (last 15 lines):"
+              docker-compose -f docker-compose.base-sepolia.yml logs --tail=15 landing-base-sepolia
+              exit 1
+            fi
             
             echo ""
-            echo "=== DEPLOYMENT COMPLETE ==="
-            echo "🎉 Successfully deployed to https://$DOMAIN"
+            echo "=== 4. RESOURCE USAGE ==="
+            docker stats --no-stream landing-base-sepolia || echo "Could not get container stats"
+            
+            echo ""
+            echo "=== 5. LATEST LOGS ==="
+            docker-compose -f docker-compose.base-sepolia.yml logs --tail=20 landing-base-sepolia
           else
             echo "❌ Landing container is NOT running"
-            docker logs scalex-landing-base-sepolia 2>&1 || true
+            echo "Debugging container failure:"
+            docker-compose -f docker-compose.base-sepolia.yml logs landing-base-sepolia
+            docker-compose -f docker-compose.base-sepolia.yml ps -a
             exit 1
           fi
