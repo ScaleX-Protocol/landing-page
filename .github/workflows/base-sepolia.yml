@@ -12,7 +12,6 @@ on:
       - '.env.base-sepolia'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
-      - 'nginx.conf'
   pull_request:
     branches: [base-sepolia]
     paths:
@@ -24,7 +23,6 @@ on:
       - '.env.base-sepolia'
       - 'astro.config.mjs'
       - 'tailwind.config.mjs'
-      - 'nginx.conf'
   workflow_dispatch:
 
 env:
@@ -129,6 +127,10 @@ jobs:
           docker system prune -f --volumes
           docker image prune -a -f --filter "until=24h"
           
+          # Ensure scalex-proxy network exists (shared across all scalex services)
+          echo "=== Ensuring scalex-proxy network exists ==="
+          docker network create scalex-proxy 2>/dev/null || echo "Network scalex-proxy already exists"
+          
           # Set up environment variables
           cp .env.base-sepolia .env
           
@@ -150,7 +152,7 @@ jobs:
           }
           
           echo "=== Checking initial service status ==="
-          sleep 15  # Reduced from 30s
+          sleep 15
           docker-compose -f docker-compose.base-sepolia.yml ps
             
       - name: Show Container Logs
@@ -178,9 +180,9 @@ jobs:
             STARTED_AT=$(docker inspect --format='{{.State.StartedAt}}' $CONTAINER_STATUS)
             echo "Container started at: $STARTED_AT"
             
-            # Check if application is ready internally
+            # Check if application is ready internally (Node.js on port 3000)
             echo "Testing internal health endpoint..."
-            if timeout 30s docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
+            if timeout 30s docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia wget --quiet --tries=1 --spider http://localhost:3000/api/health > /dev/null 2>&1; then
               echo "✅ Internal health check passed"
             else
               echo "⚠️ Internal health check failed - application may still be starting"
@@ -221,6 +223,10 @@ jobs:
             
             if [ "$response" = "200" ]; then
               echo "✅ Base Sepolia Landing API health check passed (HTTP $response)"
+              # Show health response
+              echo "Health response:"
+              curl -s https://$DOMAIN/api/health | head -c 500
+              echo ""
               break
             else
               echo "⏳ Health check failed (HTTP $response) - retrying in 15s..."
@@ -233,7 +239,7 @@ jobs:
                 echo "Debugging - checking container status:"
                 docker-compose -f docker-compose.base-sepolia.yml ps
                 echo "Debugging - testing local connectivity:"
-                docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health || echo "Local health check failed"
+                docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia wget --quiet --tries=1 --spider http://localhost:3000/api/health || echo "Local health check failed"
                 exit 1
               fi
             fi
@@ -274,8 +280,8 @@ jobs:
             
             echo ""
             echo "=== 3. CONTAINER HEALTH CHECK ==="
-            # Test container internal health
-            if docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
+            # Test container internal health (Node.js on port 3000)
+            if docker-compose -f docker-compose.base-sepolia.yml exec -T landing-base-sepolia wget --quiet --tries=1 --spider http://localhost:3000/api/health > /dev/null 2>&1; then
               echo "✅ Internal container health: PASS"
             else
               echo "❌ Internal container health: FAIL"
@@ -286,7 +292,7 @@ jobs:
             
             echo ""
             echo "=== 4. RESOURCE USAGE ==="
-            docker stats --no-stream landing-base-sepolia || echo "Could not get container stats"
+            docker stats --no-stream scalex-landing-base-sepolia || echo "Could not get container stats"
             
             echo ""
             echo "=== 5. LATEST LOGS ==="

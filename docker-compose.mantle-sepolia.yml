@@ -11,7 +11,7 @@ services:
       - .env.mantle-sepolia
     restart: unless-stopped
     networks:
-      - landing-network
+      - scalex-proxy
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.landing-mantle-sepolia.rule=Host(`mantle-sepolia.scalex.money`)"
@@ -19,10 +19,7 @@ services:
       - "traefik.http.routers.landing-mantle-sepolia.tls=true"
       - "traefik.http.routers.landing-mantle-sepolia.tls.certresolver=letsencrypt"
       - "traefik.http.services.landing-mantle-sepolia.loadbalancer.server.port=3000"
-    
+
 networks:
-  landing-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.25.0.0/16
+  scalex-proxy:
+    external: true

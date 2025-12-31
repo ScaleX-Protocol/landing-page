@@ -1,5 +1,5 @@
 # ==============================================================================
-# Stage 1: Build the Astro static site
+# Stage 1: Build the Astro SSR application
 # ==============================================================================
 FROM node:20-alpine AS builder
 
@@ -18,26 +18,40 @@ RUN pnpm install --frozen-lockfile
 # Copy source files
 COPY . .
 
-# Build the static site
+# Build the SSR application
 RUN pnpm build
 
 # ==============================================================================
-# Stage 2: Serve with Nginx
+# Stage 2: Production runtime with Node.js
 # ==============================================================================
-FROM nginx:alpine AS production
+FROM node:20-alpine AS production
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
+# Create non-root user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 astro
 
-# Copy built static files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Set working directory
+WORKDIR /app
 
-# Expose port 80
-EXPOSE 80
+# Copy built application from builder stage
+COPY --from=builder --chown=astro:nodejs /app/dist ./dist
+COPY --from=builder --chown=astro:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=astro:nodejs /app/package.json ./package.json
+
+# Switch to non-root user
+USER astro
+
+# Set environment variables
+ENV HOST=0.0.0.0
+ENV PORT=3000
+ENV NODE_ENV=production
+
+# Expose port 3000
+EXPOSE 3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost:3000/api/health || exit 1
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Node.js server
+CMD ["node", "./dist/server/entry.mjs"]
