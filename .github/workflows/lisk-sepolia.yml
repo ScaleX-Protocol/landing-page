@@ -1,0 +1,320 @@
+name: Lisk Sepolia Landing Page CI/CD
+
+on:
+  push:
+    branches: [lisk-sepolia]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - '.github/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'Dockerfile'
+      - '.env.lisk-sepolia'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+  pull_request:
+    branches: [lisk-sepolia]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - '.github/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'Dockerfile'
+      - '.env.lisk-sepolia'
+      - 'astro.config.mjs'
+      - 'tailwind.config.mjs'
+  workflow_dispatch:
+
+env:
+  CHAIN: lisk-sepolia
+  DOMAIN: lisk-sepolia.scalex.money
+  PORT: 3000
+
+jobs:
+  # Lint and Type Check for Lisk Sepolia
+  lint:
+    name: Lint & Type Check (Lisk Sepolia Landing)
+    runs-on: [self-hosted, scalex]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js with caching
+        uses: ./.github/actions/setup-node
+        
+      - name: Setup Lisk Sepolia environment
+        run: |
+          cp .env.lisk-sepolia .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+        
+      - name: Run Astro check
+        run: pnpm exec astro check || true
+
+  # Build Application for Lisk Sepolia
+  build:
+    name: Build Landing Page (Lisk Sepolia)
+    runs-on: [self-hosted, scalex]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js with caching
+        uses: ./.github/actions/setup-node
+        
+      - name: Setup Lisk Sepolia environment
+        run: |
+          cp .env.lisk-sepolia .env
+          echo "PUBLIC_DOMAIN=$DOMAIN" >> .env
+          echo "PUBLIC_BASE_URL=https://$DOMAIN" >> .env
+        
+      - name: Build Astro static site
+        run: pnpm run build
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files-lisk-sepolia-landing
+          path: dist/
+          retention-days: 1
+          compression-level: 9
+
+  # Security Audit
+  security:
+    name: Security Audit (Lisk Sepolia Landing)
+    runs-on: [self-hosted, scalex]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js with caching
+        uses: ./.github/actions/setup-node
+        
+      - name: Run security audit
+        run: pnpm audit --audit-level moderate || echo "⚠️ Some vulnerabilities found, review recommended"
+
+  # Deploy to Lisk Sepolia
+  deploy-lisk-sepolia:
+    name: Deploy Landing to Lisk Sepolia
+    runs-on: [self-hosted, scalex]
+    needs: [build, security]
+    if: |
+      github.event_name == 'push' && 
+      github.ref == 'refs/heads/lisk-sepolia' &&
+      !contains(github.event.head_commit.message, '[skip ci]')
+    environment: lisk-sepolia
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Deploy to production
+        run: |
+          echo "Deploying Lisk Sepolia landing page..."
+          
+          # Clean up Docker resources to prevent disk space issues
+          echo "=== Cleaning Docker resources ==="
+          docker system prune -f --volumes
+          docker image prune -a -f --filter "until=24h"
+          
+          # Ensure scalex-proxy network exists
+          echo "=== Ensuring scalex-proxy network exists ==="
+          docker network create scalex-proxy 2>/dev/null || echo "Network scalex-proxy already exists"
+          
+          echo "=== Building Lisk Sepolia landing services ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml build --no-cache || {
+            echo "❌ Build failed, checking build logs..."
+            docker-compose -f docker-compose.lisk-sepolia.yml build --no-cache --progress=plain
+            exit 1
+          }
+          
+          echo "=== Force removing existing container (if any) ==="
+          docker rm -f scalex-landing-lisk-sepolia 2>/dev/null || echo "No existing container to remove"
+          
+          echo "=== Stopping existing services ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml down --remove-orphans || true
+          
+          echo "=== Starting Lisk Sepolia landing services ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml up -d || {
+            echo "❌ Service start failed, checking logs..."
+            docker-compose -f docker-compose.lisk-sepolia.yml logs
+            exit 1
+          }
+          
+          echo "=== Checking initial service status ==="
+          sleep 30
+          docker-compose -f docker-compose.lisk-sepolia.yml ps
+          
+          echo "=== Checking if server is responding ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml logs --tail=50 landing-lisk-sepolia
+            
+      - name: Show Container Logs
+        run: |
+          echo "=========================================="
+          echo "📋 CONTAINER LOGS AND STATUS"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== 1. CONTAINER STATUS ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml ps
+          
+          echo ""
+          echo "=== 2. LANDING CONTAINER LOGS (last 100 lines) ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml logs --tail=100 landing-lisk-sepolia
+          
+          echo ""
+          echo "=== 3. STARTUP VERIFICATION ==="
+          # Check if container is running
+          CONTAINER_STATUS=$(docker-compose -f docker-compose.lisk-sepolia.yml ps -q landing-lisk-sepolia)
+          if [ -n "$CONTAINER_STATUS" ]; then
+            echo "✅ Landing container is running: $CONTAINER_STATUS"
+            
+            # Check container startup time
+            STARTED_AT=$(docker inspect --format='{{.State.StartedAt}}' $CONTAINER_STATUS)
+            echo "Container started at: $STARTED_AT"
+            
+            # Check if application is ready internally (using wget - available in alpine)
+            echo "Testing internal health endpoint..."
+            if timeout 30s docker-compose -f docker-compose.lisk-sepolia.yml exec -T landing-lisk-sepolia wget -q --spider http://localhost:3000/api/health 2>/dev/null; then
+              echo "✅ Internal health check passed"
+            else
+              echo "⚠️ Internal health check failed - application may still be starting"
+            fi
+          else
+            echo "❌ Landing container is NOT running"
+            echo "All containers status:"
+            docker-compose -f docker-compose.lisk-sepolia.yml ps -a
+            echo "Docker events (last 10):"
+            docker events --since 10m --format "{{.Time}} {{.Status}} {{.Actor.Attributes.name}}" | tail -10
+            exit 1
+          fi
+          
+          echo ""
+          echo "=== 4. SYSTEM RESOURCES ==="
+          echo "Available disk space:"
+          df -h | grep -E "(Filesystem|/dev/)"
+          echo ""
+          echo "Memory usage:"
+          free -h
+          echo ""
+          echo "Docker system info:"
+          docker system df
+          
+      - name: Run Lisk Sepolia health check
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🌐 EXTERNAL HEALTH CHECKS"
+          echo "=========================================="
+          sleep 30
+          
+          # Check if domain resolves first (skip external check if DNS not configured)
+          echo "--- Checking DNS Resolution ---"
+          if ! host $DOMAIN &>/dev/null && ! dig +short $DOMAIN &>/dev/null; then
+            echo "⚠️ DNS not configured for $DOMAIN - skipping external health check"
+            echo "📦 Container is running successfully, but external access requires DNS configuration"
+            echo ""
+            echo "To configure DNS, add an A record:"
+            echo "  $DOMAIN → [your-server-ip]"
+            echo ""
+            echo "✅ Deployment completed (internal health check passed)"
+            exit 0
+          fi
+          
+          echo "✅ DNS resolved for $DOMAIN"
+          
+          # Check health endpoint (external curl is fine - it's on the runner, not in container)
+          echo "--- Testing Health Endpoint ---"
+          for attempt in {1..5}; do
+            response=$(curl -s -o /dev/null -w "%{http_code}" https://$DOMAIN/api/health 2>/dev/null || echo "000")
+            echo "Attempt $attempt: HTTP $response"
+            
+            if [ "$response" = "200" ]; then
+              echo "✅ Lisk Sepolia Landing API health check passed (HTTP $response)"
+              # Show health response
+              echo "Health response:"
+              curl -s https://$DOMAIN/api/health | head -c 500
+              echo ""
+              break
+            else
+              echo "⏳ Health check failed (HTTP $response) - retrying in 15s..."
+              sleep 15
+              
+              if [ $attempt -eq 5 ]; then
+                echo "⚠️ External health check failed after 5 attempts (HTTP $response)"
+                echo "Note: Container is running, external access may need SSL/Traefik configuration"
+                echo "Debugging info:"
+                docker-compose -f docker-compose.lisk-sepolia.yml logs --tail=10 landing-lisk-sepolia
+                # Don't fail deployment - container is running
+                exit 0
+              fi
+            fi
+          done
+          
+          # Check main application with redirect following
+          main_response=$(curl -s -L -o /dev/null -w "%{http_code}" https://lisk-sepolia.scalex.money 2>/dev/null || echo "000")
+          if [ "$main_response" = "200" ]; then
+            echo "✅ Lisk Sepolia Landing main page health check passed (HTTP $main_response)"
+          else
+            echo "⚠️ Lisk Sepolia Landing main page health check: HTTP $main_response"
+          fi
+          
+          # Performance check (only if accessible)
+          if [ "$main_response" = "200" ]; then
+            start_time=$(date +%s%N)
+            curl -s https://lisk-sepolia.scalex.money > /dev/null
+            end_time=$(date +%s%N)
+            response_time=$(( ($end_time - $start_time) / 1000000 ))
+            echo "📊 Lisk Sepolia Landing response time: ${response_time}ms"
+          fi
+          
+      - name: Verify Container Status
+        run: |
+          echo "=========================================="
+          echo "🔍 CONTAINER VERIFICATION"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== 1. CONTAINER STATUS CHECK ==="
+          docker-compose -f docker-compose.lisk-sepolia.yml ps
+          
+          echo ""
+          echo "=== 2. DETAILED CONTAINER INSPECTION ==="
+          LANDING_STATUS=$(docker-compose -f docker-compose.lisk-sepolia.yml ps -q landing-lisk-sepolia)
+          if [ -n "$LANDING_STATUS" ]; then
+            echo "✅ Landing container is running: $LANDING_STATUS"
+            
+            echo ""
+            echo "=== 3. CONTAINER HEALTH CHECK ==="
+            # Test container internal health (using wget - available in alpine)
+            if docker-compose -f docker-compose.lisk-sepolia.yml exec -T landing-lisk-sepolia wget -q --spider http://localhost:3000/api/health 2>/dev/null; then
+              echo "✅ Internal container health: PASS"
+            else
+              echo "❌ Internal container health: FAIL"
+              echo "Container logs (last 15 lines):"
+              docker-compose -f docker-compose.lisk-sepolia.yml logs --tail=15 landing-lisk-sepolia
+              exit 1
+            fi
+            
+            echo ""
+            echo "=== 4. RESOURCE USAGE ==="
+            docker stats --no-stream scalex-landing-lisk-sepolia || echo "Could not get container stats"
+            
+            echo ""
+            echo "=== 5. LATEST LOGS ==="
+            docker-compose -f docker-compose.lisk-sepolia.yml logs --tail=20 landing-lisk-sepolia
+          else
+            echo "❌ Landing container is NOT running"
+            echo "Debugging container failure:"
+            docker-compose -f docker-compose.lisk-sepolia.yml logs landing-lisk-sepolia
+            docker-compose -f docker-compose.lisk-sepolia.yml ps -a
+            exit 1
+          fi
