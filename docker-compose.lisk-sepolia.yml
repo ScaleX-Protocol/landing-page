@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         CHAIN: lisk-sepolia
+    image: scalex-landing:lisk-sepolia
     container_name: scalex-landing-lisk-sepolia
     env_file:
       - .env.lisk-sepolia
