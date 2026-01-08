@@ -1,12 +1,14 @@
 ---
+import scaleXLogo from "../assets/images/ScaleX.webp";
+
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
+const {
   title = "ScaleX - Trade Smarter. Earn While You Wait.",
-  description = "The first CLOB DEX where your open limit orders earn lending yield. Stop letting your capital sit idle—maximize your portfolio's potential."
+  description = "The first CLOB DEX where your open limit orders earn lending yield. Stop letting your capital sit idle—maximize your portfolio's potential.",
 } = Astro.props;
 ---
 
@@ -17,21 +19,21 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+    <link rel="icon" type="image/webp" href={scaleXLogo.src} />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/og-image.png" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    
+
     <title>{title}</title>
   </head>
   <body class="min-h-screen">
