@@ -120,10 +120,11 @@ jobs:
         run: |
           echo "Deploying Mantle Sepolia landing page..."
           
-          # Clean up Docker resources to prevent disk space issues
-          echo "=== Cleaning Docker resources ==="
-          docker system prune -f --volumes
-          docker image prune -a -f --filter "until=24h"
+          # Targeted cleanup - only remove dangling images and old build cache
+          # NOTE: Do NOT use 'docker image prune -a' as it removes images from other chain deployments
+          echo "=== Cleaning Docker build cache ==="
+          docker builder prune -f --filter "until=48h"
+          docker image prune -f  # Only dangling images, not all unused
           
           # Ensure scalex-proxy network exists
           echo "=== Ensuring scalex-proxy network exists ==="

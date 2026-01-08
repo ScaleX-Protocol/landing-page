@@ -1,0 +1,26 @@
+services:
+  # Lisk Sepolia Landing Page Application
+  landing-lisk-sepolia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CHAIN: lisk-sepolia
+    image: scalex-landing:lisk-sepolia
+    container_name: scalex-landing-lisk-sepolia
+    env_file:
+      - .env.lisk-sepolia
+    restart: unless-stopped
+    networks:
+      - scalex-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.landing-lisk-sepolia.rule=Host(`lisk-sepolia.scalex.money`)"
+      - "traefik.http.routers.landing-lisk-sepolia.entrypoints=websecure"
+      - "traefik.http.routers.landing-lisk-sepolia.tls=true"
+      - "traefik.http.routers.landing-lisk-sepolia.tls.certresolver=letsencrypt"
+      - "traefik.http.services.landing-lisk-sepolia.loadbalancer.server.port=3000"
+
+networks:
+  scalex-proxy:
+    external: true
