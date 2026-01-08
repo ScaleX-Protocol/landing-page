@@ -319,3 +319,20 @@ jobs:
             docker-compose -f docker-compose.lisk-sepolia.yml ps -a
             exit 1
           fi
+
+      - name: Verify All Containers (Isolation Check)
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🔒 ISOLATION CHECK - ALL CONTAINERS"
+          echo "=========================================="
+          echo "Verifying other chain containers are unaffected..."
+          echo ""
+          
+          docker ps --format "table {{.Names}}\t{{.Status}}" | grep scalex-landing || echo "No scalex-landing containers found"
+          
+          echo ""
+          echo "Expected: All 3 containers should be running"
+          echo "- scalex-landing-base-sepolia"
+          echo "- scalex-landing-mantle-sepolia"
+          echo "- scalex-landing-lisk-sepolia"

@@ -1,0 +1,153 @@
+name: Debug - Check All Containers
+
+on:
+  workflow_dispatch:
+    inputs:
+      check_logs:
+        description: 'Show container logs (last 50 lines)'
+        required: false
+        default: 'true'
+        type: boolean
+
+jobs:
+  debug:
+    name: Debug All Containers
+    runs-on: [self-hosted, scalex]
+    timeout-minutes: 5
+    
+    steps:
+      - name: Check All Running Containers
+        run: |
+          echo "=========================================="
+          echo "🐳 ALL RUNNING CONTAINERS"
+          echo "=========================================="
+          docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Image}}\t{{.Ports}}"
+          
+      - name: Check ScaleX Landing Containers
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🏠 SCALEX LANDING CONTAINERS STATUS"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== Base Sepolia ==="
+          if docker ps -q -f name=scalex-landing-base-sepolia | grep -q .; then
+            echo "✅ Container is RUNNING"
+            docker inspect scalex-landing-base-sepolia --format='Started: {{.State.StartedAt}}'
+          else
+            echo "❌ Container is NOT RUNNING"
+            docker ps -a -f name=scalex-landing-base-sepolia --format "Status: {{.Status}}"
+          fi
+          
+          echo ""
+          echo "=== Mantle Sepolia ==="
+          if docker ps -q -f name=scalex-landing-mantle-sepolia | grep -q .; then
+            echo "✅ Container is RUNNING"
+            docker inspect scalex-landing-mantle-sepolia --format='Started: {{.State.StartedAt}}'
+          else
+            echo "❌ Container is NOT RUNNING"
+            docker ps -a -f name=scalex-landing-mantle-sepolia --format "Status: {{.Status}}"
+          fi
+          
+          echo ""
+          echo "=== Lisk Sepolia ==="
+          if docker ps -q -f name=scalex-landing-lisk-sepolia | grep -q .; then
+            echo "✅ Container is RUNNING"
+            docker inspect scalex-landing-lisk-sepolia --format='Started: {{.State.StartedAt}}'
+          else
+            echo "❌ Container is NOT RUNNING"
+            docker ps -a -f name=scalex-landing-lisk-sepolia --format "Status: {{.Status}}"
+          fi
+          
+      - name: Check Network Configuration
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🌐 NETWORK CONFIGURATION"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== scalex-proxy network ==="
+          docker network inspect scalex-proxy --format='{{range .Containers}}{{.Name}} {{end}}' 2>/dev/null || echo "Network not found"
+          
+      - name: Check Traefik Status
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🔀 TRAEFIK REVERSE PROXY"
+          echo "=========================================="
+          
+          if docker ps -q -f name=traefik | grep -q .; then
+            echo "✅ Traefik is RUNNING"
+            docker ps -f name=traefik --format "Image: {{.Image}}, Status: {{.Status}}"
+          else
+            echo "❌ Traefik is NOT RUNNING"
+            docker ps -a -f name=traefik --format "Status: {{.Status}}"
+          fi
+          
+      - name: Show Container Logs
+        if: ${{ inputs.check_logs == 'true' }}
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "📋 CONTAINER LOGS (last 50 lines each)"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== Base Sepolia Logs ==="
+          docker logs scalex-landing-base-sepolia --tail=50 2>&1 || echo "No logs available"
+          
+          echo ""
+          echo "=== Mantle Sepolia Logs ==="
+          docker logs scalex-landing-mantle-sepolia --tail=50 2>&1 || echo "No logs available"
+          
+          echo ""
+          echo "=== Lisk Sepolia Logs ==="
+          docker logs scalex-landing-lisk-sepolia --tail=50 2>&1 || echo "No logs available"
+          
+      - name: Check Docker Images
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "📦 DOCKER IMAGES"
+          echo "=========================================="
+          docker images | grep scalex-landing || echo "No scalex-landing images found"
+          
+      - name: Test Internal Connectivity
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "🔗 INTERNAL CONNECTIVITY TEST"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== Base Sepolia Internal Health ==="
+          docker exec scalex-landing-base-sepolia wget -q -O- http://localhost:3000/api/health 2>/dev/null || echo "❌ Health check failed"
+          
+          echo ""
+          echo "=== Mantle Sepolia Internal Health ==="
+          docker exec scalex-landing-mantle-sepolia wget -q -O- http://localhost:3000/api/health 2>/dev/null || echo "❌ Health check failed"
+          
+          echo ""
+          echo "=== Lisk Sepolia Internal Health ==="
+          docker exec scalex-landing-lisk-sepolia wget -q -O- http://localhost:3000/api/health 2>/dev/null || echo "❌ Health check failed"
+          
+      - name: System Resources
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "💻 SYSTEM RESOURCES"
+          echo "=========================================="
+          
+          echo ""
+          echo "=== Disk Space ==="
+          df -h | grep -E "(Filesystem|/dev/)"
+          
+          echo ""
+          echo "=== Memory ==="
+          free -h
+          
+          echo ""
+          echo "=== Docker Disk Usage ==="
+          docker system df
