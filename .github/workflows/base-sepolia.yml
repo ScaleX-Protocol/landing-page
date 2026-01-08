@@ -141,7 +141,7 @@ jobs:
           docker rm -f scalex-landing-base-sepolia 2>/dev/null || echo "No existing container to remove"
           
           echo "=== Stopping existing services ==="
-          docker-compose -f docker-compose.base-sepolia.yml down --remove-orphans || true
+          docker-compose -f docker-compose.base-sepolia.yml down || true
           
           echo "=== Starting Base Sepolia landing services ==="
           docker-compose -f docker-compose.base-sepolia.yml up -d || {
