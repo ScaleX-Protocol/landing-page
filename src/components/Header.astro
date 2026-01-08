@@ -1,5 +1,6 @@
 ---
 // Header component with ScaleX logo and navigation
+import scaleXLogo from "../assets/images/ScaleX.webp";
 ---
 
 <header
@@ -9,11 +10,7 @@
     <nav class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group">
-        <img
-          src="/src/assets/images/ScaleX.webp"
-          alt="ScaleX Logo"
-          class="w-12 h-12"
-        />
+        <img src={scaleXLogo.src} alt="ScaleX Logo" class="w-12 h-12" />
         <span class="text-xl md:text-2xl font-heading font-bold text-white"
           >ScaleX</span
         >
@@ -22,7 +19,9 @@
       <!-- CTA Button -->
       <div class="flex items-center gap-4">
         <a
-          href="https://base-sepolia-app.scalex.money"
+          href="https://mantle-sepolia-app.scalex.money"
+          target="_blank"
+          rel="noopener"
           class="btn-primary text-sm md:text-base"
         >
           <!-- <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

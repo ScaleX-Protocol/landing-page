@@ -3,8 +3,8 @@
 # ==============================================================================
 FROM node:20-alpine AS builder
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm - use fixed version for reproducibility
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
 # Set working directory
 WORKDIR /app

@@ -1,22 +1,24 @@
 ---
 // Footer component
+import scaleXLogo from "../assets/images/ScaleX.webp";
+
 const currentYear = new Date().getFullYear();
 
 const links = {
   protocol: [{ name: "Docs", href: "https://docs.scalex.money" }],
   community: [
-    { name: "Discord", href: "https://discord.gg/scalex", icon: "discord" },
+    // { name: "Discord", href: "https://discord.gg/scalex", icon: "discord" },
     {
       name: "Twitter",
-      href: "https://twitter.com/scalexprotocol",
+      href: "https://x.com/ScaleX_money",
       icon: "twitter",
     },
-    { name: "Forum", href: "https://docs.scalex.money" },
+    // { name: "Forum", href: "https://docs.scalex.money" },
   ],
-  legal: [
-    { name: "Privacy", href: "/privacy" },
-    { name: "Terms", href: "/terms" },
-  ],
+  // legal: [
+  //   { name: "Privacy", href: "/privacy" },
+  //   { name: "Terms", href: "/terms" },
+  // ],
 };
 ---
 
@@ -26,20 +28,11 @@ const links = {
       <!-- Brand Column -->
       <div class="col-span-2 md:col-span-1 space-y-4">
         <a href="/" class="flex items-center gap-2 group">
-          <svg
+          <img
+            src={scaleXLogo.src}
+            alt="ScaleX Logo"
             class="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 12L24 4L40 12V20L32 24L40 28V36L24 44L8 36V28L16 24L8 20V12Z"
-              fill="#F97316"></path>
-            <path d="M24 4L40 12V20L24 28V20L8 12L24 4Z" fill="#F97316"></path>
-            <path d="M24 28L40 20V28L24 36V28Z" fill="#C75A11"></path>
-            <path d="M8 28L24 36V44L8 36V28Z" fill="#A0480E"></path>
-            <path d="M24 20L32 24L24 28L16 24L24 20Z" fill="white"></path>
-          </svg>
+          />
           <span class="text-xl font-heading font-bold text-white">SCALEX</span>
         </a>
         <p class="text-sm text-gray-500 leading-relaxed max-w-xs">
@@ -61,6 +54,8 @@ const links = {
               <li>
                 <a
                   href={link.href}
+                  target="_blank"
+                  rel="noopener"
                   class="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   {link.name}
@@ -115,7 +110,7 @@ const links = {
       </div>
 
       <!-- Legal Links -->
-      <div>
+      <!-- <div>
         <h5
           class="font-heading font-semibold text-white mb-4 uppercase text-sm tracking-wider"
         >
@@ -135,7 +130,7 @@ const links = {
             ))
           }
         </ul>
-      </div>
+      </div> -->
     </div>
 
     <!-- Bottom Bar -->
@@ -149,7 +144,20 @@ const links = {
       <!-- Social Icons -->
       <div class="flex items-center gap-4">
         <a
-          href="https://github.com/scalex"
+          href="https://x.com/ScaleX_money"
+          target="_blank"
+          rel="noopener"
+          class="text-gray-500 hover:text-white transition-colors"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <title>X (Twitter)</title>
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href="https://github.com/ScaleX-Protocol"
           target="_blank"
           rel="noopener"
           class="text-gray-500 hover:text-white transition-colors"
