@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         CHAIN: base-sepolia
+    image: scalex-landing:base-sepolia
     container_name: scalex-landing-base-sepolia
     env_file:
       - .env.base-sepolia
