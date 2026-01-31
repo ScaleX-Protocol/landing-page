@@ -40,9 +40,9 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-heading font-semibold rounded-full
-           transition-all duration-300 hover:bg-primary-dark hover:shadow-glow-lg hover:scale-105
-           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-primary;
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-heading font-bold rounded-full
+           transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_0_40px_-10px_rgba(249,115,22,0.5)] hover:-translate-y-1
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-primary relative overflow-hidden;
   }
 
   .btn-secondary {
@@ -57,11 +57,11 @@
   }
 
   .card-glow {
-    @apply relative overflow-hidden bg-gradient-to-br from-surface-secondary to-surface-tertiary
-           border border-border rounded-2xl p-6
-           before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/5 before:to-transparent before:opacity-0
-           before:transition-opacity before:duration-300 hover:before:opacity-100
-           hover:border-primary/30 hover:shadow-glow transition-all duration-300;
+    @apply relative overflow-hidden bg-gradient-to-b from-surface-secondary to-surface-secondary/50
+           border border-white/5 rounded-3xl p-8
+           before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/10 before:to-transparent before:opacity-0
+           before:transition-opacity before:duration-500 hover:before:opacity-100
+           hover:border-primary/40 hover:shadow-[0_0_30px_-10px_rgba(249,115,22,0.2)] transition-all duration-500;
   }
 
   .badge {
@@ -82,7 +82,11 @@
   }
 
   .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+
+  .glass-panel {
+    @apply bg-surface-secondary/60 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
 }
 

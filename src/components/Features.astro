@@ -1,12 +1,50 @@
 ---
-// Features section - Bento Grid with background icons
+// Features section - Clean Bento Grid Layout
+const features = [
+  {
+    title: "Passive Yield on Every Order",
+    description: "Your limit orders automatically earn lending yield while waiting to fill. No extra steps needed.",
+    stat: "12.5%",
+    statLabel: "avg APY",
+    icon: "chart",
+    highlighted: false,
+  },
+  {
+    title: "Borrow from Your Portfolio",
+    description: "No need to move assets around. Borrow instantly against your portfolio in one click.",
+    stat: "1-Click",
+    statLabel: "instant borrow",
+    icon: "portfolio",
+    highlighted: false,
+  },
+  {
+    title: "Soft Liquidations",
+    description: "Positions are unwound gradually at the exact trigger price. No sudden wipeouts.",
+    stat: "Gradual",
+    statLabel: "protection",
+    icon: "shield",
+    highlighted: false,
+  },
+  {
+    title: "Auto-Repay Loans",
+    description: "Yield generated automatically pays down your loans. Your debt shrinks while you sleep.",
+    stat: "Auto",
+    statLabel: "repayment",
+    icon: "wallet",
+    highlighted: false,
+  },
+];
 ---
 
 <section class="py-24 relative overflow-hidden" id="features">
   <!-- Background -->
   <div class="absolute inset-0 pointer-events-none">
     <div
-      class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"
+      class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px]"
     >
     </div>
   </div>
@@ -23,229 +61,113 @@
       </p>
     </div>
 
-    <!-- Bento Grid Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-6xl mx-auto">
-      <!-- Large Card - Yield on Active Orders (spans 2 rows on left) -->
-      <div
-        class="group relative lg:col-span-5 lg:row-span-2 flex flex-col overflow-hidden rounded-3xl bg-surface-secondary border border-border/50 p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
-      >
-        <!-- Background Icon -->
+    <!-- Bento Grid - 2x2 Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+      {features.map((feature, index) => (
         <div
-          class="absolute -right-8 -bottom-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"
+          class="feature-card group relative flex flex-col overflow-hidden rounded-2xl bg-surface-secondary/80 border border-border/50 p-6 lg:p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 backdrop-blur-sm"
         >
-          <svg
-            class="w-48 h-48 text-primary"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1"
-          >
-            <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-            <polyline points="17,6 23,6 23,12"></polyline>
-          </svg>
-        </div>
-
-        <!-- Hover Gradient -->
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        >
-        </div>
-
-        <div class="relative z-10 flex flex-col h-full">
-          <!-- Icon -->
+          <!-- Hover Gradient Overlay -->
           <div
-            class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110"
+            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           >
-            <svg
-              class="w-7 h-7"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+          </div>
+
+          <!-- Top Row: Icon + Stat -->
+          <div class="relative z-10 flex items-start justify-between mb-5">
+            <!-- Icon -->
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:rotate-3"
             >
-              <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-              <polyline points="17,6 23,6 23,12"></polyline>
-            </svg>
+              {feature.icon === "chart" && (
+                <svg
+                  class="w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
+                  <polyline points="17,6 23,6 23,12"></polyline>
+                </svg>
+              )}
+              {feature.icon === "portfolio" && (
+                <svg
+                  class="w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M8 21h8"></path>
+                  <path d="M12 17v4"></path>
+                </svg>
+              )}
+              {feature.icon === "shield" && (
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              )}
+              {feature.icon === "wallet" && (
+                <svg
+                  class="w-6 h-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                  <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+                  <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
+                </svg>
+              )}
+            </div>
+
+            <!-- Stat Badge -->
+            <div class="text-right">
+              <div class="text-2xl lg:text-3xl font-heading font-black text-primary leading-none">
+                {feature.stat}
+              </div>
+              <div class="text-xs text-gray-500 mt-0.5">{feature.statLabel}</div>
+            </div>
           </div>
 
           <!-- Content -->
-          <h3
-            class="mb-3 text-2xl font-heading font-bold text-white group-hover:text-primary transition-colors"
-          >
-            Passive Yield on Every Order
-          </h3>
-          <p class="text-gray-400 leading-relaxed mb-6">
-            Your limit orders automatically earn lending yield while waiting to
-            fill. No extra steps, no configuration—just place your order and
-            start earning.
-          </p>
-
-          <!-- Stats Visual -->
-          <div class="mt-auto pt-6 border-t border-border/30">
-            <div class="flex items-end gap-2">
-              <span class="text-4xl font-heading font-black text-primary"
-                >12.5%</span
-              >
-              <span class="text-lg text-gray-500 mb-1">avg APY</span>
-            </div>
-            <p class="text-sm text-gray-500 mt-1">on idle limit orders</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card - Soft Liquidations (top right) -->
-      <div
-        class="group relative lg:col-span-7 flex flex-col md:flex-row items-start gap-6 overflow-hidden rounded-3xl bg-surface-secondary border border-border/50 p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
-      >
-        <!-- Background Icon -->
-        <div
-          class="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"
-        >
-          <svg
-            class="w-32 h-32 text-primary"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-
-        <div class="relative shrink-0">
-          <!-- Icon -->
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110"
-          >
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="relative z-10 flex-1">
-          <h3
-            class="mb-2 text-xl font-heading font-bold text-white group-hover:text-primary transition-colors"
-          >
-            Soft Liquidations
-          </h3>
-          <p class="text-gray-400 leading-relaxed">
-            Our engine protects your positions with gradual liquidations. No
-            sudden wipeouts—positions are unwound smoothly at the exact trigger
-            price.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card - Auto-Repay Loans (bottom right) -->
-      <div
-        class="group relative lg:col-span-7 flex flex-col md:flex-row-reverse items-start gap-6 overflow-hidden rounded-3xl bg-surface-secondary border border-border/50 p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
-      >
-        <!-- Background Icon -->
-        <div
-          class="absolute -left-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"
-        >
-          <svg
-            class="w-32 h-32 text-primary"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
-            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-            <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
-          </svg>
-        </div>
-
-        <div class="relative shrink-0">
-          <!-- Icon -->
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110"
-          >
-            <svg
-              class="w-7 h-7"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+          <div class="relative z-10 flex-1">
+            <h3
+              class="mb-2 text-lg lg:text-xl font-heading font-bold text-white group-hover:text-primary transition-colors duration-300"
             >
-              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
-              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-              <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
-            </svg>
+              {feature.title}
+            </h3>
+            <p class="text-sm lg:text-base text-gray-400 leading-relaxed">
+              {feature.description}
+            </p>
           </div>
-        </div>
 
-        <div class="relative z-10 flex-1 text-left md:text-right">
-          <h3
-            class="mb-2 text-xl font-heading font-bold text-white group-hover:text-primary transition-colors"
-          >
-            Auto-Repay Loans
-          </h3>
-          <p class="text-gray-400 leading-relaxed">
-            Yield generated automatically pays down your loans. Your debt
-            shrinks while you sleep—no manual repayments needed.
-          </p>
+          <!-- Bottom Accent Line -->
+          <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
-      </div>
+      ))}
+    </div>
 
-      <!-- Card - 10x Leverage (bottom full width)
-      <div
-        class="group relative lg:col-span-12 flex flex-col md:flex-row items-center gap-8 overflow-hidden rounded-3xl bg-gradient-to-r from-surface-secondary via-surface-secondary to-primary/5 border border-border/50 p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
-      >
-        Background Icon
-        <div
-          class="absolute right-12 top-1/2 -translate-y-1/2 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"
-        >
-          <svg
-            class="w-40 h-40 text-primary"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1"
-          >
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-        </div>
-
-        <div class="relative shrink-0">
-          Icon
-          <div
-            class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/20 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110"
-          >
-            <svg
-              class="w-8 h-8"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
-          </div>
-        </div>
-
-        <div class="relative z-10 flex-1 text-center md:text-left">
-          <h3
-            class="mb-2 text-2xl font-heading font-bold text-white group-hover:text-primary transition-colors"
-          >
-            Up to 10x Leverage
-          </h3>
-          <p class="text-gray-400 leading-relaxed max-w-xl">
-            Trade with maximum capital efficiency. Your yield-bearing tokens
-            serve as margin for leveraged positions—double duty for every
-            dollar.
-          </p>
-        </div>
-
-        <div class="relative shrink-0 text-center">
-          <div class="text-5xl font-heading font-black text-primary">10x</div>
-          <div class="text-sm text-gray-500">max leverage</div>
-        </div>
-      </div> -->
+    <!-- Bottom CTA Hint -->
+    <div class="text-center mt-12">
+      <p class="text-sm text-gray-500">
+        Same trades. Same strategy. <span class="text-primary font-semibold">More profit.</span>
+      </p>
     </div>
   </div>
 </section>
+
+<style>
+  .feature-card {
+    min-height: 200px;
+  }
+
+  @media (min-width: 768px) {
+    .feature-card {
+      min-height: 220px;
+    }
+  }
+</style>
