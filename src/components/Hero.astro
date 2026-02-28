@@ -1,203 +1,107 @@
 ---
-// Hero section - Full page with compelling stats
+// Hero section — bottom-split layout per Figma (1106:4048)
 ---
 
-<section
-  class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20"
->
+<section class="relative min-h-screen flex flex-col justify-end overflow-hidden pt-20">
   <!-- Background Glow Effects -->
   <div class="absolute inset-0 pointer-events-none">
     <div
-      class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] opacity-50 mix-blend-screen animate-pulse"
-      style="animation-duration: 4s;"
-    >
-    </div>
+      class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] opacity-50 mix-blend-screen"
+      style="animation: pulse 4s ease-in-out infinite;"
+    ></div>
     <div
       class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[120px] opacity-30 mix-blend-screen"
-    >
-    </div>
+    ></div>
   </div>
 
-  <!-- Main Content -->
-  <div class="section-container relative z-10 pt-12 pb-16">
-    <div class="max-w-5xl mx-auto text-center space-y-8">
-      <!-- Badge -->
-      <div class="inline-flex items-center justify-center animate-fade-in-up">
-        <div
-          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg hover:border-primary/30 transition-colors cursor-default"
-        >
-          <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
-            ></span>
-          </span>
-          <span class="text-sm font-medium text-gray-300 tracking-wide"
-            >Live on Base Sepolia</span
-          >
-        </div>
-      </div>
+  <!-- Bottom-split content -->
+  <div class="section-container relative z-10 pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-end gap-12 lg:gap-20">
 
-      <!-- Headline -->
-      <div class="space-y-6">
-        <h1
-          class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-heading font-black leading-[0.95] tracking-tight"
-        >
-          We Pay You<br />
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-yellow-400 animate-gradient-x"
-            >To Trade Here.</span
-          >
+      <!-- Left: Badge + Headline + CTAs -->
+      <div class="space-y-8">
+        <!-- Badge -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-sm font-medium text-gray-300 tracking-wide">Live on Base Sepolia</span>
+          </div>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black leading-[0.95] tracking-tight">
+          <span class="hero-gradient-text">We Pay You<br />To Trade Here.</span>
         </h1>
 
-        <p
-          class="text-xl sm:text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light mt-6"
-        >
-          The only DEX where <span class="text-white font-medium"
-            >limit orders generate yield</span
-          > automatically.
-          <br class="hidden md:block" />Trade smarter. Earn passively. Zero
-          extra steps.
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-start gap-4">
+          <a
+            href="https://base-sepolia-app.scalex.money"
+            target="_blank"
+            rel="noopener"
+            class="btn-primary text-base px-8 py-4"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Start Trading
+          </a>
+          <a
+            href="https://docs.scalex.money"
+            target="_blank"
+            rel="noopener"
+            class="btn-secondary text-base px-8 py-4"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            Read Docs
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Subtext + Inline Stats Row -->
+      <div class="space-y-10">
+        <!-- Subtext -->
+        <p class="text-xl font-body leading-relaxed text-secondary">
+          The only DEX where limit orders generate yield automatically.
+          Trade smarter. Earn passively. Zero extra steps.
         </p>
-      </div>
 
-      <!-- CTA Buttons -->
-      <div
-        class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
-      >
-        <a
-          href="https://base-sepolia-app.scalex.money"
-          target="_blank"
-          rel="noopener"
-          class="btn-primary w-full sm:w-auto text-lg px-8 py-4 group min-w-[200px] justify-center"
-        >
-          <svg
-            class="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          Start Trading
-          <svg
-            class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
-        <a
-          href="https://docs.scalex.money"
-          target="_blank"
-          rel="noopener"
-          class="btn-secondary w-full sm:w-auto text-lg px-8 py-4 min-w-[200px] justify-center group"
-        >
-          <svg
-            class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
-          </svg>
-          Read Docs
-        </a>
-      </div>
-    </div>
-
-    <!-- Stats Section - Modern Glass Cards -->
-    <div class="mt-24 max-w-5xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Total Volume -->
-        <div
-          class="group relative overflow-hidden rounded-3xl bg-surface-secondary/40 border border-white/5 p-8 hover:bg-surface-secondary/60 transition-all duration-300 backdrop-blur-sm"
-        >
-          <div class="flex flex-col items-center">
-            <span
-              class="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2"
-              >Total Volume</span
-            >
-            <span
-              class="text-4xl md:text-5xl font-heading font-black text-white tracking-tight"
-              >$1.2B</span
-            >
-            <span
-              class="text-green-500 text-sm font-semibold mt-2 flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-full"
-            >
-              <svg
-                class="w-3 h-3"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-                ><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"
-                ></polyline><polyline points="17 6 23 6 23 12"></polyline></svg
-              >
-              +5.2%
-            </span>
+        <!-- Inline Stats Row -->
+        <div class="flex items-stretch">
+          <div class="pr-6 sm:pr-8">
+            <div class="text-2xl sm:text-3xl font-heading font-bold text-white">$1.2B</div>
+            <div class="text-sm font-body text-white/60 mt-1">Total Volume</div>
           </div>
-        </div>
-
-        <!-- Current APY - Featured -->
-        <div
-          class="group relative overflow-hidden rounded-3xl bg-gradient-to-b from-primary/10 to-primary/5 border border-primary/20 p-8 shadow-xl shadow-primary/5 hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
-        >
-          <div
-            class="absolute inset-0 bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors"
-          >
+          <div class="px-6 sm:px-8 border-l border-white/20">
+            <div class="text-2xl sm:text-3xl font-heading font-bold text-white">12.5%</div>
+            <div class="text-sm font-body text-white/60 mt-1">Limit Order APY</div>
           </div>
-          <div class="relative flex flex-col items-center">
-            <span
-              class="text-sm text-primary font-bold uppercase tracking-widest mb-2"
-              >Limit Order APY</span
-            >
-            <span
-              class="text-5xl md:text-6xl font-heading font-black text-white tracking-tight"
-              >12.5%</span
-            >
-            <span class="text-gray-400 text-sm mt-2">earned while waiting</span>
-          </div>
-        </div>
-
-        <!-- TVL -->
-        <div
-          class="group relative overflow-hidden rounded-3xl bg-surface-secondary/40 border border-white/5 p-8 hover:bg-surface-secondary/60 transition-all duration-300 backdrop-blur-sm"
-        >
-          <div class="flex flex-col items-center">
-            <span
-              class="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2"
-              >TVL</span
-            >
-            <span
-              class="text-4xl md:text-5xl font-heading font-black text-white tracking-tight"
-              >$450M</span
-            >
-            <span
-              class="text-green-500 text-sm font-semibold mt-2 flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-full"
-            >
-              <svg
-                class="w-3 h-3"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-                ><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"
-                ></polyline><polyline points="17 6 23 6 23 12"></polyline></svg
-              >
-              +2.1%
-            </span>
+          <div class="pl-6 sm:pl-8 border-l border-white/20">
+            <div class="text-2xl sm:text-3xl font-heading font-bold text-white">$450M</div>
+            <div class="text-sm font-body text-white/60 mt-1">TVL</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+  .hero-gradient-text {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+</style>
