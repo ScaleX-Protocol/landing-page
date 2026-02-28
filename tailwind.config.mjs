@@ -11,20 +11,23 @@ export default {
                     light: '#FAAA7A',
                     lighter: '#FDD5BD',
                 },
+                secondary: '#cacaca',
                 success: {
                     DEFAULT: '#16A34A',
                     dark: '#15803D',
-                    light: '#10B981',
+                    light: '#22c55e',
                 },
                 surface: {
-                    primary: '#0A0B0F',
+                    primary: '#050505',
                     secondary: '#111318',
                     tertiary: '#1A1C24',
                 },
                 border: '#1F2937',
             },
             fontFamily: {
+                display: ['Schibsted Grotesk', 'sans-serif'],
                 heading: ['Space Grotesk', 'sans-serif'],
+                logo: ['Space Grotesk', 'sans-serif'],
                 body: ['DM Sans', 'sans-serif'],
             },
             boxShadow: {
