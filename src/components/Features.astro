@@ -1,173 +1,86 @@
 ---
-// Features section - Clean Bento Grid Layout
+// Features — full-width horizontal borders, center vertical divider per Figma (1106:4425)
 const features = [
   {
     title: "Passive Yield on Every Order",
-    description: "Your limit orders automatically earn lending yield while waiting to fill. No extra steps needed.",
+    description: "Your limit orders automatically earn lending yield while waiting to fill.",
     stat: "12.5%",
-    statLabel: "avg APY",
-    icon: "chart",
-    highlighted: false,
+    statLabel: "Avg APY",
   },
   {
     title: "Borrow from Your Portfolio",
-    description: "No need to move assets around. Borrow instantly against your portfolio in one click.",
+    description: "No need to move assets around. Borrow instantly against your portfolio.",
     stat: "1-Click",
-    statLabel: "instant borrow",
-    icon: "portfolio",
-    highlighted: false,
+    statLabel: "Instant Borrow",
   },
   {
     title: "Soft Liquidations",
     description: "Positions are unwound gradually at the exact trigger price. No sudden wipeouts.",
     stat: "Gradual",
-    statLabel: "protection",
-    icon: "shield",
-    highlighted: false,
+    statLabel: "Protection",
   },
   {
     title: "Auto-Repay Loans",
     description: "Yield generated automatically pays down your loans. Your debt shrinks while you sleep.",
     stat: "Auto",
-    statLabel: "repayment",
-    icon: "wallet",
-    highlighted: false,
+    statLabel: "Repayment",
   },
 ];
 ---
 
 <section class="py-24 relative overflow-hidden" id="features">
-  <!-- Background -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div
-      class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"
-    >
-    </div>
-    <div
-      class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px]"
-    >
+  <!-- Section Header -->
+  <div class="section-container relative z-10 mb-16">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-display font-semibold mb-6 section-gradient-text">
+        Built for Serious Traders
+      </h2>
+      <p class="text-lg font-body text-secondary">
+        Every feature designed to maximize your capital efficiency and trading edge.
+        Same trades. <strong class="text-white font-semibold">Same strategy. More profit.</strong>
+      </p>
     </div>
   </div>
 
-  <div class="section-container relative z-10">
-    <!-- Section Header -->
-    <div class="text-center mb-16 max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
-        Built for Serious Traders
-      </h2>
-      <p class="text-lg text-gray-400">
-        Every feature designed to maximize your capital efficiency and trading
-        edge.
-      </p>
-    </div>
-
-    <!-- Bento Grid - 2x2 Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
-      {features.map((feature, index) => (
-        <div
-          class="feature-card group relative flex flex-col overflow-hidden rounded-2xl bg-surface-secondary/80 border border-border/50 p-6 lg:p-8 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 backdrop-blur-sm"
-        >
-          <!-- Hover Gradient Overlay -->
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          >
-          </div>
-
-          <!-- Top Row: Icon + Stat -->
-          <div class="relative z-10 flex items-start justify-between mb-5">
-            <!-- Icon -->
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:rotate-3"
-            >
-              {feature.icon === "chart" && (
-                <svg
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"></polyline>
-                  <polyline points="17,6 23,6 23,12"></polyline>
-                </svg>
-              )}
-              {feature.icon === "portfolio" && (
-                <svg
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <path d="M8 21h8"></path>
-                  <path d="M12 17v4"></path>
-                </svg>
-              )}
-              {feature.icon === "shield" && (
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              )}
-              {feature.icon === "wallet" && (
-                <svg
-                  class="w-6 h-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
-                  <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-                  <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
-                </svg>
-              )}
-            </div>
-
-            <!-- Stat Badge -->
-            <div class="text-right">
-              <div class="text-2xl lg:text-3xl font-heading font-black text-primary leading-none">
-                {feature.stat}
-              </div>
-              <div class="text-xs text-gray-500 mt-0.5">{feature.statLabel}</div>
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div class="relative z-10 flex-1">
-            <h3
-              class="mb-2 text-lg lg:text-xl font-heading font-bold text-white group-hover:text-primary transition-colors duration-300"
-            >
+  <!-- Full-width table grid -->
+  <div class="border-t border-[rgba(255,255,255,0.12)]">
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      {features.map((feature, i) => (
+        <div class:list={[
+          'flex flex-col justify-between px-6 sm:px-12 lg:px-20 py-12 min-h-[260px]',
+          'border-b border-[rgba(255,255,255,0.12)]',
+          i % 2 === 0 ? 'md:border-r border-[rgba(255,255,255,0.12)]' : '',
+        ]}>
+          <!-- Title + Description -->
+          <div class="space-y-3">
+            <h3 class="text-lg lg:text-xl font-heading font-bold text-white">
               {feature.title}
             </h3>
-            <p class="text-sm lg:text-base text-gray-400 leading-relaxed">
+            <p class="text-sm font-body text-white/50 leading-relaxed">
               {feature.description}
             </p>
           </div>
 
-          <!-- Bottom Accent Line -->
-          <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <!-- Stat (bottom-left) -->
+          <div class="mt-8">
+            <div class="text-4xl lg:text-5xl font-heading font-black text-primary leading-none">
+              {feature.stat}
+            </div>
+            <div class="text-xs font-body text-white/40 uppercase tracking-widest mt-2">
+              {feature.statLabel}
+            </div>
+          </div>
         </div>
       ))}
-    </div>
-
-    <!-- Bottom CTA Hint -->
-    <div class="text-center mt-12">
-      <p class="text-sm text-gray-500">
-        Same trades. Same strategy. <span class="text-primary font-semibold">More profit.</span>
-      </p>
     </div>
   </div>
 </section>
 
 <style>
-  .feature-card {
-    min-height: 200px;
-  }
-
-  @media (min-width: 768px) {
-    .feature-card {
-      min-height: 220px;
-    }
+  .section-gradient-text {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 </style>
