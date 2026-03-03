@@ -1,6 +1,7 @@
 ---
 // Comparison Table - The ScaleX Advantage
-import scaleXLogo from "../assets/images/ScaleX.webp";
+import ScaleXLogoWhite from "../assets/images/ScaleX-Logo-White.png";
+import star from "../assets/images/Star.svg";
 
 const features = [
   {
@@ -46,10 +47,10 @@ const features = [
     <div class="rounded-[32px] py-[100px] px-8 lg:px-[108px]" style="background: linear-gradient(84deg, #0C0C0C 0%, #050505 100%);">
       <!-- Section Header -->
       <div class="text-center mb-[52px] max-w-[534px] mx-auto">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-white">
+        <h2 class="text-3xl md:text-4xl lg:text-[52px] leading-[62px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
           The ScaleX Advantage
         </h2>
-        <p class="text-lg text-white/80 font-body font-normal leading-7">
+        <p class="text-lg text-white/80 font-body font-normal leading-7 tracking-[-1%]">
           See how we stack up against traditional DEXs and<br/>lending protocols.
         </p>
       </div>
@@ -60,15 +61,15 @@ const features = [
           <!-- Header Row -->
           <div class="flex border-b border-white/20">
             <!-- Features Column Header -->
-            <div class="flex-1 p-4 flex items-center">
+            <div class="flex-1 px-6 py-4 flex items-center">
               <span class="text-white text-lg font-body font-medium leading-7">Features</span>
             </div>
             <!-- ScaleX Column Header -->
             <div class="flex-1 flex items-center justify-start gap-3 px-6 py-4 border-t-[3px] border-t-primary"
               style="background-color: rgba(240, 103, 24, 0.1);">
               <div class="w-9 h-9 rounded-lg flex items-center justify-center border border-white/10"
-                style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #F06718; box-shadow: 0px 2.77px 11.08px -1.38px rgba(41,43,50,0.5);">
-                <img src={scaleXLogo.src} alt="ScaleX" class="w-[22px] h-[22px]" />
+                style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #F97316; box-shadow: 0px 2.77px 11.08px -1.38px rgba(41,43,50,0.5);">
+                <img src={ScaleXLogoWhite.src} alt="ScaleX" class="w-[22px] h-[22px]" />
               </div>
               <span class="text-white text-lg font-heading font-medium leading-7">ScaleX</span>
             </div>
@@ -112,11 +113,7 @@ const features = [
                   )}
                 </div>
                 {feature.scalex.hasCheck && (
-                  <div class="w-5 h-5 flex-shrink-0">
-                    <svg class="w-5 h-[19px] text-primary" viewBox="0 0 20 19" fill="currentColor">
-                      <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm4.707 7.707l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L9 10.586l4.293-4.293a1 1 0 011.414 1.414z"/>
-                    </svg>
-                  </div>
+                  <img src={star.src} alt="Star" class="w-5 h-5" />
                 )}
               </div>
               <!-- DEX Value -->

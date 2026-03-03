@@ -1,5 +1,5 @@
 ---
-import scaleXLogo from "../assets/images/ScaleX.webp";
+import scaleXLogo from "../assets/images/ScaleX-Logo.png";
 
 interface Props {
   title?: string;
@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = "ScaleX - We Pay You to Trade Here",
-  description = "The first CLOB DEX where you earn while you trade. Your limit orders generate lending yield automatically. Borrow directly from your portfolio.",
+  description = "The only DEX where limit orders generate yield automatically. Trade smarter. Earn passively. Zero extra steps.",
 } = Astro.props;
 ---
 
@@ -22,6 +22,9 @@ const {
 
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href={scaleXLogo.src} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap" rel="stylesheet">
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />

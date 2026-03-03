@@ -1,18 +1,18 @@
 ---
 // Footer component matching the reference design
-import scaleXLogo from "../assets/images/ScaleX.webp";
+import scaleXLogo from "../assets/images/ScaleX-Logo.png";
 ---
 
 <footer class="py-10 lg:py-20" style="background-color: #050505;">
-  <div class="max-w-[1200px] mx-auto px-8 lg:px-[120px]">
+  <div class="px-8 lg:px-[120px]">
     <!-- Horizontal Rule -->
     <div class="w-full h-px bg-white/10 mb-10"></div>
 
     <!-- Top Section: Tagline + Links -->
-    <div class="flex flex-col lg:flex-row items-start gap-6 mb-10">
+    <div class="flex flex-col lg:flex-row items-center gap-6 mb-10">
       <!-- Left: Tagline -->
       <div class="flex-1">
-        <p class="text-sm text-gray-500 leading-relaxed max-w-md">
+        <p class="text-[32px] leading-[48px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
           The capital efficient DeFi trading protocol bridging the gap between
           lending and derivatives.
         </p>
@@ -25,7 +25,7 @@ import scaleXLogo from "../assets/images/ScaleX.webp";
       <div class="flex-1 flex flex-col gap-3 w-full">
         <a
           href="mailto:team@scalex.money"
-          class="flex items-center justify-between py-2 group cursor-pointer"
+          class="flex items-center justify-between group cursor-pointer"
         >
           <span
             class="text-[#CACACA] text-lg font-body font-normal leading-7 group-hover:text-white transition-colors"
@@ -47,7 +47,7 @@ import scaleXLogo from "../assets/images/ScaleX.webp";
           href="https://docs.scalex.money"
           target="_blank"
           rel="noopener"
-          class="flex items-center justify-between py-2 group cursor-pointer"
+          class="flex items-center justify-between group cursor-pointer"
         >
           <span
             class="text-[#CACACA] text-lg font-body font-normal leading-7 group-hover:text-white transition-colors"
@@ -69,7 +69,7 @@ import scaleXLogo from "../assets/images/ScaleX.webp";
           href="https://x.com/ScaleX_money"
           target="_blank"
           rel="noopener"
-          class="flex items-center justify-between py-2 group cursor-pointer"
+          class="flex items-center justify-between group cursor-pointer"
         >
           <span
             class="text-[#CACACA] text-lg font-body font-normal leading-7 group-hover:text-white transition-colors"
@@ -91,7 +91,7 @@ import scaleXLogo from "../assets/images/ScaleX.webp";
           href="https://github.com/ScaleX-Protocol"
           target="_blank"
           rel="noopener"
-          class="flex items-center justify-between py-2 group cursor-pointer"
+          class="flex items-center justify-between group cursor-pointer"
         >
           <span
             class="text-[#CACACA] text-lg font-body font-normal leading-7 group-hover:text-white transition-colors"
@@ -115,18 +115,16 @@ import scaleXLogo from "../assets/images/ScaleX.webp";
 
     <!-- Bottom Bar: Logo + Name -->
     <div class="flex items-center justify-between">
-      <a href="/" class="flex items-center gap-1.5 group">
-        <img
-          src={scaleXLogo.src}
-          alt="ScaleX Logo"
-          class="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
-        />
-        <span class="text-2xl font-heading font-bold text-white leading-8"
-          >ScaleX</span
-        >
+      <span class="text-base font-medium font-['Schibsted_Grotesk'] tracking-[-2%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+        © 2026 ScaleX Protocol. All rights reserved.
+      </span>
+      <a href="/" class="flex items-center gap-1.5 group z-10">
+        <img src={scaleXLogo.src} alt="ScaleX Logo" class="w-12 h-12" />
+        <span class="text-2xl font-heading font-bold text-white leading-8">ScaleX</span>
       </a>
-      <div class="flex items-center gap-4">
-        <!-- Social icons can go here -->
+      <div class="flex flex-row gap-4 justify-end items-center">
+        <span class="text-base font-medium font-['Schibsted_Grotesk'] tracking-[-2%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">Privacy Policy</span>
+        <span class="text-base font-medium font-['Schibsted_Grotesk'] tracking-[-2%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">Terms of Service</span>
       </div>
     </div>
   </div>
