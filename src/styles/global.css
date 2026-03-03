@@ -69,7 +69,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-2.5 text-white font-body font-medium rounded-full
+    @apply inline-flex items-center gap-2 px-7 py-2.5 text-white text-base font-body font-medium tracking-[-1%] rounded-full
            transition-all duration-300 hover:shadow-glow-lg hover:-translate-y-0.5
            focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-primary relative overflow-hidden;
     background: linear-gradient(-69deg, #f06718 0%, #f5955d 100%);

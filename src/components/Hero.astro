@@ -1,5 +1,6 @@
 ---
 // Hero section matching the ScaleX reference design
+import TokenIcon from "../assets/images/TokenIcon.png";
 ---
 
 <section
@@ -31,54 +32,11 @@
   >
   </div>
 
-  <!-- 3D Coin Assets -->
-  <div
-    class="absolute top-[154px] left-[38px] right-[37px] h-[349px] z-[3] pointer-events-none hidden lg:block"
-  >
-    <div class="relative w-full h-full flex items-center justify-center">
-      <!-- Coin arc representation using CSS -->
-      <div
-        class="flex items-end justify-center gap-4"
-        style="transform: perspective(800px) rotateX(5deg);"
-      >
-        <!-- USDT -->
-        <div
-          class="coin-item w-[120px] h-[120px] rounded-full bg-gradient-to-br from-[#26A17B]/80 to-[#26A17B]/40 border border-[#26A17B]/30 flex items-center justify-center shadow-[0_8px_32px_rgba(38,161,123,0.3)] animate-float"
-          style="animation-delay: 0s; transform: translateY(20px);"
-        >
-          <span class="text-white font-heading font-bold text-lg">USDT</span>
-        </div>
-        <!-- ETH -->
-        <div
-          class="coin-item w-[140px] h-[140px] rounded-full bg-gradient-to-br from-[#627EEA]/80 to-[#627EEA]/40 border border-[#627EEA]/30 flex items-center justify-center shadow-[0_8px_32px_rgba(98,126,234,0.3)] animate-float"
-          style="animation-delay: 0.2s; transform: translateY(-10px);"
-        >
-          <span class="text-white font-heading font-bold text-xl">ETH</span>
-        </div>
-        <!-- BTC -->
-        <div
-          class="coin-item w-[160px] h-[160px] rounded-full bg-gradient-to-br from-[#F7931A]/80 to-[#F7931A]/40 border border-[#F7931A]/30 flex items-center justify-center shadow-[0_8px_32px_rgba(247,147,26,0.4)] animate-float"
-          style="animation-delay: 0.4s; transform: translateY(-30px);"
-        >
-          <span class="text-white font-heading font-bold text-2xl">BTC</span>
-        </div>
-        <!-- USDC -->
-        <div
-          class="coin-item w-[140px] h-[140px] rounded-full bg-gradient-to-br from-[#2775CA]/80 to-[#2775CA]/40 border border-[#2775CA]/30 flex items-center justify-center shadow-[0_8px_32px_rgba(39,117,202,0.3)] animate-float"
-          style="animation-delay: 0.6s; transform: translateY(-10px);"
-        >
-          <span class="text-white font-heading font-bold text-xl">USDC</span>
-        </div>
-        <!-- IDRX -->
-        <div
-          class="coin-item w-[120px] h-[120px] rounded-full bg-gradient-to-br from-[#E74C3C]/80 to-[#E74C3C]/40 border border-[#E74C3C]/30 flex items-center justify-center shadow-[0_8px_32px_rgba(231,76,60,0.3)] animate-float"
-          style="animation-delay: 0.8s; transform: translateY(20px);"
-        >
-          <span class="text-white font-heading font-bold text-lg">IDRX</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <img
+    src={TokenIcon.src}
+    alt="Token Icon"
+    class="w-[1365px] left-[38px] absolute top-[154px]"
+  />
 
   <!-- Wave Pattern (decorative bottom) -->
   <div
@@ -112,34 +70,33 @@
     >
       <!-- Left: Badge + CTA -->
       <div class="flex flex-col gap-6 items-start">
-        <!-- Badge -->
-        <div
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10"
-          style="background-color: rgba(255, 255, 255, 0.04);"
-        >
-          <span class="relative flex h-2.5 w-2.5">
-            <span
-              class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 green-pulse"
-            ></span>
-            <span
-              class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-green-400/20"
-            ></span>
-          </span>
-          <span class="text-white text-base font-body font-medium leading-4"
-            >Live on Base Sepolia</span
+        <div class="flex flex-col gap-2.5 items-start">
+          <!-- Badge -->
+          <div
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10"
+            style="background-color: rgba(255, 255, 255, 0.04);"
           >
+            <span class="relative flex h-2.5 w-2.5">
+              <span
+                class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 green-pulse"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-green-400/20"
+              ></span>
+            </span>
+            <span class="text-white text-base font-body font-medium leading-4"
+              >Live on Base Sepolia</span
+            >
+          </div>
+  
+          <!-- Headline -->
+          <h1
+            class="text-[68px] font-body font-medium leading-[78px] tracking-[-1%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
+          >
+            We Pay You<br />
+            To Trade Here.
+          </h1>
         </div>
-
-        <!-- Headline -->
-        <h1
-          class="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-heading font-black leading-[0.95] tracking-tight text-white"
-        >
-          We Pay You<br />
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-yellow-400"
-            >To Trade Here.</span
-          >
-        </h1>
 
         <!-- CTA Buttons -->
         <div class="flex items-center gap-4">
@@ -184,7 +141,7 @@
 
       <!-- Right: Description + Stats -->
       <div class="flex flex-col gap-8 w-full lg:w-[560px]">
-        <p class="text-[#CACACA] text-xl font-body font-normal leading-8">
+        <p class="text-[#CACACA] text-xl font-body font-normal leading-8 tracking-[-1%]">
           The only DEX where limit orders generate yield automatically. Trade
           smarter. Earn passively. Zero extra steps.
         </p>
@@ -193,13 +150,8 @@
         <div class="flex items-start gap-6">
           <!-- Stat 1 -->
           <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9"
-              >$1.2B</span
-            >
-            <span
-              class="text-[#CACACA] text-lg font-body font-normal leading-[30px]"
-              >Total Volume</span
-            >
+            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">$1.2B</span>
+            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">Total Volume</span>
           </div>
 
           <!-- Separator -->
@@ -223,13 +175,8 @@
 
           <!-- Stat 2 -->
           <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9"
-              >12.5%</span
-            >
-            <span
-              class="text-[#CACACA] text-lg font-body font-normal leading-[30px]"
-              >Limit Order APY</span
-            >
+            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">12.5%</span>
+            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">Limit Order APY</span>
           </div>
 
           <!-- Separator -->
@@ -253,13 +200,8 @@
 
           <!-- Stat 3 -->
           <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9"
-              >$450M</span
-            >
-            <span
-              class="text-[#CACACA] text-lg font-body font-normal leading-[30px]"
-              >TVL</span
-            >
+            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">$450M</span>
+            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">TVL</span>
           </div>
         </div>
       </div>
