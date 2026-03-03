@@ -1,256 +1,293 @@
 ---
-// Flywheel section - Dramatic animation showing the value cycle
+// Flywheel/Compounding Engine - Radial Quad Layout with center logo
+import scaleXLogo from "../assets/images/ScaleX.webp";
+
 const steps = [
   {
     number: "01",
     title: "Deposit",
     description:
       "Your assets immediately start earning yield in lending pools.",
+    position: "top-left",
+    isOrange: true,
   },
   {
     number: "02",
     title: "Trade",
     description: "Use yield-bearing tokens as margin for leveraged positions.",
+    position: "top-right",
+    isOrange: false,
   },
   {
     number: "03",
     title: "Earn",
     description: "Yield auto-compounds. Loans auto-repay. Collateral grows.",
+    position: "bottom-right",
+    isOrange: false,
   },
   {
     number: "04",
     title: "Repeat",
     description: "More collateral = more borrowing power. The cycle compounds.",
+    position: "bottom-left",
+    isOrange: false,
   },
 ];
 ---
 
-<section class="py-32 relative overflow-hidden" id="flywheel">
-  <!-- Background -->
-  <div class="absolute inset-0">
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-surface-primary via-surface-secondary/20 to-surface-primary"
-    >
-    </div>
-    <!-- Radial glow behind center -->
-    <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"
-    >
-    </div>
-  </div>
-
-  <div class="section-container relative z-10">
+<section
+  class="py-20 lg:py-[80px] relative overflow-hidden"
+  id="flywheel"
+  style="background-color: #050505;"
+>
+  <div class="max-w-[1200px] mx-auto px-8 lg:px-[120px]">
     <!-- Section Header -->
-    <div class="text-center mb-20 max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+    <div class="text-center mb-[52px] max-w-[600px] mx-auto">
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-white"
+      >
         The Compounding Engine
       </h2>
-      <p class="text-lg text-gray-400">
+      <p class="text-lg text-[#CACACA] font-body font-normal leading-7">
         A self-reinforcing cycle that grows your portfolio while you trade.
       </p>
     </div>
 
-    <!-- Flywheel Animation Container -->
-    <div class="relative max-w-4xl mx-auto">
-      <!-- Center Engine -->
-      <div class="flex justify-center mb-12">
-        <div class="relative">
-          <!-- Outer rotating ring -->
-          <div class="absolute inset-0 -m-12 flywheel-ring">
-            <svg class="w-full h-full" viewBox="0 0 200 200">
-              <circle
-                cx="100"
-                cy="100"
-                r="90"
-                fill="none"
-                stroke="url(#gradient)"
-                stroke-width="2"
-                stroke-dasharray="8 4"
-                class="animate-spin-slow origin-center"></circle>
-              <defs>
-                <linearGradient
-                  id="gradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stop-color="#F97316" stop-opacity="0.5"
-                  ></stop>
-                  <stop offset="50%" stop-color="#F97316" stop-opacity="0.1"
-                  ></stop>
-                  <stop offset="100%" stop-color="#F97316" stop-opacity="0.5"
-                  ></stop>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+    <!-- Radial Layout Container -->
+    <div
+      class="relative w-full"
+      style="height: 800px; max-width: 1200px; margin: 0 auto;"
+    >
+      <!-- Radial overlay glow behind center -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[523px] h-[523px] pointer-events-none"
+        style="background: radial-gradient(ellipse at center, rgba(240,103,24,0.12) 0%, transparent 70%);"
+      >
+      </div>
 
-          <!-- Second rotating ring (counter) -->
-          <div class="absolute inset-0 -m-20 flywheel-ring-reverse">
-            <svg class="w-full h-full" viewBox="0 0 200 200">
-              <circle
-                cx="100"
-                cy="100"
-                r="95"
-                fill="none"
-                stroke="rgba(249,115,22,0.15)"
-                stroke-width="1"
-                stroke-dasharray="4 8"
-                class="animate-spin-slow-reverse origin-center"></circle>
-            </svg>
-          </div>
+      <!-- Decorative grid pattern -->
+      <div class="absolute inset-0 pointer-events-none opacity-5">
+        <svg class="w-full h-full" viewBox="0 0 815 798" fill="none">
+          <line
+            x1="0"
+            y1="200"
+            x2="815"
+            y2="200"
+            stroke="white"
+            stroke-width="0.5"></line>
+          <line
+            x1="0"
+            y1="400"
+            x2="815"
+            y2="400"
+            stroke="white"
+            stroke-width="0.5"></line>
+          <line
+            x1="0"
+            y1="600"
+            x2="815"
+            y2="600"
+            stroke="white"
+            stroke-width="0.5"></line>
+          <line
+            x1="200"
+            y1="0"
+            x2="200"
+            y2="798"
+            stroke="white"
+            stroke-width="0.5"></line>
+          <line
+            x1="400"
+            y1="0"
+            x2="400"
+            y2="798"
+            stroke="white"
+            stroke-width="0.5"></line>
+          <line
+            x1="600"
+            y1="0"
+            x2="600"
+            y2="798"
+            stroke="white"
+            stroke-width="0.5"></line>
+        </svg>
+      </div>
 
-          <!-- Engine Core -->
+      <!-- Concentric Circles -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      >
+        <!-- Outer circle -->
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/5"
+        >
+        </div>
+        <!-- Middle circle -->
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full border border-white/8"
+        >
+        </div>
+        <!-- Inner circle -->
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] rounded-full border border-white/10"
+        >
+        </div>
+      </div>
+
+      <!-- Center Engine Logo -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+      >
+        <div
+          class="flex items-center justify-center p-8 rounded-full"
+          style="background-color: rgba(255,255,255,0.12);"
+        >
           <div
-            class="relative w-40 h-40 rounded-full bg-gradient-to-br from-surface-tertiary to-surface-secondary border-2 border-primary/50 flex flex-col items-center justify-center shadow-2xl shadow-primary/20 engine-pulse"
+            class="w-[160px] h-[160px] rounded-full flex items-center justify-center engine-pulse"
+            style="background-color: #F06718; border: 2px solid rgba(240,103,24,0.8); box-shadow: 0px 0px 0px 1.5px #F06718;"
           >
             <svg
-              class="w-12 h-12 text-primary mb-1"
+              class="w-[62px] h-[100px] text-white"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
             >
-              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="white" stroke="none"
+              ></path>
             </svg>
-            <span
-              class="text-xs font-heading font-bold text-white tracking-wider"
-              >FLYWHEEL</span
-            >
-            <span class="text-xs text-primary font-medium">Active</span>
+          </div>
+        </div>
+      </div>
 
-            <!-- Pulse rings -->
+      <!-- Step Cards -->
+      <!-- 01: Top-Left -->
+      <div
+        class="absolute top-[80px] left-[0px] lg:left-[100px] w-[300px] lg:w-[350px] flywheel-step"
+        data-step-index="0"
+      >
+        <div
+          class="glass-card glass-card-orange glow-top-orange flex flex-col gap-6 p-8 rounded-[20px]"
+        >
+          <div class="flex flex-col gap-6">
             <div
-              class="absolute inset-0 rounded-full border border-primary/30 animate-ping"
-              style="animation-duration: 2s;"
+              class="w-11 h-11 rounded-[10px] flex items-center justify-center"
+              style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #F06718; box-shadow: 0px 3.38px 13.54px -1.69px rgba(41,43,50,0.5); border: 0.85px solid rgba(255,255,255,0.1);"
             >
+              <span
+                class="text-white text-xl font-body font-extrabold leading-6"
+                >01</span
+              >
             </div>
-            <div
-              class="absolute inset-0 -m-4 rounded-full border border-primary/20 animate-ping"
-              style="animation-duration: 3s;"
-            >
+            <div class="flex flex-col gap-2">
+              <span
+                class="text-white text-xl font-heading font-medium leading-6"
+                >Deposit</span
+              >
+              <span
+                class="text-white/80 text-base font-body font-normal leading-6"
+                >Your assets immediately start earning yield in lending pools.</span
+              >
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Steps Grid -->
+      <!-- 02: Top-Right -->
       <div
-        id="steps-grid"
-        class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+        class="absolute top-[80px] right-[0px] lg:right-[100px] w-[300px] lg:w-[350px] flywheel-step"
+        data-step-index="1"
       >
-        {
-          steps.map((step, index) => (
+        <div
+          class="glass-card glow-top-gray flex flex-col gap-6 p-8 rounded-[20px]"
+        >
+          <div class="flex flex-col gap-6">
             <div
-              class="flywheel-step group p-5 rounded-2xl bg-surface-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-surface-secondary hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500 cursor-pointer"
-              data-step-index={index}
-              style={`animation-delay: ${index * 0.15}s;`}
+              class="w-11 h-11 rounded-[10px] flex items-center justify-center"
+              style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #2C2C2C; box-shadow: 0px 3.38px 13.54px -1.69px rgba(41,43,50,0.5); border: 0.85px solid rgba(255,255,255,0.1);"
             >
-              <div class="flex items-center gap-3 mb-3">
-                <span class="step-number text-2xl font-heading font-black text-primary/30 group-hover:text-primary transition-colors duration-500">
-                  {step.number}
-                </span>
-              </div>
-              <h4 class="step-title text-lg font-heading font-bold text-white mb-2 group-hover:text-primary transition-colors duration-500">
-                {step.title}
-              </h4>
-              <p class="step-desc text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors duration-500">
-                {step.description}
-              </p>
+              <span
+                class="text-white text-xl font-body font-extrabold leading-6"
+                >02</span
+              >
             </div>
-          ))
-        }
-      </div>
-
-      <!-- Connecting lines between steps (visible on md+) -->
-      <div
-        class="hidden md:block absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none"
-        style="top: calc(50% + 80px);"
-      >
-        <div class="flex justify-between items-center px-12">
-          <div
-            class="step-line flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-primary/30 transition-all duration-500"
-            data-line-index="0"
-          >
-          </div>
-          <svg
-            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
-            data-arrow-index="0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-          <div
-            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 via-primary/30 to-primary/30 transition-all duration-500"
-            data-line-index="1"
-          >
-          </div>
-          <svg
-            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
-            data-arrow-index="1"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-          <div
-            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 via-primary/30 to-primary/30 transition-all duration-500"
-            data-line-index="2"
-          >
-          </div>
-          <svg
-            class="step-arrow w-4 h-4 text-primary/50 mx-2 transition-all duration-500"
-            data-arrow-index="2"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-          <div
-            class="step-line flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent transition-all duration-500"
-            data-line-index="3"
-          >
+            <div class="flex flex-col gap-2">
+              <span
+                class="text-white text-xl font-heading font-medium leading-6"
+                >Trade</span
+              >
+              <span
+                class="text-white/60 text-base font-body font-normal leading-6"
+                >Use yield-bearing tokens as margin for leveraged positions.</span
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- CTA -->
-    <div class="text-center mt-16">
-      <a
-        href="https://base-sepolia-app.scalex.money"
-        target="_blank"
-        rel="noopener"
-        class="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4 group"
+      <!-- 03: Bottom-Right -->
+      <div
+        class="absolute bottom-[80px] right-[0px] lg:right-[100px] w-[300px] lg:w-[350px] flywheel-step"
+        data-step-index="2"
       >
-        <svg
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
+        <div
+          class="glass-card glow-top-gray flex flex-col gap-6 p-8 rounded-[20px]"
         >
-          <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-        </svg>
-        Start the Flywheel
-        <svg
-          class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
+          <div class="flex flex-col gap-6">
+            <div
+              class="w-11 h-11 rounded-[10px] flex items-center justify-center"
+              style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #2C2C2C; box-shadow: 0px 3.38px 13.54px -1.69px rgba(41,43,50,0.5); border: 0.85px solid rgba(255,255,255,0.1);"
+            >
+              <span
+                class="text-white text-xl font-body font-extrabold leading-6"
+                >03</span
+              >
+            </div>
+            <div class="flex flex-col gap-2">
+              <span
+                class="text-white text-xl font-heading font-medium leading-6"
+                >Earn</span
+              >
+              <span
+                class="text-white/60 text-base font-body font-normal leading-6"
+                >Yield auto-compounds. Loans auto-repay. Collateral grows.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04: Bottom-Left -->
+      <div
+        class="absolute bottom-[80px] left-[0px] lg:left-[100px] w-[300px] lg:w-[350px] flywheel-step"
+        data-step-index="3"
+      >
+        <div
+          class="glass-card glow-top-gray flex flex-col gap-6 p-8 rounded-[20px]"
         >
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </a>
+          <div class="flex flex-col gap-6">
+            <div
+              class="w-11 h-11 rounded-[10px] flex items-center justify-center"
+              style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #2C2C2C; box-shadow: 0px 3.38px 13.54px -1.69px rgba(41,43,50,0.5); border: 0.85px solid rgba(255,255,255,0.1);"
+            >
+              <span
+                class="text-white text-xl font-body font-extrabold leading-6"
+                >04</span
+              >
+            </div>
+            <div class="flex flex-col gap-2">
+              <span
+                class="text-white text-xl font-heading font-medium leading-6"
+                >Repeat</span
+              >
+              <span
+                class="text-white/60 text-base font-body font-normal leading-6"
+                >More collateral = more borrowing power. The cycle compounds.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -265,13 +302,13 @@ const steps = [
     0%,
     100% {
       box-shadow:
-        0 0 30px rgba(249, 115, 22, 0.2),
-        0 0 60px rgba(249, 115, 22, 0.1);
+        0 0 30px rgba(240, 103, 24, 0.2),
+        0 0 60px rgba(240, 103, 24, 0.1);
     }
     50% {
       box-shadow:
-        0 0 50px rgba(249, 115, 22, 0.4),
-        0 0 100px rgba(249, 115, 22, 0.2);
+        0 0 50px rgba(240, 103, 24, 0.4),
+        0 0 100px rgba(240, 103, 24, 0.2);
     }
   }
 
@@ -282,6 +319,19 @@ const steps = [
     animation: stepFadeIn 0.6s ease-out forwards;
   }
 
+  .flywheel-step:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .flywheel-step:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .flywheel-step:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .flywheel-step:nth-child(4) {
+    animation-delay: 0.45s;
+  }
+
   @keyframes stepFadeIn {
     to {
       opacity: 1;
@@ -289,72 +339,22 @@ const steps = [
     }
   }
 
-  /* Active step state - simulates hover */
-  .flywheel-step.step-active {
-    border-color: rgba(249, 115, 22, 0.5) !important;
-    background-color: rgba(30, 30, 36, 1) !important;
-    box-shadow: 0 10px 40px -10px rgba(249, 115, 22, 0.3);
+  /* Active step state */
+  .flywheel-step.step-active .glass-card {
+    border-color: rgba(240, 103, 24, 0.5) !important;
+    box-shadow: 0 10px 40px -10px rgba(240, 103, 24, 0.3);
     transform: translateY(-4px);
-  }
-
-  .flywheel-step.step-active .step-number {
-    color: #f97316 !important;
-  }
-
-  .flywheel-step.step-active .step-title {
-    color: #f97316 !important;
-  }
-
-  .flywheel-step.step-active .step-desc {
-    color: rgb(156, 163, 175) !important;
-  }
-
-  /* Active line glow */
-  .step-line.line-active {
-    background: linear-gradient(to right, #f97316, #f97316) !important;
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
-    height: 2px !important;
-  }
-
-  /* Active arrow */
-  .step-arrow.arrow-active {
-    color: #f97316 !important;
-    transform: scale(1.2);
-  }
-
-  /* Slow spin for rings */
-  .animate-spin-slow {
-    animation: spin 20s linear infinite;
-  }
-
-  .animate-spin-slow-reverse {
-    animation: spin 30s linear infinite reverse;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 </style>
 
 <script>
-  // Add intersection observer for entrance animations
+  // Flywheel auto-cycling
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const steps = entry.target.querySelectorAll(".flywheel-step");
-          steps.forEach((step, index) => {
-            (step as HTMLElement).style.animationDelay = `${index * 0.15}s`;
-          });
-          // Start auto-cycling when section is visible
           startAutoCycle();
         } else {
-          // Pause when out of view
           stopAutoCycle();
         }
       });
@@ -367,58 +367,25 @@ const steps = [
     observer.observe(flywheelSection);
   }
 
-  // Auto-cycling animation for steps
   let currentStep = 0;
   let cycleInterval: ReturnType<typeof setInterval> | null = null;
   const totalSteps = 4;
-  const stepDuration = 2500; // 2.5 seconds per step
+  const stepDuration = 2500;
 
   function activateStep(index: number) {
-    // Get all step elements
     const steps = document.querySelectorAll(".flywheel-step");
-    const lines = document.querySelectorAll(".step-line");
-    const arrows = document.querySelectorAll(".step-arrow");
-
-    // Remove active class from all steps
-    steps.forEach((step) => {
-      step.classList.remove("step-active");
-    });
-
-    // Remove active class from all lines and arrows
-    lines.forEach((line) => {
-      line.classList.remove("line-active");
-    });
-    arrows.forEach((arrow) => {
-      arrow.classList.remove("arrow-active");
-    });
-
-    // Add active class to current step
+    steps.forEach((step) => step.classList.remove("step-active"));
     const currentStepEl = document.querySelector(
       `[data-step-index="${index}"]`,
     );
     if (currentStepEl) {
       currentStepEl.classList.add("step-active");
     }
-
-    // Activate connecting line and arrow leading TO this step (index - 1)
-    if (index > 0) {
-      const prevLine = document.querySelector(
-        `[data-line-index="${index - 1}"]`,
-      );
-      const prevArrow = document.querySelector(
-        `[data-arrow-index="${index - 1}"]`,
-      );
-      if (prevLine) prevLine.classList.add("line-active");
-      if (prevArrow) prevArrow.classList.add("arrow-active");
-    }
   }
 
   function startAutoCycle() {
-    if (cycleInterval) return; // Already running
-
-    // Initial activation
+    if (cycleInterval) return;
     activateStep(currentStep);
-
     cycleInterval = setInterval(() => {
       currentStep = (currentStep + 1) % totalSteps;
       activateStep(currentStep);
@@ -430,27 +397,5 @@ const steps = [
       clearInterval(cycleInterval);
       cycleInterval = null;
     }
-  }
-
-  // Pause auto-cycle on hover, resume on mouse leave
-  const stepsGrid = document.getElementById("steps-grid");
-  if (stepsGrid) {
-    stepsGrid.addEventListener("mouseenter", () => {
-      stopAutoCycle();
-      // Clear all active states when hovering
-      document.querySelectorAll(".flywheel-step").forEach((step) => {
-        step.classList.remove("step-active");
-      });
-      document.querySelectorAll(".step-line").forEach((line) => {
-        line.classList.remove("line-active");
-      });
-      document.querySelectorAll(".step-arrow").forEach((arrow) => {
-        arrow.classList.remove("arrow-active");
-      });
-    });
-
-    stepsGrid.addEventListener("mouseleave", () => {
-      startAutoCycle();
-    });
   }
 </script>

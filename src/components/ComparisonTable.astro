@@ -1,166 +1,141 @@
 ---
-// Comparison Table - Why ScaleX Wins with tooltips
+// Comparison Table - The ScaleX Advantage
+import scaleXLogo from "../assets/images/ScaleX.webp";
+
 const features = [
   {
     name: "Yield on Open Orders",
-    tooltip: "Earn lending interest on the capital locked in your limit orders while waiting for execution.",
-    scalex: { value: "Yes", detail: "12.5% avg APY", positive: true },
-    dex: { value: "No", positive: false },
-    lending: { value: "No", positive: false },
+    desc: "Earn yield while orders wait.",
+    scalex: { value: "Yes", detail: "(12.5% avg APY)", hasCheck: true },
+    dex: { value: "No" },
+    lending: { value: "No" },
   },
   {
     name: "Borrow from Portfolio",
-    tooltip: "Borrow against your assets without moving them between protocols or wallets.",
-    scalex: { value: "1-Click", detail: "No asset transfer", positive: true },
-    dex: { value: "No", positive: false },
-    lending: { value: "Multi-step", detail: "Transfer required", positive: false },
+    desc: "Borrow instantly without transfers.",
+    scalex: { value: "1-Click", detail: "(No asset transfer)", hasCheck: true },
+    dex: { value: "No" },
+    lending: { value: "Multi-step", detail: "(Transfer required)" },
   },
   {
     name: "Capital Efficiency",
-    tooltip: "How much trading power you get per dollar deposited. Higher is better.",
-    scalex: { value: "10x", detail: "Leverage", positive: true },
-    dex: { value: "5x", positive: null },
-    lending: { value: "1.5x", detail: "Over-collateralized", positive: false },
+    desc: "Higher leverage, smarter capital use.",
+    scalex: { value: "10x Leverage", hasCheck: true },
+    dex: { value: "5x Leverage" },
+    lending: { value: "1.5x", detail: "(Over-collateralized)" },
   },
   {
     name: "Liquidation Protection",
-    tooltip: "How the protocol handles positions that approach liquidation threshold.",
-    scalex: { value: "Gradual", detail: "Soft liquidation", positive: true },
-    dex: { value: "Instant", positive: false },
-    lending: { value: "Instant", positive: false },
+    desc: "Gradual, softer liquidations.",
+    scalex: { value: "Gradual", detail: "(Soft liquidation)", hasCheck: true },
+    dex: { value: "Instant" },
+    lending: { value: "Instant" },
   },
   {
     name: "Loan Repayment",
-    tooltip: "How outstanding loans are paid back over time.",
-    scalex: { value: "Automatic", detail: "Yield pays debt", positive: true },
-    dex: { value: "Manual", positive: null },
-    lending: { value: "Manual", positive: null },
+    desc: "Yield automatically repays debt.",
+    scalex: { value: "Automatic", detail: "(Yield pays debt)", hasCheck: true },
+    dex: { value: "Manual" },
+    lending: { value: "Manual" },
   },
 ];
 ---
 
-<section class="py-24 relative overflow-hidden" id="compare">
-  <div class="section-container relative z-10">
-    <!-- Section Header -->
-    <div class="text-center mb-16 max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
-        The ScaleX Advantage
-      </h2>
-      <p class="text-lg text-gray-400">
-        See how we stack up against traditional DEXs and lending protocols.
-      </p>
-    </div>
+<section class="py-0 relative overflow-hidden" id="compare" style="background-color: #050505;">
+  <div class="max-w-[1440px] mx-auto px-3">
+    <div class="rounded-[32px] py-[100px] px-8 lg:px-[108px]" style="background: linear-gradient(84deg, #0C0C0C 0%, #050505 100%);">
+      <!-- Section Header -->
+      <div class="text-center mb-[52px] max-w-[534px] mx-auto">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-white">
+          The ScaleX Advantage
+        </h2>
+        <p class="text-lg text-white/80 font-body font-normal leading-7">
+          See how we stack up against traditional DEXs and<br/>lending protocols.
+        </p>
+      </div>
 
-    <!-- Comparison Table -->
-    <div class="max-w-4xl mx-auto overflow-x-auto">
-      <table class="w-full border-collapse">
-        <!-- Header -->
-        <thead>
-          <tr>
-            <th class="text-left py-6 px-6 text-sm text-gray-400 uppercase tracking-wider font-medium border-b border-border/50">
-              Feature
-            </th>
-            <th class="text-center py-6 px-6 relative border-b border-primary/20">
-              <div class="absolute inset-x-0 top-0 h-1 bg-primary"></div>
-              <div class="absolute inset-0 bg-primary/5 -z-10"></div>
-              <div class="flex items-center justify-center gap-2">
-                <div class="p-1.5 bg-primary rounded-lg text-white shadow-lg">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                     <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <span class="font-heading font-bold text-lg text-white">ScaleX</span>
+      <!-- Table Container -->
+      <div class="w-full overflow-x-auto">
+        <div class="min-w-[800px] border border-white/20 rounded-2xl overflow-hidden">
+          <!-- Header Row -->
+          <div class="flex border-b border-white/20">
+            <!-- Features Column Header -->
+            <div class="flex-1 p-4 flex items-center">
+              <span class="text-white text-lg font-body font-medium leading-7">Features</span>
+            </div>
+            <!-- ScaleX Column Header -->
+            <div class="flex-1 flex items-center justify-start gap-3 px-6 py-4 border-t-[3px] border-t-primary"
+              style="background-color: rgba(240, 103, 24, 0.1);">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center border border-white/10"
+                style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #F06718; box-shadow: 0px 2.77px 11.08px -1.38px rgba(41,43,50,0.5);">
+                <img src={scaleXLogo.src} alt="ScaleX" class="w-[22px] h-[22px]" />
               </div>
-            </th>
-            <th class="text-center py-6 px-6 border-b border-border/50">
-              <div class="text-gray-500 font-heading font-medium">Standard DEX</div>
-            </th>
-            <th class="text-center py-6 px-6 border-b border-border/50">
-              <div class="text-gray-500 font-heading font-medium">Lending Protocol</div>
-            </th>
-          </tr>
-        </thead>
+              <span class="text-white text-lg font-heading font-medium leading-7">ScaleX</span>
+            </div>
+            <!-- Standard DEX Column Header -->
+            <div class="flex-1 flex items-center justify-start gap-3 px-6 py-4">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center border border-white/10"
+                style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #2C2C2C; box-shadow: 0px 2.77px 11.08px -1.38px rgba(41,43,50,0.5);">
+                <svg class="w-4 h-5 text-gray-400" viewBox="0 0 16 22" fill="currentColor">
+                  <path d="M8 0L0 4v6c0 5.55 3.41 10.74 8 12 4.59-1.26 8-6.45 8-12V4L8 0z"/>
+                </svg>
+              </div>
+              <span class="text-white text-lg font-heading font-medium leading-7">Standard DEX</span>
+            </div>
+            <!-- Lending Protocol Column Header -->
+            <div class="flex-1 flex items-center justify-start gap-3 px-6 py-4">
+              <div class="w-9 h-9 rounded-lg flex items-center justify-center border border-white/10"
+                style="background: linear-gradient(0deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.16) 46%); background-color: #2C2C2C; box-shadow: 0px 2.77px 11.08px -1.38px rgba(41,43,50,0.5);">
+                <svg class="w-4 h-5 text-gray-400" viewBox="0 0 16 22" fill="currentColor">
+                  <path d="M8 0L0 4v6c0 5.55 3.41 10.74 8 12 4.59-1.26 8-6.45 8-12V4L8 0z"/>
+                </svg>
+              </div>
+              <span class="text-white text-lg font-heading font-medium leading-7">Lending Protocol</span>
+            </div>
+          </div>
 
-        <!-- Body -->
-        <tbody>
+          <!-- Data Rows -->
           {features.map((feature, index) => (
-            <tr class="group">
+            <div class={`flex ${index < features.length - 1 ? 'border-b border-white/20' : ''}`}>
               <!-- Feature Name -->
-              <td class="py-5 px-6 border-b border-white/5 group-hover:bg-white/[0.02] transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="font-medium text-gray-300 group-hover:text-white transition-colors">{feature.name}</span>
-                  <div class="relative group/tooltip">
-                    <button class="text-gray-600 hover:text-primary transition-colors cursor-help">
-                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4M12 8h.01" />
-                      </svg>
-                    </button>
-                    <!-- Tooltip -->
-                    <div class="absolute left-0 bottom-full mb-2 w-64 p-3 bg-surface-tertiary border border-border rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 z-50 transform translate-y-2 group-hover/tooltip:translate-y-0">
-                      <p class="text-sm text-gray-300 leading-relaxed">{feature.tooltip}</p>
-                      <div class="absolute left-4 bottom-0 translate-y-full w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-surface-tertiary"></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              
-              <!-- ScaleX Column (Highlighted) -->
-              <td class="py-5 px-6 text-center bg-primary/[0.03] border-b border-primary/10 group-hover:bg-primary/[0.06] transition-colors relative">
-                <div class="absolute inset-y-0 left-0 w-px bg-primary/10"></div>
-                <div class="absolute inset-y-0 right-0 w-px bg-primary/10"></div>
-                
-                <div class="flex flex-col items-center gap-1">
-                  <div class="flex items-center gap-2 text-white">
-                    {feature.scalex.positive && (
-                      <div class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      </div>
-                    )}
-                    <span class={`font-bold ${feature.scalex.positive ? "text-white" : "text-gray-400"}`}>
-                      {feature.scalex.value}
-                    </span>
-                  </div>
+              <div class="flex-1 px-6 py-4 flex flex-col gap-1.5 justify-center">
+                <span class="text-white text-base font-body font-medium leading-5">{feature.name}</span>
+                <span class="text-white/80 text-sm font-body font-normal leading-5">{feature.desc}</span>
+              </div>
+              <!-- ScaleX Value -->
+              <div class="flex-1 px-6 py-4 flex items-center gap-2.5"
+                style="background-color: rgba(240, 103, 24, 0.1);">
+                <div class="flex items-center gap-1 flex-1">
+                  <span class="text-white text-base font-body font-normal leading-5">{feature.scalex.value}</span>
                   {feature.scalex.detail && (
-                    <span class="text-xs font-medium text-primary/80 bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">{feature.scalex.detail}</span>
+                    <span class="text-white/80 text-sm font-body font-normal leading-5">{feature.scalex.detail}</span>
                   )}
                 </div>
-              </td>
-              
-              <!-- DEX Column -->
-              <td class="py-5 px-6 text-center border-b border-white/5 group-hover:bg-white/[0.02] transition-colors">
-                <div class="flex items-center justify-center gap-1.5 grayscale opacity-60">
-                  {feature.dex.positive === false && (
-                    <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M18 6L6 18M6 6l12 12"></path>
+                {feature.scalex.hasCheck && (
+                  <div class="w-5 h-5 flex-shrink-0">
+                    <svg class="w-5 h-[19px] text-primary" viewBox="0 0 20 19" fill="currentColor">
+                      <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm4.707 7.707l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L9 10.586l4.293-4.293a1 1 0 011.414 1.414z"/>
                     </svg>
+                  </div>
+                )}
+              </div>
+              <!-- DEX Value -->
+              <div class="flex-1 px-6 py-4 flex items-center">
+                <span class="text-white/80 text-base font-body font-normal leading-6">{feature.dex.value}</span>
+              </div>
+              <!-- Lending Value -->
+              <div class="flex-1 px-6 py-4 flex items-center">
+                <div class="flex items-center gap-1">
+                  <span class="text-white text-base font-body font-normal leading-5">{feature.lending.value}</span>
+                  {feature.lending.detail && (
+                    <span class="text-white/80 text-sm font-body font-normal leading-5">{feature.lending.detail}</span>
                   )}
-                  <span class="text-gray-400 font-medium">{feature.dex.value}</span>
                 </div>
-              </td>
-              
-              <!-- Lending Column -->
-              <td class="py-5 px-6 text-center border-b border-white/5 group-hover:bg-white/[0.02] transition-colors">
-                 <div class="flex flex-col items-center gap-1 grayscale opacity-60">
-                   <div class="flex items-center justify-center gap-1.5">
-                     {feature.lending.positive === false && (
-                      <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18M6 6l12 12"></path>
-                      </svg>
-                     )}
-                     <span class="text-gray-400 font-medium">{feature.lending.value}</span>
-                   </div>
-                   {feature.lending.detail && (
-                     <span class="text-xs text-gray-500">{feature.lending.detail}</span>
-                   )}
-                 </div>
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
