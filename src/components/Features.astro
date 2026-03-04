@@ -4,28 +4,28 @@ const features = [
   {
     title: "Passive Yield on Every Order",
     description:
-      "Your limit orders automatically earn lending yield while\nwaiting to fill. No extra steps needed.",
+      "Your limit orders automatically earn lending yield while waiting to fill. No extra steps needed.",
     stat: "12.5%",
     statLabel: "Avg APY",
   },
   {
     title: "Borrow from Your Portfolio",
     description:
-      "No need to move assets around. Borrow instantly against\nyour portfolio in one click.",
+      "No need to move assets around. Borrow instantly against your portfolio in one click.",
     stat: "1-Click",
     statLabel: "Instant Borrow",
   },
   {
     title: "Soft Liquidations",
     description:
-      "Positions are unwound gradually at the exact trigger price.\nNo sudden wipeouts.",
+      "Positions are unwound gradually at the exact trigger price. No sudden wipeouts.",
     stat: "Gradual",
     statLabel: "Protection",
   },
   {
     title: "Auto-Repay Loans",
     description:
-      "Yield generated automatically pays down your loans. Your\ndebt shrinks while you sleep.",
+      "Yield generated automatically pays down your loans. Your debt shrinks while you sleep.",
     stat: "Auto",
     statLabel: "Repayment",
   },
@@ -37,39 +37,16 @@ const features = [
   id="features"
   style="background-color: #050505; border-top: 1px solid rgba(255,255,255,0.12);"
 >
-  <!-- Decorative Pattern (optional background SVG) -->
+  <!-- Top Gradient Blending -->
   <div
-    class="absolute -top-[315px] left-1/2 -translate-x-1/2 w-[619px] h-[606px] pointer-events-none z-[2] opacity-10"
-  >
-    <svg class="w-full h-full" viewBox="0 0 619 606" fill="none">
-      <circle
-        cx="309.5"
-        cy="303"
-        r="300"
-        stroke="rgba(240,103,24,0.15)"
-        stroke-width="0.5"
-        fill="none"></circle>
-      <circle
-        cx="309.5"
-        cy="303"
-        r="200"
-        stroke="rgba(240,103,24,0.1)"
-        stroke-width="0.5"
-        fill="none"></circle>
-      <circle
-        cx="309.5"
-        cy="303"
-        r="100"
-        stroke="rgba(240,103,24,0.08)"
-        stroke-width="0.5"
-        fill="none"></circle>
-    </svg>
-  </div>
+    class="absolute top-0 left-0 right-0 h-[300px] pointer-events-none z-[0]"
+    style="background: radial-gradient(ellipse at center top, rgba(240,103,24,0.08) 0%, rgba(240,103,24,0.03) 40%, transparent 70%);"
+  ></div>
 
-  <div class="mx-auto px-8 lg:px-0 relative z-10">
+  <div class="mx-auto px-4 sm:px-8 lg:px-0 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-[52px] max-w-[600px] mx-auto">
-      <h2 class="text-3xl md:text-4xl lg:text-[52px] leading-[62px] font-medium font-['Schibsted_Grotesk'] tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+    <div class="text-center mb-[52px] max-w-[600px] mx-auto" data-reveal>
+      <h2 class="text-3xl md:text-4xl lg:text-[52px] leading-[40px] md:leading-[52px] lg:leading-[62px] font-medium font-['Schibsted_Grotesk'] tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
         Built for Serious Traders
       </h2>
       <p class="text-lg text-[#CACACA] font-body font-normal leading-7 tracking-[-1%]">
@@ -80,30 +57,34 @@ const features = [
     </div>
 
     <!-- 2x2 Bordered Grid -->
-    <div class="relative z-[1]">
+    <div class="relative z-[1]" data-reveal="delay-1">
       <!-- Top Row -->
       <div
-        class="flex flex-col md:flex-row px-[120px]"
+        class="flex flex-col md:flex-row lg:px-[120px]"
         style="border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12);"
       >
         {
           features.slice(0, 2).map((feature, index) => (
             <div
-              class={`flex-1 p-10 flex flex-col gap-10 justify-center ${index === 0 ? "border-r border-white/[0.12]" : ""}`}
+              class={`flex-1 p-6 sm:p-10 flex flex-col gap-6 sm:gap-10 justify-center ${
+                index === 0
+                  ? "md:border-r md:border-white/[0.12] border-b md:border-b-0 border-white/[0.12]"
+                  : ""
+              }`}
             >
               <div class="flex flex-col gap-2">
-                <h3 class="text-white text-2xl font-['Schibsted_Grotesk'] font-medium leading-9 tracking-[-2%]">
+                <h3 class="text-white text-xl sm:text-2xl font-['Schibsted_Grotesk'] font-medium leading-7 sm:leading-9 tracking-[-2%]">
                   {feature.title}
                 </h3>
-                <p class="text-white/60 text-lg font-body font-normal leading-7 whitespace-pre-line tracking-[-2%]">
+                <p class="text-white/60 text-base sm:text-lg font-body font-normal leading-6 sm:leading-7 tracking-[-2%]">
                   {feature.description}
                 </p>
               </div>
               <div class="flex flex-col gap-2">
-                <span class="text-primary text-[44px] font-['Schibsted_Grotesk'] font-medium leading-[54px] tracking-[-2%]">
+                <span class="text-primary text-[32px] sm:text-[44px] font-['Schibsted_Grotesk'] font-medium leading-[40px] sm:leading-[54px] tracking-[-2%]">
                   {feature.stat}
                 </span>
-                <span class="text-white/60 text-lg font-body font-normal leading-[26px] tracking-[-2%]">
+                <span class="text-white/60 text-base sm:text-lg font-body font-normal leading-[22px] sm:leading-[26px] tracking-[-2%]">
                   {feature.statLabel}
                 </span>
               </div>
@@ -114,27 +95,31 @@ const features = [
 
       <!-- Bottom Row -->
       <div
-        class="flex flex-col md:flex-row px-[120px]"
+        class="flex flex-col md:flex-row lg:px-[120px]"
         style="border-bottom: 1px solid rgba(255,255,255,0.12);"
       >
         {
           features.slice(2, 4).map((feature, index) => (
             <div
-              class={`flex-1 p-10 flex flex-col gap-10 justify-center ${index === 0 ? "border-r border-white/[0.12]" : ""}`}
+              class={`flex-1 p-6 sm:p-10 flex flex-col gap-6 sm:gap-10 justify-center ${
+                index === 0
+                  ? "md:border-r md:border-white/[0.12] border-b md:border-b-0 border-white/[0.12]"
+                  : ""
+              }`}
             >
               <div class="flex flex-col gap-2">
-                <h3 class="text-white text-2xl font-['Schibsted_Grotesk'] font-medium leading-9 tracking-[-2%]">
+                <h3 class="text-white text-xl sm:text-2xl font-['Schibsted_Grotesk'] font-medium leading-7 sm:leading-9 tracking-[-2%]">
                   {feature.title}
                 </h3>
-                <p class="text-white/60 text-lg font-body font-normal leading-7 whitespace-pre-line tracking-[-2%]">
+                <p class="text-white/60 text-base sm:text-lg font-body font-normal leading-6 sm:leading-7 tracking-[-2%]">
                   {feature.description}
                 </p>
               </div>
               <div class="flex flex-col gap-2">
-                <span class="text-primary text-[44px] font-['Schibsted_Grotesk'] font-medium leading-[54px] tracking-[-2%]">
+                <span class="text-primary text-[32px] sm:text-[44px] font-['Schibsted_Grotesk'] font-medium leading-[40px] sm:leading-[54px] tracking-[-2%]">
                   {feature.stat}
                 </span>
-                <span class="text-white/60 text-lg font-body font-normal leading-[26px] tracking-[-2%]">
+                <span class="text-white/60 text-base sm:text-lg font-body font-normal leading-[22px] sm:leading-[26px] tracking-[-2%]">
                   {feature.statLabel}
                 </span>
               </div>

@@ -1,6 +1,8 @@
 ---
 // Hero section matching the ScaleX reference design
 import TokenIcon from "../assets/images/TokenIcon.png";
+import PatternOrangeTop from "../assets/images/Pattern-Orange-Top.svg";
+import PatternOrangeBottom from "../assets/images/Pattern-Orange-Bottom.svg";
 ---
 
 <section
@@ -14,13 +16,27 @@ import TokenIcon from "../assets/images/TokenIcon.png";
   >
   </div>
 
+  <!-- Orange Grid Pattern - Top -->
+  <img
+    src={PatternOrangeTop.src}
+    alt=""
+    class="absolute top-0 left-0 w-full h-auto pointer-events-none z-[1] opacity-60"
+  />
+
+  <!-- Orange Grid Pattern - Bottom -->
+  <img
+    src={PatternOrangeBottom.src}
+    alt=""
+    class="absolute bottom-0 right-0 w-full h-auto pointer-events-none z-[1] opacity-40"
+  />
+
   <!-- Background Glow Effect - Top Center -->
   <div
-    class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[220px] pointer-events-none z-[1]"
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[320px] pointer-events-none z-[1]"
   >
     <div
       class="w-full h-full"
-      style="background: radial-gradient(ellipse at center, rgba(240,103,24,0.2) 0%, rgba(240,103,24,0.05) 40%, transparent 70%);"
+      style="background: radial-gradient(ellipse at center, rgba(240,103,24,0.25) 0%, rgba(240,103,24,0.08) 40%, transparent 70%);"
     >
     </div>
   </div>
@@ -35,7 +51,7 @@ import TokenIcon from "../assets/images/TokenIcon.png";
   <img
     src={TokenIcon.src}
     alt="Token Icon"
-    class="w-[1365px] left-[38px] absolute top-[154px]"
+    class="w-[1365px] md:left-[38px] absolute top-[154px]"
   />
 
   <!-- Wave Pattern (decorative bottom) -->
@@ -63,10 +79,10 @@ import TokenIcon from "../assets/images/TokenIcon.png";
 
   <!-- Main Content -->
   <div
-    class="relative z-10 flex-1 flex items-end px-8 lg:px-[100px] pb-16 pt-[450px] lg:pt-[520px]"
+    class="relative z-10 flex-1 flex items-end px-4 sm:px-8 lg:px-[100px] pb-10 sm:pb-16 pt-[320px] sm:pt-[450px] lg:pt-[520px]"
   >
     <div
-      class="flex flex-col lg:flex-row items-end justify-between w-full max-w-[1240px] mx-auto gap-12"
+      class="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full max-w-[1240px] mx-auto gap-8 lg:gap-12"
     >
       <!-- Left: Badge + CTA -->
       <div class="flex flex-col gap-6 items-start">
@@ -84,14 +100,14 @@ import TokenIcon from "../assets/images/TokenIcon.png";
                 class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-green-400/20"
               ></span>
             </span>
-            <span class="text-white text-base font-body font-medium leading-4"
+            <span class="text-white text-sm sm:text-base font-body font-medium leading-4"
               >Live on Base Sepolia</span
             >
           </div>
-  
+
           <!-- Headline -->
           <h1
-            class="text-[68px] font-body font-medium leading-[78px] tracking-[-1%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
+            class="text-[40px] sm:text-[52px] lg:text-[68px] font-body font-medium leading-[48px] sm:leading-[62px] lg:leading-[78px] tracking-[-1%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
           >
             We Pay You<br />
             To Trade Here.
@@ -99,7 +115,7 @@ import TokenIcon from "../assets/images/TokenIcon.png";
         </div>
 
         <!-- CTA Buttons -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3 sm:gap-4">
           <a
             href="https://base-sepolia-app.scalex.money"
             target="_blank"
@@ -140,18 +156,18 @@ import TokenIcon from "../assets/images/TokenIcon.png";
       </div>
 
       <!-- Right: Description + Stats -->
-      <div class="flex flex-col gap-8 w-full lg:w-[560px]">
-        <p class="text-[#CACACA] text-xl font-body font-normal leading-8 tracking-[-1%]">
+      <div class="flex flex-col gap-6 sm:gap-8 w-full lg:w-[560px]">
+        <p class="text-[#CACACA] text-base sm:text-xl font-body font-normal leading-7 sm:leading-8 tracking-[-1%]">
           The only DEX where limit orders generate yield automatically. Trade
           smarter. Earn passively. Zero extra steps.
         </p>
 
         <!-- Stats with Vertical Separators -->
-        <div class="flex items-start gap-6">
+        <div class="flex items-start gap-4 sm:gap-6">
           <!-- Stat 1 -->
-          <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">$1.2B</span>
-            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">Total Volume</span>
+          <div class="flex flex-col gap-1 flex-1 sm:w-[144px] sm:flex-none">
+            <span class="text-white text-xl sm:text-[28px] font-body font-medium leading-7 sm:leading-9 tracking-[-1%]">$1.2B</span>
+            <span class="text-[#CACACA] text-sm sm:text-lg font-body font-normal leading-5 sm:leading-[30px] tracking-[-1%]">Total Volume</span>
           </div>
 
           <!-- Separator -->
@@ -174,9 +190,9 @@ import TokenIcon from "../assets/images/TokenIcon.png";
           </div>
 
           <!-- Stat 2 -->
-          <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">12.5%</span>
-            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">Limit Order APY</span>
+          <div class="flex flex-col gap-1 flex-1 sm:w-[144px] sm:flex-none">
+            <span class="text-white text-xl sm:text-[28px] font-body font-medium leading-7 sm:leading-9 tracking-[-1%]">12.5%</span>
+            <span class="text-[#CACACA] text-sm sm:text-lg font-body font-normal leading-5 sm:leading-[30px] tracking-[-1%]">Limit Order APY</span>
           </div>
 
           <!-- Separator -->
@@ -199,9 +215,9 @@ import TokenIcon from "../assets/images/TokenIcon.png";
           </div>
 
           <!-- Stat 3 -->
-          <div class="flex flex-col gap-1 w-[144px]">
-            <span class="text-white text-[28px] font-body font-medium leading-9 tracking-[-1%]">$450M</span>
-            <span class="text-[#CACACA] text-lg font-body font-normal leading-[30px] tracking-[-1%]">TVL</span>
+          <div class="flex flex-col gap-1 flex-1 sm:w-[144px] sm:flex-none">
+            <span class="text-white text-xl sm:text-[28px] font-body font-medium leading-7 sm:leading-9 tracking-[-1%]">$450M</span>
+            <span class="text-[#CACACA] text-sm sm:text-lg font-body font-normal leading-5 sm:leading-[30px] tracking-[-1%]">TVL</span>
           </div>
         </div>
       </div>
