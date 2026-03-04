@@ -21,7 +21,7 @@ export const translations = {
     },
     hero: {
       badge: "Live on Base Sepolia",
-      headline: "We Pay You\nTo Trade Here.",
+      headline: "The Most Capital Efficient and Safe DApp for Agent and Human",
       description: "The only DEX where limit orders generate yield automatically. Trade smarter. Earn passively. Zero extra steps.",
       startTrading: "Start Trading",
       readDocs: "Read Docs",
