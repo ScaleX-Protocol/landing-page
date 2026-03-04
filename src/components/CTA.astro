@@ -1,5 +1,7 @@
 ---
 // CTA Section - Banner with gradient background
+import bgCTA from "../assets/images/Background-CTA.png";
+import pattern from "../assets/images/Pattern.svg";
 ---
 
 <section
@@ -9,50 +11,33 @@
   <div class="max-w-[1200px] mx-auto px-8 lg:px-[120px]">
     <!-- CTA Banner -->
     <div
-      class="relative rounded-3xl overflow-hidden px-10 py-20 flex flex-col items-center gap-8"
-      style="background: linear-gradient(135deg, rgba(240,103,24,0.15) 0%, rgba(12,12,12,1) 50%, rgba(240,103,24,0.08) 100%); border: 1px solid rgba(240,103,24,0.15);"
+      class="relative rounded-3xl overflow-hidden px-10 py-20 flex flex-col items-center border border-white/5"
     >
-      <!-- Wave pattern overlay -->
-      <div
-        class="absolute bottom-0 left-0 right-0 h-[276px] pointer-events-none opacity-10"
-      >
-        <svg
-          class="w-full h-full"
-          viewBox="0 0 1200 276"
-          fill="none"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 138C100 184 300 276 600 138C900 0 1100 92 1200 138V276H0V138Z"
-            fill="url(#cta-wave)"
-            opacity="0.3"></path>
-          <defs>
-            <linearGradient id="cta-wave" x1="0" y1="0" x2="1200" y2="276">
-              <stop offset="0%" stop-color="#F06718" stop-opacity="0.3"></stop>
-              <stop offset="100%" stop-color="#F06718" stop-opacity="0.05"
-              ></stop>
-            </linearGradient>
-          </defs>
-        </svg>
+      <!-- Background Images -->
+      <div class="absolute inset-0 z-0">
+        <img src={bgCTA.src} alt="" class="w-full h-full object-cover" />
       </div>
-
-      <!-- Radial glow -->
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-        style="background: radial-gradient(ellipse at center, rgba(240,103,24,0.15) 0%, transparent 70%);"
-      >
+      <div class="absolute inset-0 z-0 flex items-end">
+        <img
+          src={pattern.src}
+          alt=""
+          class="w-full h-auto object-cover opacity-80 mix-blend-lighten"
+        />
       </div>
 
       <!-- Heading -->
-      <h2 class="text-[52px] leading-[62px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+      <h2
+        class="relative z-10 text-[52px] leading-[62px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
+      >
         Ready to Earn More?
       </h2>
 
       <!-- Description -->
       <p
-        class="relative z-10 text-lg text-[#CACACA] font-body font-normal leading-7 text-center tracking-[-1%]"
+        class="relative z-10 text-lg text-[#CACACA] font-body font-normal leading-7 text-center tracking-[-1%] mb-8"
       >
-        Join traders who refuse to let their capital sit idle. Start<br/>earning yield on every order today.
+        Join traders who refuse to let their capital sit idle. Start<br
+        />earning yield on every order today.
       </p>
 
       <!-- CTA Buttons -->
