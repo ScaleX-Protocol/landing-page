@@ -113,7 +113,7 @@ export default function BenefitsSection() {
       </TextReveal>
 
       {/* Combined carousel — tall scroll container with sticky pin */}
-      <div ref={containerRef} className="relative h-[300vh]">
+      <div ref={containerRef} className="relative h-[180vh] md:h-[300vh]">
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
           <motion.div
             style={{ x }}

@@ -9,11 +9,11 @@ import { FadeIn, StaggerContainer, StaggerItem } from "./ui/fade-in";
   class="py-10 relative overflow-hidden"
   style="background-color: #050505;"
 >
-  <div class="max-w-[1200px] mx-auto px-8 lg:px-[120px]">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-[120px]">
     <!-- CTA Banner -->
     <FadeIn client:visible>
       <div
-        class="relative rounded-3xl overflow-hidden px-10 py-20 flex flex-col items-center border border-white/5"
+        class="relative rounded-3xl overflow-hidden px-5 py-12 sm:px-10 sm:py-20 flex flex-col items-center border border-white/5"
       >
         <!-- Background Images -->
         <div class="absolute inset-0 z-0">
@@ -31,7 +31,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "./ui/fade-in";
           <!-- Heading -->
           <StaggerItem>
             <h2
-              class="relative z-10 text-[52px] leading-[62px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 text-center"
+              class="relative z-10 text-[28px] leading-[36px] sm:text-[40px] sm:leading-[50px] lg:text-[52px] lg:leading-[62px] font-['Schibsted_Grotesk'] font-medium tracking-[-2%] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 text-center"
             >
               Ready to Earn More?
             </h2>
@@ -49,7 +49,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "./ui/fade-in";
 
           <!-- CTA Buttons -->
           <StaggerItem>
-            <div class="relative z-10 flex items-center gap-4">
+            <div class="relative z-10 flex flex-col sm:flex-row items-center gap-4">
               <a
                 href="https://base-sepolia-app.scalex.money"
                 target="_blank"

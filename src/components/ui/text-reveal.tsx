@@ -19,7 +19,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({ children, className }) =
   const words = children.split(" ")
 
   return (
-    <div ref={targetRef} className={cn("relative z-0 h-[250vh]", className)}>
+    <div ref={targetRef} className={cn("relative z-0 h-[150vh] md:h-[250vh]", className)}>
       <div className="sticky top-0 mx-auto flex h-screen max-w-4xl items-center bg-transparent px-4 py-20">
         <span className="flex flex-wrap p-5 text-2xl font-bold text-white/20 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl">
           {words.map((word, i) => {
