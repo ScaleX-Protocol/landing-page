@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide hero content before React hydration so fade-in animation is visible */
+.hero-animate-init {
+  opacity: 0;
+}
+
 :root {
   --brand-orange: #f06718;
   --brand-orange-muted: #f5955d;

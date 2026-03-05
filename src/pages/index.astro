@@ -6,6 +6,9 @@ import ProblemSolution from "../components/ProblemSolution.astro";
 import Features from "../components/Features.astro";
 import ComparisonTable from "../components/ComparisonTable.astro";
 import Flywheel from "../components/Flywheel.astro";
+import Benefits from "../components/Benefits.astro";
+import WhyAgents from "../components/WhyAgents";
+import TechStack from "../components/TechStack.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -13,15 +16,18 @@ import "../styles/global.css";
 
 <Layout
   title="ScaleX - The Most Capital Efficient and Safe DApp for Agent and Human"
-  description="The only DEX where limit orders generate yield automatically. Trade smarter. Earn passively. Zero extra steps."
+  description="ScaleX is an AI-agent-native DEX with integrated lending, prediction markets, and ERC-8004 agent identity. Capital efficient, safe, and multi-chain."
 >
   <Header />
   <main>
     <Hero />
-    <ProblemSolution />
+    <!-- <ProblemSolution /> -->
     <Features />
-    <ComparisonTable />
-    <Flywheel />
+    <!-- <ComparisonTable /> -->
+    <!-- <Flywheel /> -->
+    <Benefits />
+    <WhyAgents client:visible />
+    <TechStack />
     <CTA />
   </main>
   <Footer />

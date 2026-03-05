@@ -3,6 +3,7 @@
 import TokenIcon from "../assets/images/TokenIcon.png";
 import PatternOrangeTop from "../assets/images/Pattern-Orange-Top.svg";
 import PatternOrangeBottom from "../assets/images/Pattern-Orange-Bottom.svg";
+import { HeroContent, HeroItem, HeroRight, HeroRightItem, HeroBackground } from "./HeroAnimated";
 ---
 
 <section
@@ -51,7 +52,7 @@ import PatternOrangeBottom from "../assets/images/Pattern-Orange-Bottom.svg";
   <img
     src={TokenIcon.src}
     alt="Token Icon"
-    class="w-[1365px] md:left-[38px] absolute top-[154px]"
+    class="w-[1365px] absolute top-[154px] left-1/2 -translate-x-1/2"
   />
 
   <!-- Wave Pattern (decorative bottom) -->
@@ -82,89 +83,78 @@ import PatternOrangeBottom from "../assets/images/Pattern-Orange-Bottom.svg";
     class="relative z-10 flex-1 flex items-end px-4 sm:px-8 lg:px-[100px] pb-10 sm:pb-16 pt-[320px] sm:pt-[450px] lg:pt-[520px]"
   >
     <div
-      class="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full max-w-[1240px] mx-auto gap-8 lg:gap-12"
+      class="hero-animate-init flex flex-col lg:flex-row items-start lg:items-end justify-between w-full max-w-[1240px] mx-auto gap-8 lg:gap-12"
     >
       <!-- Left: Badge + CTA -->
-      <div class="flex flex-col gap-6 items-start">
-        <div class="flex flex-col gap-2.5 items-start">
-          <!-- Badge -->
-          <div
-            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10"
-            style="background-color: rgba(255, 255, 255, 0.04);"
-          >
-            <span class="relative flex h-2.5 w-2.5">
-              <span
-                class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 green-pulse"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-green-400/20"
-              ></span>
-            </span>
-            <span
-              class="text-white text-sm sm:text-base font-body font-medium leading-4"
-              >Live on Base Sepolia</span
+      <HeroContent client:load>
+        <HeroItem>
+          <div class="flex flex-col gap-2.5 items-start">
+            <!-- Headline -->
+            <h1
+              class="text-[32px] sm:text-[48px] font-body font-medium leading-[48px] sm:leading-[58px] tracking-[-1%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
             >
+              The Most Capital Efficient and Safe DApp for Agent and Human
+            </h1>
           </div>
+        </HeroItem>
 
-          <!-- Headline -->
-          <h1
-            class="text-[32px] sm:text-[48px] font-body font-medium leading-[48px] sm:leading-[58px] tracking-[-1%] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
-          >
-            The Most Capital Efficient and Safe DApp for Agent and Human
-          </h1>
-        </div>
-
-        <!-- CTA Buttons -->
-        <div class="flex items-center gap-3 sm:gap-4">
-          <a
-            href="https://base-sepolia-app.scalex.money"
-            target="_blank"
-            rel="noopener"
-            class="btn-primary text-base group"
-          >
-            <svg
-              class="w-6 h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+        <HeroItem>
+          <!-- CTA Buttons -->
+          <div class="flex items-center gap-3 sm:gap-4">
+            <a
+              href="https://base-sepolia-app.scalex.money"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary text-base group"
             >
-              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Start Trading
-          </a>
-          <a
-            href="https://scalex.mintlify.app/genesis-story"
-            target="_blank"
-            rel="noopener"
-            class="btn-secondary text-base group"
-          >
-            <svg
-              class="w-6 h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+              <svg
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              Start Trading
+            </a>
+            <a
+              href="https://scalex.mintlify.app/genesis-story"
+              target="_blank"
+              rel="noopener"
+              class="btn-secondary text-base group"
             >
-              <path
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-              ></path>
-            </svg>
-            Read Docs
-          </a>
-        </div>
-      </div>
+              <svg
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                ></path>
+              </svg>
+              Read Docs
+            </a>
+          </div>
+        </HeroItem>
+      </HeroContent>
 
       <!-- Right: Description + Stats -->
-      <div class="flex flex-col gap-6 sm:gap-8 w-full lg:w-[560px]">
-        <p
-          class="text-[#CACACA] text-base sm:text-xl font-body font-normal leading-7 sm:leading-8 tracking-[-1%]"
-        >
-          The only DEX where limit orders generate yield automatically. Trade
-          smarter. Earn passively. Zero extra steps.
-        </p>
+      <HeroRight client:load>
+        <HeroRightItem>
+          <p
+            class="text-[#CACACA] text-base sm:text-xl font-body font-normal leading-7 sm:leading-8 tracking-[-1%]"
+          >
+            Trade, predict, and deploy AI agents on the most capital-efficient
+            DEX. Earn yield on every order. Settle predictions trustlessly. Build
+            agents with on-chain identity.
+          </p>
+        </HeroRightItem>
 
         <!-- Stats with Vertical Separators -->
+        <HeroRightItem>
         <div class="flex items-start gap-4 sm:gap-6">
           <!-- Stat 1 -->
           <div class="flex flex-col gap-1 flex-1 sm:w-[144px] sm:flex-none">
@@ -240,7 +230,8 @@ import PatternOrangeBottom from "../assets/images/Pattern-Orange-Bottom.svg";
             >
           </div>
         </div>
-      </div>
+        </HeroRightItem>
+      </HeroRight>
     </div>
   </div>
 </section>
