@@ -39,6 +39,34 @@ const features = [
     dex: { value: "Manual" },
     lending: { value: "Manual" },
   },
+  {
+    name: "AI Agent Support",
+    desc: "On-chain agent identity and trading.",
+    scalex: { value: "Yes", detail: "(ERC-8004)", hasCheck: true },
+    dex: { value: "No" },
+    lending: { value: "No" },
+  },
+  {
+    name: "Prediction Markets",
+    desc: "Binary price predictions with settlement.",
+    scalex: { value: "Yes", detail: "(CRE-settled)", hasCheck: true },
+    dex: { value: "No" },
+    lending: { value: "No" },
+  },
+  {
+    name: "Agent Payments",
+    desc: "Micropayment protocol for agent services.",
+    scalex: { value: "X402", detail: "(Micropayments)", hasCheck: true },
+    dex: { value: "None" },
+    lending: { value: "None" },
+  },
+  {
+    name: "Agent Policy Engine",
+    desc: "On-chain guardrails for AI agent trading.",
+    scalex: { value: "42+ Rules", detail: "(Circuit breakers)", hasCheck: true },
+    dex: { value: "None" },
+    lending: { value: "None" },
+  },
 ];
 ---
 
