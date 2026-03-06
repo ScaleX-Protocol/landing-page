@@ -126,10 +126,6 @@ export default function BenefitsSection() {
         </div>
       </div>
 
-      {/* Why agents love ScaleX - text reveal */}
-      <TextReveal>
-        Why Agents Love ScaleX — three revenue streams from day one, no other DApp pays agents just for showing up.
-      </TextReveal>
     </section>
   )
 }
