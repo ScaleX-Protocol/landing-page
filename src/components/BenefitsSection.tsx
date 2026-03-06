@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { TextReveal } from "./ui/text-reveal"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "../lib/utils"

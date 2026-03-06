@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 // @ts-ignore - ESM/CJS interop
 import MarqueeImport from "react-fast-marquee"
 const Marquee = (MarqueeImport as any).default || MarqueeImport
