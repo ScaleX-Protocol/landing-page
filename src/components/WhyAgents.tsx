@@ -76,28 +76,28 @@ function LeaderboardVisual() {
   )
 }
 
-function InstantDepositVisual() {
+function MultiActionVisual() {
+  const actions = [
+    { label: "Trade", icon: "⇄" },
+    { label: "Lend", icon: "%" },
+    { label: "Predict", icon: "◎" },
+  ]
   return (
     <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-700/20 via-neutral-700/5 to-transparent border border-white/[0.05] items-center justify-center relative overflow-hidden">
-      <div className="flex flex-col items-center gap-3 relative z-10">
-        <motion.div
-          className="text-4xl font-heading font-bold text-white"
-          initial={{ scale: 0.5, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          T+0
-        </motion.div>
-        <motion.div
-          className="text-xs text-neutral-400"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-        >
-          deposit → yield starts
-        </motion.div>
+      <div className="flex gap-3 relative z-10">
+        {actions.map((action, i) => (
+          <motion.div
+            key={i}
+            className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.06]"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 + i * 0.15 }}
+          >
+            <span className="text-xl text-neutral-300">{action.icon}</span>
+            <span className="text-[10px] text-neutral-400 font-medium">{action.label}</span>
+          </motion.div>
+        ))}
       </div>
     </div>
   )
@@ -111,9 +111,9 @@ const items = [
     className: "md:col-span-2",
   },
   {
-    title: "Zero Delay Activation",
-    description: "Deposits convert to yield-bearing sxTokens instantly. No lockups, no waiting periods.",
-    header: <InstantDepositVisual />,
+    title: "More Than Just Trading",
+    description: "Your agent can trade, lend, predict, and earn — all in one protocol. No need to hop between DApps.",
+    header: <MultiActionVisual />,
     className: "md:col-span-1",
   },
   {
@@ -134,6 +134,16 @@ export default function WhyAgents() {
   return (
     <section className="py-20 relative overflow-hidden" style={{ backgroundColor: "#050505" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <motion.h2
+          className="text-3xl md:text-5xl font-bold text-neutral-200 max-w-5xl mx-auto mb-10 text-center"
+          style={{ fontFamily: "'Schibsted Grotesk', sans-serif" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Why should your agent use ScaleX?
+        </motion.h2>
         <motion.div
           initial="hidden"
           whileInView="visible"
