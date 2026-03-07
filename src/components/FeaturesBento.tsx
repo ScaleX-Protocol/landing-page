@@ -23,35 +23,19 @@ function OrbitIcon({ src, alt }: { src: ImageMetadata | string; alt: string }) {
 
 const features = [
   {
-    area: "md:[grid-area:1/1/2/3]",
-    title: "Trading or Betting while Earning",
+    area: "md:[grid-area:1/1/2/4]",
+    title: "Let AI Agents Securely Grow Your Portfolio",
     description: (
       <>
-        When you deposit, your assets are{" "}
-        <span className="text-white font-medium">automatically lent</span> and you receive{" "}
-        <span className="text-white font-medium">sxTokens</span> — ownership representations that let you{" "}
-        <span className="text-white font-medium">trade or bet</span> as usual, while passively earning{" "}
-        <span className="text-white font-medium">lending yield</span> in the background.
-      </>
-    ),
-    pillar: "Capital Efficiency",
-    header: <TradeBeamHeader />,
-  },
-  {
-    area: "md:[grid-area:1/3/2/6]",
-    title: "Autonomous Agent with On-Chain Policy Engine",
-    description: (
-      <>
-        A <span className="text-white font-medium">42+ rule on-chain policy engine</span> — processed
-        via <span className="text-white font-medium">Chainlink CRE</span> — enforces order limits, drawdown caps, and circuit breakers
-        across trading, prediction, borrow, and repay. Agents are identified
-        with <span className="text-white font-medium">ERC-8004</span> and transact
-        through <span className="text-white font-medium">X402</span> micropayments.
+        Subscribe to an AI agent that actively manages your portfolio — executing trades, predictions, borrow, and repay on your behalf to{" "}
+        <span className="text-white font-medium">earn additional yield</span>. Payments run on{" "}
+        <span className="text-white font-medium">X402 micropayments</span>, while a{" "}
+        <span className="text-white font-medium">42+ rule on-chain policy engine</span> via Chainlink CRE keeps every agent action within your risk limits.
       </>
     ),
     pillar: "Safety & Trust",
     header: (
-      <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+      <div className="relative flex h-full w-full items-center justify-center overflow-hidden" style={{ minHeight: 280 }}>
         {/* Center: Chainlink logo */}
         <div className="absolute z-10 w-[90px] h-[90px] rounded-full border border-white/[0.08] flex items-center justify-center overflow-hidden p-4" style={{ background: "linear-gradient(189deg, #252525 5.97%, #0E0E0E 92.92%)" }}>
           <img src={typeof chainlinkIcon === "string" ? chainlinkIcon : chainlinkIcon.src} alt="Chainlink" className="w-full h-full object-contain" />
@@ -76,7 +60,7 @@ const features = [
     ),
   },
   {
-    area: "md:[grid-area:2/1/3/4]",
+    area: "md:[grid-area:1/4/2/6]",
     title: "Borrow from Your Portfolio",
     description: (
       <>
@@ -114,7 +98,7 @@ const features = [
     ),
   },
   {
-    area: "md:[grid-area:2/4/3/6]",
+    area: "md:[grid-area:2/1/3/3]",
     title: "Smart Borrow & Repay",
     description: (
       <>
@@ -124,6 +108,21 @@ const features = [
     ),
     pillar: "Safety",
     header: <RepayCards />,
+  },
+  {
+    area: "md:[grid-area:2/3/3/6]",
+    title: "Trading or Betting while Earning",
+    description: (
+      <>
+        When you deposit, your assets are{" "}
+        <span className="text-white font-medium">automatically lent</span> and you receive{" "}
+        <span className="text-white font-medium">sxTokens</span> — ownership representations that let you{" "}
+        <span className="text-white font-medium">trade or bet</span> as usual, while passively earning{" "}
+        <span className="text-white font-medium">lending yield</span> in the background.
+      </>
+    ),
+    pillar: "Capital Efficiency",
+    header: <TradeBeamHeader />,
   },
 ];
 
