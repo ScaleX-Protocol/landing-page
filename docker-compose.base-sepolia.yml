@@ -15,7 +15,7 @@ services:
       - scalex-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.landing-base-sepolia.rule=Host(`base-sepolia.scalex.money`)"
+      - "traefik.http.routers.landing-base-sepolia.rule=Host(`base-sepolia.scalex.money`) || Host(`scalex.money`)"
       - "traefik.http.routers.landing-base-sepolia.entrypoints=websecure"
       - "traefik.http.routers.landing-base-sepolia.tls=true"
       - "traefik.http.routers.landing-base-sepolia.tls.certresolver=letsencrypt"

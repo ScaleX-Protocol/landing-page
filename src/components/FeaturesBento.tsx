@@ -30,7 +30,7 @@ const features = [
         Subscribe to an AI agent that actively manages your portfolio — executing trades, predictions, borrow, and repay on your behalf to{" "}
         <span className="text-white font-medium">earn additional yield</span>. Payments run on{" "}
         <span className="text-white font-medium">X402 micropayments</span>, while a{" "}
-        <span className="text-white font-medium">42+ rule on-chain policy engine</span> via Chainlink CRE keeps every agent action within your risk limits.
+        <span className="text-white font-medium">42+ rule on-chain policy engine</span> via <span className="text-white font-medium">Chainlink CRE</span> keeps every agent action within your risk limits.
       </>
     ),
     pillar: "Safety & Trust",
